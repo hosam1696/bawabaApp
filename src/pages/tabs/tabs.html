@@ -1,0 +1,19 @@
+<ion-tabs *ngIf="isTransporter">
+    <ion-tab [root]="TransporterTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
+    <ion-tab [root]="TransporterTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>
+    <ion-tab [root]="TransporterTab3" tabTitle="التذاكر" tabIcon="card"></ion-tab>
+    <ion-tab [root]="TransporterTab4" tabTitle="الاشعارات" tabIcon="notifications"></ion-tab>
+    <ion-tab [root]="TransporterTab5" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
+</ion-tabs>
+
+<ion-tabs *ngIf="isPassenger">
+    <ion-tab [root]="PassengerTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
+    <ion-tab [root]="PassengerTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>
+    <ion-tab [root]="PassengerTab3" tabTitle="التذاكر" tabIcon="card"></ion-tab>
+    <ion-tab [root]="PassengerTab4" tabTitle="الاشعارات" tabIcon="notifications"></ion-tab>
+    <ion-tab [root]="PassengerTab5" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
+</ion-tabs>
+
+<ion-tabs *ngIf="isAdmin">
+    <ion-tab [root]="AdminTab1" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'Intro' | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <button (click)="goLogin('Transporter','4')" ion-button full>{{ 'Companies Login Area' | translate }}</button>
+  
+  <button (click)="goLogin('Passenger','5')" ion-button full>{{ 'Clients Login Area' | translate }}</button>
+
+  <button (click)="goSignup()" ion-button round>{{ 'Request a Membership' | translate }}</button>
+  
+  <button (click)="changeLang('ar')" ion-button round>{{ 'Arabic' | translate }}</button>
+
+  <button (click)="changeLang('en')" ion-button round>{{ 'English' | translate }}</button>
+</ion-content>

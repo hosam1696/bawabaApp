@@ -1,0 +1,40 @@
+page-notifications-detail {
+    ion-content{
+        direction: rtl!important;
+        background-color:#f1f1f1!important;
+        
+
+        .inner-content{
+            ion-item{
+                .item-inner{
+                    border: 0px !important;
+                    ion-label{
+                        p{
+                            white-space: normal;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+    }
+    ion-navbar{
+        ion-buttons{
+            position: absolute!important;
+            right: 10px!important;
+            z-index: 99999;
+            left: auto!important;
+
+            button{
+                padding: 5px!important;
+                ion-icon{
+                    font-size: 30px;
+                }
+            }  
+        }
+    }
+}
+
+

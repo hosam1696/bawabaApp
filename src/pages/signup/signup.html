@@ -1,0 +1,196 @@
+<!--<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{'Signup' | translate}}</ion-title>
+    </ion-navbar>
+
+</ion-header>-->
+
+
+<ion-content padding>
+
+    <ion-img src="./assets/img/ba_logo.png"></ion-img>
+
+
+
+    <ion-grid *ngIf="step == 1">
+
+        <ion-card>
+            <ion-card-content>
+                يرجى إدخال رقم الهاتف الخاص بك لإرسال كود تفعيل العضوية
+            </ion-card-content>
+        </ion-card>
+        <ion-row>
+            <!--            <ion-col col-3>
+                            <ion-input [(ngModel)]="CountryCode" [value]="CountryCode" type="number" placeholder="" disabled='true'></ion-input>
+                        </ion-col>-->
+            <ion-col >
+                <ion-item>
+                    <ion-input [(ngModel)]="mobile" [value]="mobile" type="tel" placeholder="رقم الهاتف" ></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <button ion-button full (click)="Step2()">التالي
+                    <ion-spinner *ngIf="spinner == 1" name="circles" duration="3000"></ion-spinner>
+            </button>
+
+            <ion-col>
+                <button class="back-btn" ion-button (click)="goSignin()"><ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid *ngIf="step == 2">
+
+        <ion-card>
+            <ion-card-content>
+                يرجى ادخال كود التفعيل المرسل اليك لاتمام عملية التفعيل            
+            </ion-card-content>
+        </ion-card>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-input [(ngModel)]="vercode" [value]="vercode" type="number" placeholder="كود التفعيل" ></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <button ion-button full (click)="Step3()">تأكيد التفعيل</button>
+        </ion-row>
+
+        <ion-row>
+            <ion-col class="resend">
+                <a (click)="Step2()" class="resend-code" >اعادة إرسال كود التفعيل</a>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button  class="back-btn" ion-button (click)="Step1()"> <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-grid *ngIf="step == 3">
+
+        <ion-card>
+            <ion-card-content>
+                يرجى تحديد نوع العضوية لاستكمال عملية التسجيل            
+            </ion-card-content>
+        </ion-card>
+        <!--        <ion-row>
+                    <button ion-button full (click)="selectType()">Membership Type : {{MembershipType}}</button>
+                </ion-row>-->
+
+        <ion-row>
+            <button ion-button full (click)="Step6('Passenger')" >باحث عن مواصلات
+                    <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+            </button>
+        </ion-row>
+        <ion-row>
+            <button ion-button full (click)="Step6('Transporter')">شركة نقل جماعي
+                    <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+            </button>
+        </ion-row>
+
+        <ion-col>
+            <button  class="back-btn" ion-button (click)="Step1()"> <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon></button>
+        </ion-col>
+
+    </ion-grid>
+
+    <ion-grid *ngIf="step == 6">
+        <ion-grid *ngIf="MembershipType == 'Passenger'">
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-input [(ngModel)]="name" type="text"  placeholder="اسم المستخدم"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input [(ngModel)]="mail" type="mail" placeholder="البريد الالكتروني"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input [(ngModel)]="password" type="password" placeholder="كلمة المرور" ></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input [(ngModel)]="repassword" type="password" placeholder="تأكيد كلمة المرور"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+
+                <button ion-button full (click)="Step4()">تسجيل
+                        <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+                </button>
+
+
+                <ion-col>
+                    <button class="back-btn" ion-button (click)="Step3()"><ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon></button>
+                </ion-col>
+                <ion-col>
+                    <h4 class="have-account"> هل لديك حساب ؟<a (click)="goSignin()" class="new-account" >تسجيل الدخول</a></h4>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+
+        <ion-grid *ngIf="MembershipType == 'Transporter'">
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-input [(ngModel)]="name" type="text"  placeholder="اسم الشركة"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input [(ngModel)]="mail" type="mail" placeholder="البريد الالكتروني" value=""></ion-input>
+                    </ion-item>
+
+
+
+                    <ion-item>
+                        <ion-input [(ngModel)]="password" type="password" placeholder="كلمة المرور" ></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-input [(ngModel)]="repassword" type="password" placeholder="تأكيد كلمة المرور"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+              
+                    <button ion-button full (click)="Step4()">تسجيل
+                            <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+                    </button>
+               
+<!--                <ion-col >
+                    <button ion-button (click)="PrintCityID()">check city</button>
+                </ion-col>-->
+                <ion-col>
+                    <button class="back-btn" ion-button (click)="Step3()"><ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon></button>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+    </ion-grid>
+
+
+    <ion-grid *ngIf="step == 4">
+        Grid 4
+        <button ion-button round (click)="Step5()">Step 5</button>
+    </ion-grid>
+
+    <ion-grid *ngIf="step == 5">
+        Grid 5
+        <button ion-button round (click)="Step1()">Again !</button>
+    </ion-grid>
+
+
+</ion-content>

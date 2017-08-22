@@ -1,0 +1,21 @@
+{
+	"HELLO": "Hello",
+
+	"Home" : "Home",
+	"Intro" : "Intro",
+	"Companies Login" : "Companies Login",
+	"Clients Login" : "Clients Login",
+	"Login" : "Login",
+	"Signup" : "Signup",
+	
+	"Password" : "Password",
+	"Username" : "Username",
+
+	"New Account?" : "New Account?",
+	"Forget Your Password!" : "Forget Your Password!",
+	"Companies Login Area" : "Companies Login Area",
+	"Clients Login Area" : "Clients Login Area",
+	"Request a Membership" : "Request a Membership",
+	"Arabic" : "Arabic",
+	"English" : "English"
+}

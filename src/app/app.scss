@@ -1,0 +1,225 @@
+@font-face {
+    font-family: 'JF-Flat';
+    src:  url('../assets/fonts/flat-jooza-regular.ttf') format('truetype');
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    font-family: 'JF-Flat';
+}
+
+.toolbar-title-md{
+    text-align: center!important;
+}
+.text-input {
+    box-shadow: none!important;
+}
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
+    border-bottom-color: transparent!important;
+    box-shadow: none!important;
+}
+ion-navbar{
+    .back-button{
+        color: #2d3e52;
+        position: absolute;
+        left: 0px;
+        padding:5px 10px;
+        z-index: 999999;
+
+        ion-icon{
+            font-size:28px;  
+        }
+        .back-button-text{
+            display: none;
+        }
+    }
+}
+
+/*.action-sheet-container {
+    padding: 0 10px;
+}
+
+ion-action-sheet{
+    .action-sheet-container {
+        padding: 0 10px!important;
+        background-color: transparent!important;
+        .action-sheet-group {
+            margin-bottom: 10px!important;
+            border-radius: 5px!important;
+            background: #f1f1f1!important;
+            overflow: hidden;
+
+            .action-sheet-title{
+                padding: 5px!important;
+                font-size: 18px!important;
+                text-align: center;
+                color: #2d3e52!important;
+                border-bottom: 1px solid #ddd!important;
+                border-radius: 0!important;
+                background: #f6bc44;
+            }
+            .action-sheet-button{
+                color: #2d3e52;
+                font-size: 16px!important;
+                padding: 5px!important;
+                background: transparent!important;
+                border-bottom: 1px solid #ddd!important;
+                direction: rtl;
+                text-align: center!important;
+                min-height: 44px;
+                .button-inner{
+                    justify-content:center!important;
+                    -webkit-justify-content:center!important;
+                    -moz-justify-content:center!important;
+                    .action-sheet-icon{
+                        float: right;
+                        margin-left: 5px;
+                        font-size: 1.2em;
+                        position: absolute;
+                        right: 16px;
+                        margin: 0px;
+                        color: #f6bc44;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+}*/
+
+.list-md .item-input.input-has-focus:last-child{
+    border-bottom-color: transparent!important;
+    box-shadow: none!important;
+}
+.col-center{
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.activated {
+    background-color: f6bc44 !important;
+}
+.full-height{
+    height: 100%;
+}
+.hint{
+    font-size: 19px;
+    color: #777;
+}
+.alert-ios .alert-wrapper,.platform-android .alert-wrapper {
+    overflow: hidden;
+    max-width: 88%;
+    border-radius: 13px;
+    background-color: #f8f8f8;
+    box-shadow: none;
+    width: 400px;
+}
+.footer-button {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+    top: -5px;
+}
+.footer-button ion-spinner{
+    top:9px;
+}
+.item-md ion-thumbnail{
+    min-width: 60px !important; 
+    min-height: 60px !important; 
+}
+
+
+
+
+ion-alert .alert-wrapper .alert-head {
+    padding-bottom: 12px;
+}
+
+.platform-android .alert-head {
+    padding: 12px 16px 7px;
+    text-align: center;
+}
+.platform-android .alert-radio-group, .platform-android .alert-checkbox-group {
+    overflow: scroll;
+    max-height: 240px;
+    border-top: 0.55px solid #dbdbdf;
+    -webkit-overflow-scrolling: touch;
+}
+.platform-android .alert-tappable {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 44px;
+}
+.platform-android .alert-radio-icon {
+    position: relative;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    min-width: 30px;
+        border-style: none !important;
+}
+.platform-android .alert-button-group {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -0.55px;
+}
+.alert-md .alert-radio-inner {
+    background-color: none !important;
+}
+.alert-md .alert-button .button-inner{
+       -webkit-justify-content: center !important;
+    -ms-flex-pack: end;
+    justify-content: center !important;
+
+}
+.alert-md [aria-checked=true] .alert-radio-icon {
+    border-color: #f6bc44 !important;
+}
+.platform-android [aria-checked=true] .alert-radio-inner {
+    position: absolute;
+    top: -7px;
+    left: 7px;
+    width: 6px;
+    height: 12px;
+    border-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-style: solid;
+    border-color: #488aff;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.platform-android .alert-button:last-child {
+    border-right: 0;
+    font-weight: bold;
+}
+
+.platform-android .alert-button {
+    overflow: hidden;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin: 0;
+    min-width: 50%;
+    height: 44px;
+    /*border-top: 0.55px solid #dbdbdf;*/
+    border-right: 0.55px solid #dbdbdf;
+    border-radius: 0;
+    font-size: 17px;
+    color: #488aff;
+    background-color: transparent;
+}
+ion-alert{
+    direction: rtl;
+}
+ion-alert .alert-wrapper .alert-message {
+     display: block !important; 
+}
+.activated {
+    background-color: #f6bc44 !important;
+}

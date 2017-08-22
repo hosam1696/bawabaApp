@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>الجامعات</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <div *ngIf="!showLoader">
+        <ion-card>
+            <ion-card-content>
+                من فضلك قم بتحديد الجامعة التي تريد الذهاب إليها         
+            </ion-card-content>
+        </ion-card>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let uni of university"  col-12 class="city-btn">
+                    <button  [ngClass]="{' activated' : (uni.tid == this.universityId)}" ion-button outline icon-left (click)="goTransportation(uni.tid,uni.name)">
+                        {{uni.name}}
+                        <ion-icon name="arrow-back"></ion-icon>
+                    </button>
+                </ion-col>
+
+
+
+            </ion-row>
+        </ion-grid>
+
+    </div>
+    <div text-center class="col-center"   *ngIf="showLoader" >
+        <ion-spinner name="circles"></ion-spinner>
+        <!--        <div>جارى جلب المحتوى  </div>-->
+    </div>
+
+</ion-content>

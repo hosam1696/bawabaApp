@@ -1,0 +1,30 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>حجز مقعد</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-input [(ngModel)]="username" type="email" placeholder="اسم الراكب "></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input [(ngModel)]="phone" type="tel" placeholder="رقم الهاتف"></ion-input>
+        </ion-item>
+
+        <ion-item class="Pledge">
+            <ion-label>أتعهد بدفع عمولة موقع بوابة النقل (15 ريال) في مدة أقصاها  شهر من تاريخ الحجز ، ويبقى المبلغ في ذمتي </ion-label>
+            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+        </ion-item>
+        
+    </ion-list>
+
+    <ion-row>
+        <button ion-button full (click)="Send()">تأكيد الحجز</button>
+    </ion-row>
+</ion-content>

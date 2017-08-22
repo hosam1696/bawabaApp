@@ -1,0 +1,64 @@
+page-complaints{
+
+    ion-content{
+        background-color:#f1f1f1!important;
+        .main-content{
+            ion-list{
+                padding:0px!important;
+                border: 0px;
+                ion-item{
+                    margin-top: 1px;
+                    padding: 0px;
+                    border: 0px!important;
+                    .item-inner{
+                        padding: 0px!important;
+                        border: 0px!important;
+                        ion-label{
+                            /*margin-left: 10px;*/
+                            margin: 10px!important;
+                            h2{
+                                font-size:14px;
+                                font-weight: 700;
+                                margin-bottom: 5px;
+                            }
+                            .price{
+                                font-size:16px;
+                                color: #f6bc44;
+                                position: absolute;
+                                left: 10px;
+                                top: 5px;
+                            }
+                            p{
+                                color: #999;
+                                font-size: 14px;
+                                font-weight: 600;
+                                height: auto;
+                                max-height: 80px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                margin-left: 50px;
+                                white-space: normal;
+                            }
+                            button{
+                                position: absolute;
+                                bottom: 5px;
+                                left: 10px;
+                                height: 26px;
+                                min-height: 26px;
+                                line-height: 26px;
+                                border-radius: 15px;
+                                border-color: #f6bc44;
+                                color: #2d3e52;
+                                padding: 0px 15px;
+                            }
+                            button.activated{
+                                background-color: #f6bc44;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,147 @@
+page-add-path{
+    direction: rtl!important;
+
+    ion-content{
+        background-color:#f1f1f1!important;
+        #lbl-6 {
+            min-width: 90px;
+        }
+        .top-header{
+            height: 100px;
+            text-align: center;
+            width: 100%;
+
+            .path-img{
+                width: 100px;
+                height: 100px;
+                background-color: #ccc;
+                margin: auto;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            button{
+                border-color: #f6bc44!important;
+                position: absolute;
+                left: 16px;
+                padding: 4px 8px;
+                top: 60px;
+                font-size: 12px;
+                height: 30px;
+                color: #2d3e52;
+                border-radius: 15px;
+            }
+            button.activated{
+                background-color: #f6bc44;
+                color: #2d3e52;
+            }
+
+        }
+
+        ion-list{
+            margin:0px!important;
+
+            ion-list-header{
+                padding-right: 10px!important;
+                padding-left: 10px!important;
+                height: 30px;
+                min-height: 30px;
+                border:0px !important;
+                margin-top:0px!important;
+                ion-label{
+                    margin: 0px!important;
+                    font-weight: 600;
+                    color: #2d3e52;
+                }
+            }
+
+            ion-item{
+                border:0px !important;
+                margin-bottom: 1px!important;
+                padding:0px 10px 0 0!important;
+                /*height: 40px;*/
+                min-height: 40px;
+                line-height: 40px;
+              
+                &:last-child {
+                    ion-label {
+                        min-width: 90px;
+                    }
+                }
+                .item-inner{
+                    border-bottom:0px solid #ddd!important;
+                    padding: 0px!important;
+
+                    ion-label{
+                        display: flex;
+                        margin: 0px !important; 
+                        /*height: 100%;*/
+                        font-size: 16px;
+                        max-width: 90px !important;
+
+                        line-height: 20px;
+                        white-space: normal;
+                        
+                        &.holder {
+
+                        display: flex;
+                            justify-content: flex-end;
+                            padding-left: 6px;
+                            height: 50px;
+                            align-items: center;
+                        flex: 1;
+                            min-width: calc(100% - 90px);
+                        }
+
+
+                    }
+
+                    ion-icon{
+                        /*margin-top: 13px;*/
+                        margin-left: 16px!important;
+                        color: #f6bc44;
+                    }
+
+                    ion-select{
+                        position: relative;
+                            font-size: 13px;
+    height: 50px;
+                        max-width: calc(100% - 90px)!important;
+                        width: calc(100% - 90px)!important;
+                        .select-icon{
+                            margin-top: 5px;
+                            .select-icon-inner{
+                                color: #f6bc44!important;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .path-data{
+            ion-item{
+                height: 40px;
+            }
+        }
+    }
+}
+
+ion-navbar{
+    ion-buttons{
+        position: absolute!important;
+        right: 10px!important;
+        z-index: 99999;
+        left: auto!important;
+
+        button{
+            padding: 5px!important;
+            ion-icon{
+                font-size: 30px;
+            }
+        }  
+    }
+}

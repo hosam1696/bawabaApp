@@ -1,0 +1,8 @@
+{
+  "name": "AlBawabah",
+  "app_id": "b03b6fac",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

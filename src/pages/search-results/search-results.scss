@@ -1,0 +1,107 @@
+page-search-results {
+    ion-content{
+        background-color:#f1f1f1!important;
+
+        .inner-content{
+            .top-div{
+                background-color: #fff;
+                /*margin-bottom:10px;*/
+                ion-row{
+                    padding:0px!important;
+                    ion-col{
+
+                        h4{
+                            font-size: 14px;
+                            margin: 10px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+
+                    }
+                }
+            }
+
+
+
+            ion-list{
+                margin:0px!important;
+
+                ion-list-header{
+                    padding-right: 10px!important;
+                    padding-left: 10px!important;
+                    height: 30px;
+                    min-height: 30px;
+                    border:0px !important;
+                    margin-top:0px!important;
+                    ion-label{
+                        margin: 0px!important;
+                        font-weight: 600;
+                        color: #999;
+                    }
+                }
+
+                ion-item{
+                    border:0px !important;
+                    border-bottom: 1px solid #ddd!important;
+                    padding:0px 10px 0 10px!important;
+                    font-size:14px!important;
+                    color:#2d3e52!important;
+                    height: 80px!important;
+                    min-height: 80px!important;
+                    .item-inner{
+                        padding-right: 0px!important;  
+                        ion-label{
+                            margin-right: 70px !important;
+                            padding: 10px 0px;
+                            margin: 0px;
+                            height: 100%;
+
+                            ion-thumbnail{
+                                position: absolute;
+                                right: 10px;
+                                /*margin-top: 10px;*/
+                                height: 60px;
+                                width: 60px;
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                            h2{
+                                margin-top: 5px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                            p{
+                                margin-top: 5px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                            button{
+                                position: absolute;
+                                bottom: 5px;
+                                left: 10px;
+                                height: 26px;
+                                min-height: 26px;
+                                line-height: 26px;
+                                border-radius: 15px;
+                                border-color: #f6bc44;
+                                color: #2d3e52;
+                                padding: 0px 10px;
+                            }
+                            button.activated{
+                                background-color: #f6bc44;
+                            }
+
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+

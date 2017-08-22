@@ -1,0 +1,124 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>إضافة مسار</ion-title>
+        <ion-buttons start right>
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="main-content">
+     
+
+              <div class="inner-content">
+                <div class="top-header">
+                    <div class="path-img">
+                        <img src="./assets/img/bb.png" alt=""/>
+                        {{pathForImage(lastImage)}}
+                        {{lastImage}}
+                          <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+
+                    </div>
+                    <button ion-button outline  (click)="imageActionSheet()">أضف صورة</button>
+                </div>
+                <ion-list class="temp-data">
+                    <ion-item>
+                     
+                        <ion-label> عنوان المسار</ion-label>
+                        <ion-input type="text" [(ngModel)]="temp.title" placeholder="يرجى إدخار عنوان المسار" ></ion-input>
+                    </ion-item>
+                    <ion-item class="city">
+                        <ion-label>المدينة</ion-label>
+                        <ion-label [hidden]="districts" class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
+                        <ion-select [hidden]="!cities" (click)="checkDB('districts')" okText="تم" cancelText="إلغاء" [(ngModel)]="temp.field_route_from.und[0]['tid']"
+                            placeholder="يرجى تحديد المدينة ">
+                            <ion-option *ngFor="let district of cities " [value]="district.tid"> {{district.name}}</ion-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <ion-item class="city">
+                        <ion-label>نقل من</ion-label>
+                        <ion-label [hidden]="districts"class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>    
+                        </ion-label>  
+                        <ion-select [hidden]="!districts" (click)="checkDB('districts')" okText="تم" cancelText="إلغاء" [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد المدينة ">
+                            <ion-option *ngFor="let district of districts " [value]="district.tid" > {{district.name}}</ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="districts">
+                        <ion-label>نقل إلى</ion-label>
+                        <ion-label [hidden]="universities" class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
+                        <ion-select [hidden]="!universities" (click)="checkDB('universities')" [(ngModel)]="temp.field_route_university_to.und[0]['tid']" placeholder="يرجى تحديد الجامعة">
+                            <ion-option *ngFor="let university of universities" [value]="university.tid" >{{university.name}}</ion-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <ion-item class="van">
+                        <ion-label>نوع المركبة</ion-label>
+                        <ion-label [hidden]="vehicles" class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
+                        <ion-select [hidden]="!vehicles" (click)="checkDB($event,'vehicles')" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']" placeholder="يرجى تحديد نوع المركبة">
+                            <ion-option *ngFor="let vehicles of vehicles" [value]="vehicles.tid" >{{vehicles.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="cont">
+                        <ion-label>مدة العقد </ion-label>
+                        <ion-label [hidden]="contracts" class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
+                        <ion-select [hidden]="!contracts" (click)="checkDB('contracts')" [(ngModel)]="temp.field_contract_period.und[0]['tid']" placeholder="يرجى تحديد مدة العقد">
+                            <ion-option *ngFor="let contract of contracts" [value]="contract.tid" >{{contract.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="gocome">
+                        <ion-label>نوع الطلب </ion-label>
+                        <ion-label [hidden]="goAndComes" class="holder">
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
+                        <ion-select [hidden]="!goAndComes" (click)="checkDB('goAndComes')" [(ngModel)]="temp.field_go_and_come.und[0]['tid']" placeholder="يرجى تحديد نوع الطلب ">
+                            <ion-option *ngFor="let goAndCome of goAndComes" [value]="goAndCome.tid" >{{goAndCome.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>السعر </ion-label>
+                        <ion-input type="number" [(ngModel)]="temp.field_price.und[0]['value']" placeholder="يرجى إدخال السعر"></ion-input>
+                    </ion-item>
+
+
+
+                </ion-list>
+
+            </div>
+  
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar >
+        <div class="footer-button" (click)="addPath()">
+                      <ion-spinner *ngIf="submitload" name="circles"></ion-spinner>
+
+            حفظ المسار
+            
+        </div>
+    </ion-toolbar>
+</ion-footer>
+

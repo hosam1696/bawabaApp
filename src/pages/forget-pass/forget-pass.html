@@ -1,0 +1,46 @@
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'Login' | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>-->
+
+
+<ion-content padding>
+
+    <ion-img [src]="headerimg"></ion-img>
+
+    <ion-card>
+        <ion-card-content>
+            قم بإدخال رقم هاتفك لكي تتمكن من إستعادة كلمة المرور
+        </ion-card-content>
+    </ion-card>
+
+
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-input [(ngModel)]="phone" type="tel" placeholder="أدخل رقم الهاتف"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <button ion-button full (click)="userLogin()">إرسال
+                <ion-spinner *ngIf="loginload" name="circles"></ion-spinner>
+        </button>
+    </ion-row>
+
+    <ion-row>
+        <ion-col width-50>
+            <a (click)="goSignup()" class="new-account" >{{'New Account?' | translate}}</a>
+        </ion-col>
+        <ion-col width-50>
+            <a (click)="gologin()" class="forget-pass">تسجيل الدخول</a>
+        </ion-col>
+    </ion-row>
+
+</ion-content>
+
+

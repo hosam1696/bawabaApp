@@ -1,0 +1,62 @@
+page-passenger-home {
+
+    ion-content{
+        background-color: #f1f1f1!important;
+
+        ion-card{
+            margin:0px!important; 
+            width: 100%!important; 
+            text-align: center!important;
+            background: transparent!important; 
+            box-shadow: none!important;
+            ion-card-content{
+                font-size: 16px!important;
+                line-height: 24px!important;
+                padding: 20px 15px!important;
+
+            } 
+        }
+        ion-grid{
+            padding: 10px!important;
+            ion-row{
+                ion-col{
+                    button{
+                        width: 100%!important;
+                        border-radius: 30px!important;
+                        margin: 0px!important;
+                        padding: 0 10px!important;
+
+                        .button-inner{
+                            text-align:right;
+                            padding-right:5px;
+                            justify-content: right;
+                            ion-icon{
+                                position: absolute;
+                                left: 10px;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+}
+.city-btn:nth-child(odd) button{
+    border-color: #f6bc44;
+    color: #2d3e52;
+}
+.city-btn:nth-child(even) button{
+    border-color: #2d3e52;
+    color: #f6bc44;
+}
+.city-btn:nth-child(odd) button.activated{
+    background-color: #f6bc44;
+}
+.city-btn:nth-child(even) button.activated{
+    background-color: #2d3e52;
+}
+ion-toast{
+    background-color: rgba(0,0,0,0.6);
+}

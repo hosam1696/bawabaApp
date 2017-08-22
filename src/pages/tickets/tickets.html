@@ -1,0 +1,123 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>التذاكر</ion-title>
+    </ion-navbar>
+    <ion-toolbar class="subheader" >
+        <ion-segment [(ngModel)]="mytickets">
+            <ion-segment-button value="booked">
+                التذاكر المحجوزة
+            </ion-segment-button>
+            <ion-segment-button value="Canceled">
+                التذاكر الملغاة
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <div class="main-content">
+
+        <div [ngSwitch]="mytickets">
+
+            <ion-list *ngSwitchCase="'booked'">
+
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012424</span></h2>
+                    <h2>تاريخ الحجز: <span>10/1/2017</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">220 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>745424</span></h2>
+                    <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">350 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012745</span></h2>
+                    <h2>تاريخ الحجز: <span>5/11/2015</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">230 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>045224</span></h2>
+                    <h2>تاريخ الحجز: <span>7/2/2013</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">420 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>745424</span></h2>
+                    <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">350 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012745</span></h2>
+                    <h2>تاريخ الحجز: <span>5/11/2015</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">230 ريال</h4>
+                    <button ion-button outline>الغاء</button>
+
+                </ion-item>
+
+
+            </ion-list>
+
+            <ion-list *ngSwitchCase="'Canceled'">
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012424</span></h2>
+                    <h2>تاريخ الحجز: <span>10/1/2017</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">220 ريال</h4>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>745424</span></h2>
+                    <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">350 ريال</h4>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012745</span></h2>
+                    <h2>تاريخ الحجز: <span>5/11/2015</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">230 ريال</h4>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>045224</span></h2>
+                    <h2>تاريخ الحجز: <span>7/2/2013</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">420 ريال</h4>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>745424</span></h2>
+                    <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
+                    <p>شركة السالم للنقل</p>
+                    <h4 class="price">350 ريال</h4>
+                </ion-item>
+                <ion-item>
+                    <h2>رقم التذكرة : <span>012745</span></h2>
+                    <h2>تاريخ الحجز: <span>5/11/2015</span></h2>
+                    <p>شركة الصافنات للنقل</p>
+                    <h4 class="price">230 ريال</h4>
+                </ion-item>
+
+            </ion-list>
+        </div>
+
+
+
+    </div>
+</ion-content>
+
+

@@ -1,0 +1,30 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>إرسال الموقع</ion-title>
+        <ion-buttons right>
+            <button ion-button  (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            أدخل رقم الهاتف لكي يتم إرسال موقع الشركة إليك فى رسالة نصية
+        </ion-card-content>
+    </ion-card>
+    <ion-list>
+        <ion-item>
+            <ion-input [(ngModel)]="phone" type="tel" placeholder="رقم الهاتف"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <ion-row>
+        <button ion-button full (click)="Send()">إرسال</button>
+    </ion-row>
+</ion-content>

@@ -1,0 +1,113 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+$font-path: "../assets/fonts";
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  app-color:    #f6bc44
+);
+
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+$toast-ios-background: rgba(246,188,68,0.8);
+$toast-md-background: rgba(246,188,68,0.8);
+$toast-ios-title-color: #fff;
+$toast-md-title-color: #fff;
+// Material Design only Sass variables can go here
+
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+
+$text-color: #2d3e52;
+$toolbar-background: #f6bc44;
+$toolbar-border-color:#dba73a;
+$toolbar-ios-border-color:#dba73a;
+$toolbar-md-border-color:#dba73a;
+$toolbar-text-color: #2d3e52;
+$toolbar-md-title-text-color: #2d3e52;
+$toolbar-ios-title-text-color: #2d3e52;
+$toolbar-wp-title-text-color: #2d3e52;
+
+$tabs-background: #f6bc44;
+$tabs-ios-tab-text-color: #33475e;
+$tabs-ios-tab-text-color-active: #2d3e52;
+$tabs-ios-tab-icon-color: #33475e;
+$tabs-ios-tab-icon-color-active: #2d3e52;
+$tabs-ios-tab-icon-size:22px;
+$tabs-ios-tab-font-size:14px;
+
+$tabs-md-tab-text-color: #33475e;
+$tabs-md-tab-text-color-active: #2d3e52;
+$tabs-md-tab-icon-color:#33475e;
+$tabs-md-tab-icon-color-active:#2d3e52;
+$tabs-md-tab-icon-size:22px;
+$tabs-md-tab-font-size:14px;
+
+$tabs-wp-tab-icon-color: #33475e;
+$tabs-wp-tab-icon-color-active: #2d3e52;
+
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
+/*@import "flat-jooza-regular";*/

@@ -1,0 +1,80 @@
+page-login {
+    ion-content{
+        background-image: url(../assets/img/gmap.jpg);
+        background-size:cover;
+
+        ion-img{
+            background: transparent;
+            width: 100%;
+            text-align: center;
+            position:relative;
+            contain: none;
+            margin:55px 0px;
+            img{
+                width: 150px;
+                height: 150px;
+                margin: auto;
+            }
+        }
+
+        ion-row{
+            ion-col{
+                padding:0px!important;
+
+                ion-item{
+                    background-color: rgba(246,188,68,0.10)!important;
+                    border: 1px solid #f6bc44!important;
+                    border-radius: 5px!important;
+                    color: #fff!important;
+                    margin-bottom:10px!important;
+                    .item-inner{
+                        border: none;
+                        border-bottom: 0px!important;
+
+                        ion-label{
+                            color: #fff!important;
+                        }
+                        
+                        ion-input{
+                            
+                            input.activated,
+                            input{
+                                background-color: transparent !important;
+                                margin: 0px !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            button{
+                background-color: #f6bc44 !important;
+                border-radius: 5px !important;
+                color: #fff !important;
+                margin-top: 15px!important;
+            }
+
+
+            a{
+                color: #f6bc44 !important;
+                /*margin-top: 5px;*/
+            }
+            
+            .forget-pass{
+                float: left;
+            }
+
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+}
+

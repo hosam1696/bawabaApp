@@ -1,0 +1,110 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            صفحتي
+        </ion-title>
+        <ion-buttons start right>
+            <button ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </button>
+        </ion-buttons> 
+    </ion-navbar>
+
+ 
+
+</ion-header>
+
+<ion-content fullscreen >
+    <div *ngIf="user;else noUser">
+    <div class="top-header">
+        <div class="user-img">
+            <img *ngIf="!user?.logo" src="./assets/img/male.jpg" alt=""/>
+            <img *ngIf="user?.logo" src="{{user.logo}}" alt=""/>
+        </div>
+        <div class="change-img" (click)="imageActionSheet()">
+            <ion-icon name="camera"></ion-icon>
+        </div>
+        <h2 class="user-name" >{{userLabel}}</h2>
+        <!--<h2 class="user-name" *ngIf="user.firstName" >{{user.firstName}} {{user.lastName}}</h2>-->
+
+        <ion-row>
+            <ion-col col-6 class="contact-us">
+                <ion-icon name="chatbubbles" (click)="contactus()"></ion-icon> 
+            </ion-col>
+            <ion-col col-6 class="edit-profile">
+                <ion-icon name="cog" (click)="goEditProfile()"></ion-icon> 
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="co-info">
+        <ion-row>
+            <ion-col col-6>
+                <h4>عدد المسارات</h4>
+                <p>{{user.numberOfRoutes}}</p>
+            </ion-col>
+<!--            <ion-col col-4>
+                <h4>عدد الزيارات</h4>
+                <p>160</p>
+            </ion-col>-->
+            <ion-col col-6>
+                <h4> مرات الحجز</h4>
+                <p>{{user.numberOfTickets}}</p>
+            </ion-col>
+        </ion-row>
+    </div>
+<!--    <div class="location-map">
+        <button ion-button full item-end icon-right (click)="locationmodal()">
+            <ion-icon name="pin"></ion-icon>
+            الموقع على الخريطة
+        </button>
+    </div>
+    <div class="location-info">
+        <ion-row>
+            <ion-col col-6>
+                <button ion-button full (click)="gobooking()">
+                    حجز مقعد
+                </button>
+            </ion-col>
+            <ion-col col-6>
+                <button ion-button full (click)="sendlocation()">
+                    ارسال الموقع
+                </button>
+            </ion-col>
+        </ion-row>
+    </div>-->
+
+
+    <!--    <div [ngSwitch]="section">
+    
+            <ion-list *ngSwitchCase="'one'">
+                <ion-item *ngFor="let something of somethings">
+                    <ion-thumbnail item-left>
+                        <ion-icon name="settings"></ion-icon>
+                    </ion-thumbnail>
+                    <h2>Something</h2>
+                </ion-item>
+            </ion-list>
+    
+            <ion-list *ngSwitchCase="'two'">
+                <ion-item (click)="editaccount()">
+                    Edit Account
+                </ion-item>
+                <ion-item (click)="contactus()">
+                    Send us a Message
+                </ion-item>
+                <ion-item (click)="changeLang()">
+                    Change Language
+                </ion-item>
+            </ion-list>
+    
+        </div>-->
+    </div>
+    <ng-template #noUser>
+        <p>
+            No user
+        </p>
+    </ng-template>
+</ion-content>
+
+
+

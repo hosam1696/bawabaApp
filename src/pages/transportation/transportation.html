@@ -1,0 +1,72 @@
+
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>المواصلات</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page" parallax-header>
+
+    <div *ngIf="!showLoader">
+        <div class="main-content">
+
+            <div class="inner-content">
+                <ion-list [(ngModel)]="vehicleId" radio-group  (ionChange)="setValue($event)">
+                    <ion-list-header>
+                        نوع المركبة
+                    </ion-list-header>
+                    <ion-item  *ngFor="let vehicle of vehicles" >
+                        <ion-label>{{vehicle.name}}</ion-label>
+                        <ion-radio  value="{{vehicle.tid}}"></ion-radio>
+                    </ion-item>
+
+                    
+                </ion-list>
+
+                <ion-list [(ngModel)]="contractId" radio-group>
+                    <ion-list-header>
+                        مدة العقد
+                    </ion-list-header>
+
+                    <ion-item  *ngFor="let contract of contracts" >
+                        <ion-label>{{contract.name}} </ion-label>
+                        <ion-radio  [value]="contract.tid"></ion-radio>
+                    </ion-item>
+
+                </ion-list>
+                
+                
+                <ion-list [(ngModel)]="goAndComeId" radio-group>
+                    <ion-list-header>
+نوع الطلب 
+                    </ion-list-header>
+
+                    <ion-item  *ngFor="let goAndCome of goAndComes" >
+                        <ion-label>{{goAndCome.name}} </ion-label>
+                        <ion-radio   [value]="goAndCome.tid"></ion-radio>
+                    </ion-item>
+
+                </ion-list>
+
+                <ion-row>
+                    <button ion-button full (click)="goresults()">
+                            
+                            نتائج البحث
+                            <ion-spinner *ngIf="loginload" name="circles"></ion-spinner>
+                    </button>
+                </ion-row>
+
+            </div>
+
+        </div>
+    </div>
+    <div text-center class="col-center"   *ngIf="showLoader" >
+        <ion-spinner name="circles"></ion-spinner>
+        <!--        <div>جارى جلب المحتوى  </div>-->
+    </div>
+</ion-content>
+
+

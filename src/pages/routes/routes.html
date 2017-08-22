@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <button (click)="newRoute()" ion-button>
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-title>Routes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-spinner *ngIf="noData" name="crescent"></ion-spinner>
+  <ion-list *ngFor="let route of userRoutes">
+    <ion-item (click)="openRoute(route.uuid)">
+      <ion-avatar item-left>
+        <img src="">
+      </ion-avatar>
+      <h2>{{route.title}}</h2>
+      <p>{{route.nid}} - {{route.vid}}</p>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,68 @@
+
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>مساراتى</ion-title>
+    </ion-navbar>
+    <ion-toolbar class="search-filter">
+        <ion-title (click)="searchoption()">خيارات البحث
+            <ion-icon name="funnel" item-left></ion-icon>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="home" parallax-header>
+    <div *ngIf="!showLoader" class="full-height">
+        <div class="main-content">
+
+            <div class="inner-content">
+                <ion-list>
+                    <ion-item *ngFor="let route of routes">
+                        <ion-thumbnail item-start>
+                            <img src="{{api.url}}{{route.mainImage}}">
+                        </ion-thumbnail>
+                      
+                        <h2>{{route.title}}</h2>
+                        
+                        <h5>من: {{route.routeFrom}}</h5>
+                        <h5>الى: {{route.university}}</h5>
+                        <button ion-button outline item-end (click)="editpathmodal(route.Nid)">تعديل
+                    
+                    </button>
+                            <button  ion-button outline class="item-first" (click)="deletepathmodal(route)">حذف
+                    
+                    </button>
+                    </ion-item>
+
+
+                </ion-list>
+
+
+            </div>
+
+
+            <!--        <div class="drop-div" style="height: 100%; width: 100%; position: absolute; top:0px;" [dragula]='"drop-bag"'>
+                        
+                        
+                    </div>-->
+        </div>
+        <div text-center class="hint col-center"  *ngIf="(routes).length <1 ">
+            <div  >
+                لم يتم إضافة مسارات الى الان , يمكنك إضافة مسار من خلال الضغط على زر أضف مسار</div>
+
+        </div>
+    </div>
+
+    <div text-center class="col-center"   *ngIf="showLoader" >
+        <ion-spinner name="circles"></ion-spinner>
+        <!--        <div>جارى جلب المحتوى  </div>-->
+    </div>
+
+    <div class="add-path">
+        <button ion-button (click)="addpathmodal()">أضف مسار</button>
+    </div>
+</ion-content>
+
+

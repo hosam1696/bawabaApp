@@ -1,0 +1,29 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>مراسلة البوابة</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon>
+<!--                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>-->
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-input [(ngModel)]="mestitle" placeholder="موضوع الرسالة "></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-textarea [(ngModel)]="mesbody" placeholder="نص الرسالة"></ion-textarea>
+        </ion-item>
+    </ion-list>
+    <ion-row>
+        <button ion-button full (click)="Send()">إرسال</button>
+    </ion-row>
+</ion-content>

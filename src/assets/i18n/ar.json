@@ -1,0 +1,21 @@
+{
+	"HELLO": "اهلاً",
+
+	"Home" : "الرئيسيه",
+	"Intro" : "صفحه الاستقبال",
+	"Companies Login" : "منطقه دخول الشركات",
+	"Clients Login" : "منطقه دخول الاعضاء",
+	"Login" : "تسجيل الدخول",
+	"Signup" : "تسجيل عضويه",
+
+	"Password" : "كلمه السر",
+	"Username" : "اسم المستخدم",
+
+	"New Account?" : "تسجيل حساب جديد ؟",
+	"Forget Your Password!" : "نسيت كلمه السر !",
+	"Companies Login Area" : "منطقه دخول الشركات",
+	"Clients Login Area" : "منطقه دخول العملاء",
+	"Request a Membership" : "طلب عضويه",
+	"Arabic" : "العربيه",
+	"English" : "الانجليزيه"
+}

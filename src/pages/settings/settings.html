@@ -1,0 +1,111 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>الاعدادات</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page" parallax-header>
+
+    <div class="top-content">
+        <div class="header-image" (click)="goProfile()">
+            <img src="http://ionicframework.com/dist/preview-app/www/assets/img/card-amsterdam.png" />
+        </div>
+        <h4 class="user-name">حسين محمود</h4>
+        <p class="user-mail">husseinmahmoud@gmail.com</p>
+    </div>
+
+
+    <div class="main-content">
+
+        <div class="inner-content">
+            <ion-list>
+                <ion-list-header>
+                    الاعدادات
+                </ion-list-header>
+                <ion-item (click)="goEditProfile()">
+                    <ion-icon ios="ios-cog" md="md-cog" item-start></ion-icon>
+                    <div class="inner-item">
+                        تعديل البيانات الشخصية
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+
+                </ion-item>
+
+                <ion-item (click)="goComplaints()">
+                    <ion-icon ios="ios-document" md="md-document" item-start></ion-icon>
+                    <div class="inner-item">
+                        شكاوى العملاء
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+                </ion-item>
+            </ion-list>
+
+            <ion-list>
+                <ion-list-header>
+                    التطبيق
+                </ion-list-header>
+
+                <ion-item>
+                    <ion-icon ios="ios-clipboard" md="md-clipboard" item-start></ion-icon>
+                    <div class="inner-item">
+                        سياسة الاستخدام
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+                </ion-item>
+
+                <ion-item (click)="contactus()">
+                    <ion-icon ios="ios-call" md="md-call" item-start></ion-icon>
+                    <div class="inner-item">
+                        اتصل بنا
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon ios="ios-share-alt" md="md-share-alt" item-start></ion-icon>
+                    <div class="inner-item">
+                        شارك التطبيق
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+                </ion-item>
+
+                <!--                <ion-item (click)="goProfile()">
+                                    go Profile
+                                </ion-item>-->
+            </ion-list>
+
+            <ion-list>
+
+                <ion-list-header>
+                    تسجيل الخروج
+                </ion-list-header>
+                <ion-item (click)='Logout()'>
+                    <ion-icon ios="ios-log-out" md="md-log-out" item-start></ion-icon>
+                    <div class="inner-item">
+                        تسجيل الخروج
+                        <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                    </div>
+                </ion-item>
+
+                <!--                <ion-item (click)="goProfile()">
+                                    go Profile
+                                </ion-item>-->
+            </ion-list>
+
+            <div class="powered-by">
+                <h4>
+                    powered by it plus
+                </h4>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+</ion-content>
+
+

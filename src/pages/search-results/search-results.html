@@ -1,0 +1,77 @@
+
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>المواصلات</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page" parallax-header>
+
+
+    <div class="main-content">
+
+        <div class="inner-content">
+            <div class="top-div">
+                <ion-row>
+                    <ion-col col-6>
+                        <h4 class="from">من: حي القادسية</h4>
+                        <h4 class="vaicle">المركبة: فان 7 راكب</h4>
+                    </ion-col>
+                    <ion-col col-6>
+                        <h4 class="to">الى:جامعة الملك سعود</h4>
+                        <h4 class="contract">عقد فصلي</h4>
+                    </ion-col>
+                </ion-row>
+            </div>
+
+            <ion-list>
+                <ion-list-header>
+                    نتائج البحث
+                </ion-list-header>
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="./assets/img/h1.png">
+                    </ion-thumbnail>
+                    <h2>شركة الصافنات للنقل</h2>
+                    <p>220 ريال</p>
+                    <button ion-button outline item-end (click)="goReservation()">حجز مقعد</button>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="./assets/img/h2.png">
+                    </ion-thumbnail>
+                    <h2>شركة اريج الفصول للنقل</h2>
+                    <p>240 ريال</p>
+                    <button ion-button outline item-end (click)="goReservation()">حجز مقعد</button>
+                </ion-item> 
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="./assets/img/h3.png">
+                    </ion-thumbnail>
+                    <h2>شركةالسالم للنقل</h2>
+                    <p>220 ريال</p>
+                    <button ion-button outline item-end (click)="goReservation()">حجز مقعد</button>
+                </ion-item>
+                
+                <ion-item>
+                    <ion-thumbnail item-start>
+                        <img src="./assets/img/h1.png">
+                    </ion-thumbnail>
+                    <h2>شركةالصافنات للنقل</h2>
+                    <p>240 ريال</p>
+                    <button ion-button outline item-end (click)="goReservation()">حجز مقعد</button>
+                </ion-item> 
+            </ion-list>
+
+
+        </div>
+
+    </div>
+
+</ion-content>
+
+

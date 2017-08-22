@@ -1,0 +1,60 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>خيارات البحث</ion-title>
+        <ion-buttons start right>
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="main-content">
+
+        <div class="inner-content">
+
+            <ion-list class="location-data">
+                <ion-item class="city">
+                    <ion-label>الجامعة</ion-label>
+                    <ion-select [(ngModel)]="city">
+                        <ion-option value="reyad" selected>جامعة الاميرة نورة</ion-option>
+                        <ion-option value="gadah">الملك عبد الله</ion-option>
+                        <ion-option value="damam">الملك سلمان</ion-option>
+                        <ion-option value="ehsaa">الامير حمد </ion-option>
+                        <ion-option value="kharg">الملك محمد بن سلمان</ion-option>
+                        <ion-option value="mekah">الملك عبد العزيز</ion-option>
+                        <ion-option value="madinah">الملك سعود</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item class="city">
+                    <ion-label>الأحياء</ion-label>
+                    <ion-select [(ngModel)]="districts">
+                        <ion-option value="nahda" selected>النهضة</ion-option>
+                        <ion-option value="qadisya">القادسية</ion-option>
+                        <ion-option value="ashbilya">اشبيليا</ion-option>
+                        <ion-option value="mroug">المروج</ion-option>
+                        <ion-option value="rabwah">الربوة</ion-option>
+                        <ion-option value="rawaby">الروابي</ion-option>
+                        <ion-option value="shobra">شبرا</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+
+
+
+        </div>
+
+    </div>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar (click)="dismiss()">
+        <ion-title>عرض المسارات </ion-title>
+    </ion-toolbar>
+</ion-footer>
+

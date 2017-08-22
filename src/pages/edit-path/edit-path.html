@@ -1,0 +1,99 @@
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>تعديل مسار</ion-title>
+        <ion-buttons start right>
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="!showLoader" class="full-height">
+        <div class="main-content">
+
+            <div class="inner-content">
+                <div class="top-header">
+                    <div class="path-img">
+                        <img src="./assets/img/bb.png" alt=""/>
+                    </div>
+                    <button ion-button outline (click)="editimageActionSheet()">تعديل صورة</button>
+                </div>
+                <ion-list class="path-data">
+                    <ion-item>
+                        <ion-label> عنوان المسار</ion-label>
+                        <ion-input type="text" [(ngModel)]="temp.title" placeholder="يرجى إدخار عنوان المسار"></ion-input>
+                        <ion-icon name="checkmark" item-right></ion-icon>
+                    </ion-item>
+                   <ion-item class="city">
+                        <ion-label>نقل من</ion-label>
+                        <ion-select [(ngModel)]="temp.field_route_from" placeholder="يرجى تحديد المدينة ">
+                            <ion-option *ngFor="let district of districts "   [value]="district.tid" > {{district.name}}</ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                  <ion-item class="districts">
+                        <ion-label>نقل إلى</ion-label>
+                        <ion-select [(ngModel)]="temp.field_route_university_to" placeholder="يرجى تحديد الجامعة">
+                            <ion-option *ngFor="let university of universities" [value]="university.tid" >{{university.name}}</ion-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <ion-item class="van">
+                        <ion-label>نوع المركبة</ion-label>
+                        <ion-select [(ngModel)]="temp.field_vehicle_type" placeholder="يرجى تحديد نوع المركبة">
+                            <ion-option *ngFor="let vehicles of vehicles" [value]="vehicles.tid" >{{vehicles.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="cont">
+                        <ion-label>مدة العقد </ion-label>
+                        <ion-select [(ngModel)]="temp.field_contract_period" placeholder="يرجى تحديد مدة العقد">
+                            <ion-option *ngFor="let contract of contracts" [value]="contract.tid" >{{contract.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="gocome">
+                        <ion-label>نوع الطلب </ion-label>
+                        <ion-select [(ngModel)]="temp.field_go_and_come" placeholder="يرجى تحديد نوع الطلب ">
+                            <ion-option *ngFor="let goAndCome of goAndComes" [value]="goAndCome.tid" >{{goAndCome.name}} </ion-option>
+
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>السعر </ion-label>
+                        <ion-input type="number" [(ngModel)]="temp.field_price" placeholder="يرجى إدخال السعر"></ion-input>
+                    </ion-item>
+
+
+
+                </ion-list>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div text-center class="col-center"   *ngIf="showLoader" >
+        <ion-spinner name="circles"></ion-spinner>
+        <!--        <div>جارى جلب المحتوى  </div>-->
+    </div>
+</ion-content>
+
+<ion-footer   *ngIf="!showLoader">
+   
+    
+       <ion-toolbar >
+        <div class="footer-button" (click)="updatePath()">
+                      <ion-spinner *ngIf="submitload" name="circles"></ion-spinner>
+
+حفظ التعديل            
+        </div>
+    </ion-toolbar>
+</ion-footer>
+

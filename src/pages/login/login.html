@@ -1,0 +1,48 @@
+<!--<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'Login' | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>-->
+
+
+<ion-content padding>
+
+    <ion-img src="./assets/img/ba_logo.png"></ion-img>
+
+
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-input [(ngModel)]="username" type="text" placeholder="{{'Username' | translate}}"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-input [(ngModel)]="password" type="password" placeholder="{{'Password' | translate}}"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <button ion-button full (click)="userLogin()">{{'Login' | translate}}
+                <ion-spinner *ngIf="loginload" name="circles"></ion-spinner>
+        </button>
+    </ion-row>
+
+    <ion-row>
+        <ion-col width-50>
+            <a (click)="goSignup()" class="new-account" >{{'New Account?' | translate}}</a>
+        </ion-col>
+        <ion-col width-50>
+            <a (click)="goForgetPass()" class="forget-pass">{{'Forget Your Password!' | translate}}</a>
+        </ion-col>
+    </ion-row>
+
+</ion-content>
+
+

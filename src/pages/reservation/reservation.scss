@@ -1,0 +1,60 @@
+page-reservation {
+    ion-content{
+        background:#f1f1f1!important;
+
+        ion-list{
+
+            ion-item{
+                padding: 0px!important;
+                margin-bottom: 10px!important;
+                border: 0px !important;
+                border-radius: 5px!important;
+                .item-inner{
+                    border: 0px !important;
+                    padding: 0px!important;
+                    ion-input{
+                        input {
+                            margin: 8px!important;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+            .Pledge{
+                background: transparent!important;
+                ion-checkbox{
+                    position: absolute!important;
+                    top: 5px;
+                    margin: 5px 0!important;
+                    margin-right: 0px!important;
+                    .checkbox-icon{
+                        border-color: #2d3e52!important;
+                    }
+                    .checkbox-checked {
+                        border-color: #2d3e52;
+                        background-color: #2d3e52;
+                    }
+                }
+                ion-label{
+                    white-space: normal!important;
+                    overflow: visible!important;
+                    font-size: 15px;
+                    line-height: 20px;
+                    margin-right: 26px;
+                }
+
+
+            }
+
+        }
+
+        ion-row{
+            padding: 0px;
+            button{
+                background-color: #f6bc44 !important;
+                border-radius: 5px !important;
+                color: #2d3e52 !important;
+            }
+        }
+    }
+}
