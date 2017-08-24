@@ -14,39 +14,39 @@
         <div class="main-content">
 
             <div class="inner-content">
-                <ion-list [(ngModel)]="vehicleId" radio-group  (ionChange)="setValue($event)">
+                <ion-list [(ngModel)]="vehicle" radio-group  (ionChange)="setValue($event)">
                     <ion-list-header>
                         نوع المركبة
                     </ion-list-header>
                     <ion-item  *ngFor="let vehicle of vehicles" >
                         <ion-label>{{vehicle.name}}</ion-label>
-                        <ion-radio  value="{{vehicle.tid}}"></ion-radio>
+                        <ion-radio  [value]="vehicle.tid+','+vehicle.name"></ion-radio>
                     </ion-item>
 
                     
                 </ion-list>
 
-                <ion-list [(ngModel)]="contractId" radio-group>
+                <ion-list [(ngModel)]="contract" radio-group>
                     <ion-list-header>
                         مدة العقد
                     </ion-list-header>
 
                     <ion-item  *ngFor="let contract of contracts" >
                         <ion-label>{{contract.name}} </ion-label>
-                        <ion-radio  [value]="contract.tid"></ion-radio>
+                        <ion-radio  [value]="contract.tid+','+contract.name"></ion-radio>
                     </ion-item>
 
                 </ion-list>
                 
                 
-                <ion-list [(ngModel)]="goAndComeId" radio-group>
+                <ion-list [(ngModel)]="goAndCome" radio-group>
                     <ion-list-header>
 نوع الطلب 
                     </ion-list-header>
 
                     <ion-item  *ngFor="let goAndCome of goAndComes" >
                         <ion-label>{{goAndCome.name}} </ion-label>
-                        <ion-radio   [value]="goAndCome.tid"></ion-radio>
+                        <ion-radio   [value]="goAndCome.tid+','+goAndCome.name"></ion-radio>
                     </ion-item>
 
                 </ion-list>

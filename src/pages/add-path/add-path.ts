@@ -54,12 +54,21 @@ export class AddPath {
         public api: API,
         public users: Users
     ) {
+
+        
 //         this.submitload = true;
         this.temp = {
             type: "routes",
             language: "ar",
 
             title: '',
+            "field_city": {
+                "und": [
+                    {
+                        "tid": ""
+                    }
+                ]
+            },
             "field_route_from": {
                 "und": [
                     {
@@ -214,11 +223,14 @@ export class AddPath {
             this.temp.uid = this.myInfo.uid;
             console.log('this.temp.uid', this.temp.uid);
             this.users.addPath(this.temp, this.Token)
-                .map(res => res.json()).subscribe(data => {
+                .map(res => res.json())
+                .subscribe(data => {
                     this.submitload = false;
                     console.log('data', data);
                     this.showToast('تم اضافة المسار بنجاح ');
                     this.viewCtrl.dismiss(data);
+                },err=>{
+                    this.submitload = false;
                 });
         }
 

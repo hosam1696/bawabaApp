@@ -5,6 +5,15 @@
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     font-family: 'JF-Flat';
 }
+.header-ios .toolbar-ios:last-child .toolbar-background-ios {
+    border-width: 0 !important;
+}
+/*
+.tab-button[aria-selected=true] {
+    background: linear-gradient(#f3c25d ,#FF9800 ) !important;
+    border-top: 2px solid #33475e  !important;
+
+}*/
 
 .toolbar-title-md{
     text-align: center!important;

@@ -53,7 +53,7 @@ this.cityId=0;
     ionViewDidLoad() {
 
         Promise.all([this.users.getUserInfo()]).then((data) => {
-            this.name = data[0].user.name;
+            this.name = data[0].name;
         });
 
 

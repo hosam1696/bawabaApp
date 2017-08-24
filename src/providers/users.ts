@@ -229,7 +229,7 @@ export class Users {
 
   userConnect(Token) {
     // Building Data in JSON Format
-    let data = JSON.stringify({});
+    let data = JSON.stringify({Token});
 
     // Building Headers
     let headers = new Headers({
@@ -244,7 +244,7 @@ export class Users {
       withCredentials: true
     });
 
-    return this.http.post(this.api.userConnect, data, options);
+    return this.http.post(this.api.userConnect, data, options).map(res=>res.json());
   }
 
   testpromise() {
@@ -553,6 +553,13 @@ export class Users {
           reject(err);
         });
     });
+  }
+
+
+  getSearchResults(cityId, universityId, vehicleId, routeFrom, contract, goAndCome) {
+    
+    
+      return this.http.get('http://www.bawabt-alnagel.com/api/v1/routes?city='+cityId+'&university='+universityId+'&vehicle_type='+vehicleId+'&route_from='+routeFrom+'&contract_period='+contract+'&go_come='+goAndCome).map(serverRes=>serverRes.json());
   }
 }
 

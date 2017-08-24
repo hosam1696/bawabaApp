@@ -26,29 +26,29 @@
                 </ion-list-header>
                 <ion-item>
                     <ion-label>إسم المستخدم</ion-label>
-                    <ion-input type="text" formControlName="name"></ion-input>
+                    <input type="text" formControlName="name">
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
-                <ion-item *ngIf="user?.roles[4]=='passenger'">
+                <ion-item *ngIf="userType&&userType=='passenger'">
                     <ion-label>الاسم الأول</ion-label>
-                    <ion-input type="tel" [value]="user?.firstName"></ion-input>
+                    <ion-input type="tel" formControlName="passenger_first_name"></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
 
-                <ion-item *ngIf="user?.roles[4]=='passenger'">
+                <ion-item *ngIf="userType&&userType=='passenger'">
                     <ion-label>اسم العائلة</ion-label>
-                    <ion-input type="tel" [value]="user?.familyName"></ion-input>
+                    <ion-input type="text" formControlName="passenger_last_name"></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
-                <ion-item *ngIf="user?.roles[4]=='passenger'">
+                <ion-item *ngIf="userType&&userType=='passenger'">
                     <ion-label>رقم الهاتف</ion-label>
-                    <ion-input type="tel" [value]="user?.phoneNumber"></ion-input>
+                    <ion-input type="tel" formControlName="passenger.mobile"></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
 
 <ion-item>
     <ion-label>البريد الالكترونى</ion-label>
-    <ion-input type="tel" [value]="user?.email"></ion-input>
+    <ion-input type="tel" formControllName="mail"></ion-input>
     <ion-icon name="checkmark" item-right></ion-icon>
 </ion-item>
 
@@ -64,29 +64,29 @@
                 </ion-item>
 
 
-                <ion-item *ngIf="user?.roles[4]=='transporter'">
+                <ion-item *ngIf="userType&&userType=='transporter'">
                     <ion-label>اسم الشركة</ion-label>
-                    <ion-input type="tel" [value]="user?.companyName"></ion-input>
+                    <ion-input type="text" formControlName='transporter_company_name'></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
 
                 
 
-                <ion-item *ngIf="user?.roles[4]=='transporter'">
+                <ion-item *ngIf="userType&&userType=='transporter'">
                     <ion-label>الاسم الأول للشركة</ion-label>
-                    <ion-input type="tel" [value]="user?.companyFirstName"></ion-input>
+                    <ion-input type="text" formControlName='transporter_company_name'></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
 
-                <ion-item *ngIf="user?.roles[4]=='transporter'">
+                <ion-item *ngIf="userType&&userType=='transporter'">
                     <ion-label>الاسم الأخير للشركة</ion-label>
-                    <ion-input type="tel" [value]="user?.cmpanyLastName"></ion-input>
+                    <ion-input type="text" formControlName='transporter_company_name'></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
 
-                <ion-item *ngIf="user?.roles[4]=='transporter'">
+                <ion-item *ngIf="userType&&userType=='transporter'">
                     <ion-label>رقم هاتف الشركة</ion-label>
-                    <ion-input type="tel" [value]="user?.companyMobileNumber"></ion-input>
+                    <ion-input type="tel" formControlName='transporter_company_name'></ion-input>
                     <ion-icon name="checkmark" item-right></ion-icon>
                 </ion-item>
             </ion-list>
@@ -102,7 +102,7 @@
                     <ion-icon name="pin" item-right></ion-icon>
                 </ion-item>
 
-                <ion-item class="city">
+                <ion-item hidden class="city">
                     <ion-label>المدينة</ion-label>
                     <ion-select >
                         <ion-option value="reyad" selected>{{user?.city || 'لم يحدد بعد'}}</ion-option>
@@ -129,12 +129,16 @@
                 </ion-item>
             </ion-list>
 
-<button type="submit" ion-button color="primary"  block>حفظ التعديلات</button>
+            
 
         </div>
-
+        <button type="submit" full ion-button color="primary"  block>حفظ التعديلات</button>
     </form>
     <br><br>
+
+    <ion-footer hidden>
+        <button type="submit" full ion-button color="primary"  block>حفظ التعديلات</button>
+    </ion-footer>
 </ion-content>
 
 

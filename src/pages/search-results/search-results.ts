@@ -1,3 +1,4 @@
+import { RoutesProvider } from './../../providers/routes';
 // Main Components
 import {Component} from '@angular/core';
 import {IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController} from 'ionic-angular';
@@ -10,6 +11,20 @@ import {API} from "../../providers/api";
 
 import { Reservation } from '../reservation/reservation';
 
+interface ISerachData {
+    cityId: number,
+    cityName: string,
+    contractId: number,
+    contractName: string,
+    distId: number,
+    distName: string,
+    univId: number,
+    univName: string,
+    vehicleId:number,
+    vehicleName: string,
+    goAndComeId: number,
+    goAndComeName: string
+}
 
 @IonicPage()
 @Component({
@@ -17,14 +32,24 @@ import { Reservation } from '../reservation/reservation';
     templateUrl: 'search-results.html',
 })
 export class SearchResults {
-
+    searchData: ISerachData;
+    AllSearchedData: any[];
+    domain:string;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public events: Events,
         public api: API,
-        public users: Users
+        public users: Users,
+        private routesProvider: RoutesProvider,
     ) {
+
+        this.domain = this.api.url;
+
+        this.searchData = this.navParams.get('searchData');
+
+        console.log('Search Data',this.searchData);
+
     }
 
     ionViewDidEnter() {
@@ -34,12 +59,27 @@ export class SearchResults {
 
     ionViewDidLoad() {
         // Run After Page Already Loaded
+        this.users.getSearchResults(
+            this.searchData.cityId,
+            this.searchData.univId,
+            this.searchData.vehicleId,
+            this.searchData.distId,
+            this.searchData.contractId,
+            this.searchData.goAndComeId
+        ).subscribe(data=>{
+            console.log(data);
 
+            // map(x=> {return {Nid: x.Nid, title: x.title, Uid: x.Uid, city: x.city, mainImage: x.mainImage.price: x.price}})
+            
+            this.AllSearchedData = data;
+        }, err=> {
+            console.warn(err);
+        })
     }
 
 
-  goReservation() {
-        this.navCtrl.push(Reservation);
+  goReservation(searchData) {
+        this.navCtrl.push(Reservation, {route:searchData} );
     } 
     
 

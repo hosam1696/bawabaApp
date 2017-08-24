@@ -27,6 +27,7 @@ export class EditPath {
     Token: any;
     myInfo: any;
     submitload: any;
+    cities: any;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -39,6 +40,8 @@ export class EditPath {
         public users: Users
     ) {
 
+        
+
         Promise.all([
             this.users.getToken().then((val) => {
                 this.Token = val;
@@ -50,7 +53,10 @@ export class EditPath {
         console.log(navParams.get('nId'));
         this.getRouteInfoByUserId(navParams.get('nId'));
 
-
+        this.users.getTaxList('7')
+        .then(data=>{
+            this.cities = data;
+        });
 
         //get cities
         this.users.getTaxList('5').then((data) => {
@@ -108,6 +114,7 @@ export class EditPath {
             this.temp = {
                 nid: nId,
                 title: this.routeInfo.title,
+                "field_city": this.routeInfo.field_city.und.tid,
                 "field_route_from": this.routeInfo.field_route_from.und.tid
                 ,
                 "field_route_university_to": this.routeInfo.field_route_university_to.und.tid

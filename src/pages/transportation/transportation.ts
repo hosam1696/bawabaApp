@@ -18,13 +18,13 @@ export class Transportation {
 
 
     showLoader: boolean = true;
-
+    loginload:boolean = false;
     vehicles: any;
     contracts: any;
     goAndComes: any;
-    goAndComeId: any;
-    vehicleId: any;
-    contractId: any;
+    goAndCome: any;
+    vehicle: any;
+    contract: any;
     temp: any
     constructor(
         public navCtrl: NavController,
@@ -79,15 +79,18 @@ export class Transportation {
             distName: this.navParams.get('distName'),
             univId: this.navParams.get('univId'),
             univName: this.navParams.get('univName'),
-            vehicleId: this.vehicleId,
-            contractId: this.contractId,
-            goAndComeId: this.goAndComeId
+            vehicleId: this.vehicle.split(',')[0],
+            vehicleName: this.vehicle.split(',')[1],
+            contractId: this.contract.split(',')[0],
+            contractName: this.contract.split(',')[1],
+            goAndComeId: this.goAndCome.split(',')[0],
+            goAndComeName: this.goAndCome.split(',')[1]
         };
-        console.log(' this.vehicleId', this.vehicleId);
-        console.log('this.contractId', this.contractId);
-        console.log('this.goAndComeId', this.goAndComeId);
+        console.log(' this.vehicle', this.vehicle);
+        console.log('this.contractId', this.contract);
+        console.log('this.goAndComeId', this.goAndCome);
         console.log('temp', this.temp);
-        this.navCtrl.push(SearchResults, this.temp);
+        this.navCtrl.push(SearchResults, {searchData: this.temp});
     }
 
 

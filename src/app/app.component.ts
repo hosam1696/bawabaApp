@@ -1,3 +1,4 @@
+import { Login } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -10,7 +11,6 @@ import { Tabs } from '../pages/tabs/tabs';
 // import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
 // import { Intro } from '../pages/intro/intro';
-import { Login } from '../pages/login/login';
 // import { Signup } from '../pages/signup/signup';
 // import { TransporterHome } from '../pages/transporter-home/transporter-home';
 // import { PassengerHome } from '../pages/passenger-home/passenger-home';
@@ -144,10 +144,28 @@ export class MyApp {
 
   userConnect(Token){
     console.log('Token:'+Token);
+
+    this.users
+      .userConnect(Token)
+      .subscribe(({user})=>{
+        console.log('%c%s','font-size: 20px;color:green;','User connect Data [app component file line 151]', user);
+        if (user.uid === 0) { // no login user
+          this.nav.setRoot(Login);
+        } else {
+          this.nav.setRoot(Tabs);
+        }
+      }, err => {
+        console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());
+        this.nav.setRoot(Login);
+      });
+/*
+
     Promise.all([
       this.users.userConnect(Token)
     ]).then((data) => {
       data[0].map(res => res.json()).subscribe(data => {
+
+        console.log('user id', data, data.user.uid);
         if(data.user.uid == 0) {
           this.nav.setRoot(Login);
         } else {
@@ -157,7 +175,7 @@ export class MyApp {
         console.log('Stablishing connection failed');
         this.nav.setRoot(Login);
       })
-    });
+    });*/
   }
 
   getToken() {

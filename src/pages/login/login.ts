@@ -22,7 +22,7 @@ export class Login {
 
   username:any;
   password:any;
-  loginload:any;
+  loginload:boolean = false;
   Token:any;
 
   constructor(
@@ -34,7 +34,7 @@ export class Login {
     public alertCtrl: AlertController,
     public events: Events
   ) {
-    this.loginload = false ;
+
   }
 
   ionViewDidEnter(){
@@ -71,6 +71,7 @@ export class Login {
   }
 
   userLogin() {
+    this.loginload = true;
     this.users
       .userLogin(this.username, this.password)
       .map(res => res.json())
@@ -82,10 +83,13 @@ export class Login {
           this.events.publish('user:getToken', this.Token)
         ]);
       }, error => {
+        this.loginload = false;
         let M = error.statusText;
         let D = 2000;
         let P = 'top';
         this.com.Toast(M, D, P);
+      }, ()=> {
+        this.loginload = true;
       });
   }
 

@@ -17,6 +17,8 @@ import { Components } from "../../providers/components";
 })
 export class Reservation {
 
+  transporterRoute: any;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -25,6 +27,11 @@ export class Reservation {
     public users: Users,
     public components: Components
   ) {
+
+    this.transporterRoute = this.navParams.get('route');
+
+    console.log('reservation Route Details', this.transporterRoute);
+
   }
 
   ionViewDidEnter(){
@@ -33,6 +40,11 @@ export class Reservation {
 
   ionViewDidLoad() {
     // Run After Page Already Loaded
+  }
+
+  Confirm() {
+
+
   }
 
 

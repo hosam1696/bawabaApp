@@ -1,4 +1,5 @@
-<ion-tabs *ngIf="isTransporter">
+<!-- color="bgPrimary" -->
+<ion-tabs  *ngIf="isTransporter">
     <ion-tab [root]="TransporterTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
     <ion-tab [root]="TransporterTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>
     <ion-tab [root]="TransporterTab3" tabTitle="التذاكر" tabIcon="card"></ion-tab>
@@ -6,7 +7,7 @@
     <ion-tab [root]="TransporterTab5" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
 </ion-tabs>
 
-<ion-tabs *ngIf="isPassenger">
+<ion-tabs  *ngIf="isPassenger">
     <ion-tab [root]="PassengerTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
     <ion-tab [root]="PassengerTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>
     <ion-tab [root]="PassengerTab3" tabTitle="التذاكر" tabIcon="card"></ion-tab>

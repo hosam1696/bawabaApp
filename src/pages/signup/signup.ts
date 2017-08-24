@@ -202,7 +202,8 @@ export class Signup {
             this.signupload = false;
         } else {
             this.users.userRegister(this.name, this.mail, this.password, this.role)
-                .map(res => res.json()).subscribe(data => {
+                .map(res => res.json())
+                .subscribe(data => {
                     console.log('User Created');
                     console.log(data);
                     Promise.all([
@@ -249,9 +250,22 @@ export class Signup {
 
                 }, error => {
                     console.log(error);
+                    let errors = error.json()['form_errors'];
+                    let errorsKeys = Object.keys(errors);
+
+                    this.showToast(errors[errorsKeys[0]]);
                     console.log('Error while creating user');
                 });
         }
+    }
+
+    showToast(msg){
+        let toast = this.toastCtrl.create({
+            message: msg,
+            duration: 2000,
+            position: 'top'
+        });
+        toast.present();
     }
 
 

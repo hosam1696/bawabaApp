@@ -1,3 +1,4 @@
+import { RoutesProvider } from './../providers/routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -163,6 +164,7 @@ export function createTranslateLoader(http: Http) {
     Transfer,
     Camera,
     FilePath,
+    RoutesProvider,
     API,SMS,Users,Components,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -44,9 +44,9 @@ export class ProfilePage {
         
         let userRole = this.user.roles[4];
         
-        if (userRole === 'transporter') {
+        if (this.user.roles[4] === 'transporter') {
             this.userLabel = this.checkNull(this.user.companyFirstName) + ' ' + this.checkNull(this.user.cmpanyLastName);
-        } else if (userRole === 'passenger') {
+        } else if (this.user.roles[5] === 'passenger') {
             this.userLabel = this.checkNull(this.user.firstName) + ' ' + this.checkNull(this.user.familyName);
         }
     }
@@ -103,6 +103,7 @@ export class ProfilePage {
     }
     
       locationmodal() {
+          
         let getlocationModal = this.modalCtrl.create(GetLocation);
         getlocationModal.present();
         getlocationModal.onDidDismiss(data => {
