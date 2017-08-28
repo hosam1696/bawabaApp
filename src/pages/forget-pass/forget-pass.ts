@@ -25,7 +25,7 @@ export class ForgetPass {
   Token:any;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
     public users: Users,
@@ -44,8 +44,8 @@ export class ForgetPass {
   ionViewDidLoad() {
     console.log('load');
     // Run After Page Already Loaded
-    this.headerimg = '../assets/img/ba_logo.png';    
-    
+    this.headerimg = '../assets/img/ba_logo.png';
+
     Promise.all([
       this.users.getToken().then((val) => {
         this.Token = val;
@@ -60,7 +60,7 @@ export class ForgetPass {
   }
 
   gologin(){
-    this.navCtrl.push(Login);
+    this.navCtrl.setRoot(Login);
   }
 
 

@@ -33,7 +33,7 @@ export class Users {
     });
   }
 
-  // Creating User Proccess -> Sending main info then 
+  // Creating User Proccess -> Sending main info then
   // get created user id and save session and token after that
   // sending request to saving his profile data using csrf token
 
@@ -179,7 +179,7 @@ export class Users {
   }
 
   sendMessage(Link, uid, mestitle, mesbody) {
-    //let apiKey = 'sendMessage'; 
+    //let apiKey = 'sendMessage';
     //let data = JSON.stringify({apiKey,uid,mestitle,mesbody});
     //return this.http.post(Link,data);
     return false;
@@ -366,7 +366,7 @@ export class Users {
 
   addPath(temp,Token) {
 
-  
+
    let data = JSON.stringify(temp);
 
       // Building Headers
@@ -383,13 +383,13 @@ export class Users {
       });
 
     return  this.http.post(this.api.SystemGateway+'add-node',data, options)
-     
-   
+
+
   }
    updatePath(temp,Token) {
 
    let data= JSON.stringify(temp);
-   
+
 // let data={'nid':temp.nid,'titlew':temp.title}
       // Building Headers
       let headers = new Headers({
@@ -405,8 +405,8 @@ export class Users {
       });
 
     return  this.http.post(this.api.SystemGateway+'route/edit',data, options)
-     
-   
+
+
   }
    deletePath(nid,Token) {
 
@@ -426,15 +426,15 @@ export class Users {
       });
 
     return  this.http.post(this.api.SystemGateway+'route/delete',data, options)
-     
-   
+
+
   }
-  getTaxList(vid) { 
-    
-    // using vid 
+  getTaxList(vid) {
+
+    // using vid
     // 1 : Tags , 2: Vehicles , 3 : Shifts , 4 : Contracts , 5 : Districts
     // 7 : Cities , 8 : Go and Come , 9 : Univirsities
-    
+
     return new Promise((resolve, reject) => {
       let Link = this.api.getTaxList+vid;
       // Building Headers
@@ -459,23 +459,23 @@ export class Users {
   }
 
   getUserRoutes(userId) {
-    
+
       let Link = this.api.getRoutes;
       // uid=? > user id &parameters[uid]=?
       if (userId != 0) {
         Link = Link + '?user_id=' + userId;
       }
       return this.getData(Link);
-    
+
   }
   getRouteInfo(nId){
        let Link = this.api.getRoutes+ '?route_id=' + nId;
-      
+
       return this.getData(Link);
   }
   getData(Link) {
     return new Promise((resolve, reject) => {
-   
+
       // Building Headers
       let headers = new Headers({
         'Content-Type': 'application/json',
@@ -557,10 +557,74 @@ export class Users {
 
 
   getSearchResults(cityId, universityId, vehicleId, routeFrom, contract, goAndCome) {
-    
-    
+
+
       return this.http.get('http://www.bawabt-alnagel.com/api/v1/routes?city='+cityId+'&university='+universityId+'&vehicle_type='+vehicleId+'&route_from='+routeFrom+'&contract_period='+contract+'&go_come='+goAndCome).map(serverRes=>serverRes.json());
   }
+
+
+  BookTicket(ticketData, Token) {
+
+    // Building Headers
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-Token': Token,
+    });
+
+
+    // Building Options
+    let options = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
+
+    let body = JSON.stringify(ticketData);
+
+    return this.http.post(this.api.SystemGateway+'ticket/add',body, options ).map(res=>res.json());
+  }
+
+  GetTickets(user_id) {
+    // Building Headers
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    // Building Options
+    let options = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
+
+    return this.http.get(this.api.SystemGateway+'get-tickets?uid='+user_id, options).map(response=>response.json());
+  }
+
+  GetCancelledTickets() {
+
+  }
+
+
+  CancelTicket(ticketId,Token) {
+    // Building Headers
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-Token': Token,
+    });
+
+
+    // Building Options
+    let options = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
+
+    return this.http.post(this.api.SystemGateway+'ticket/delete',JSON.stringify({nid:ticketId}), options).map(response=>response.json());
+
+
+  }
+
 }
 
 

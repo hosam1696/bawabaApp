@@ -1,10 +1,10 @@
 
 <ion-header>
-    <ion-navbar color="bgPrimary">
+    <ion-navbar >
         <ion-title>تعديل مسار</ion-title>
         <ion-buttons start right>
             <button clear color="primary" ion-button (click)="dismiss()">
-                    <ion-icon name="close" color="primary"></ion-icon>
+                    <ion-icon name="close"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -96,13 +96,13 @@
 </ion-content>
 
 <ion-footer   *ngIf="!showLoader">
-   
-    
+
+
        <ion-toolbar >
         <div class="footer-button" (click)="updatePath()">
                       <ion-spinner *ngIf="submitload" name="circles"></ion-spinner>
 
-حفظ التعديل            
+حفظ التعديل
         </div>
     </ion-toolbar>
 </ion-footer>

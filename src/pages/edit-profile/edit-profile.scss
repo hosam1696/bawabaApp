@@ -3,7 +3,27 @@ page-edit-profile {
 
     ion-content{
         background-color:#f1f1f1!important;
+        ion-header {
+          margin-bottom: 0 !important;
+        }
 
+      form {
+        margin-bottom: 30px;
+      }
+      .float-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      }
+      ion-spinner {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px;
+        * {
+          stroke: #fff !important;
+          fill: #fff !important;
+        }
+      }
         ion-list{
             margin:0px!important;
 
@@ -33,18 +53,24 @@ page-edit-profile {
                     border-bottom:0px solid #ddd!important;
                     padding: 0px!important;
 
-                    ion-label{
-                        margin: 0px !important; 
-                        /*height: 100%;*/
-                        font-size: 16px;
-                        width: 120px!important;
-                        max-width: 120px!important;
-                        line-height: 20px;
-                        white-space: normal;
-
-
-
+                  ion-label {
+                    display: flex;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    span {
+                      width: 40%
                     }
+                    input {
+                      flex: 1;
+                      border: none;
+                      padding: 2px 6px;
+                      margin-left: 7px;
+                      &:focus {
+                        background: linear-gradient(to left,#faf7f7,#ffffff);
+                        border-radius: 6px;
+                      }
+                    }
+                  }
 
                     ion-icon{
                         /*margin-top: 13px;*/
@@ -97,6 +123,6 @@ ion-navbar{
             ion-icon{
                 font-size: 30px;
             }
-        }  
+        }
     }
 }

@@ -2,27 +2,54 @@
 <ion-header>
     <ion-navbar >
         <ion-title>الاعدادات</ion-title>
+      <ion-buttons start>
+        <button ion-button clear>
+          <ion-spinner *ngIf="logOutSpinner"></ion-spinner>
+        </button>
+      </ion-buttons>
     </ion-navbar>
+
+
 </ion-header>
 
 <ion-content class="card-background-page" parallax-header>
 
-    <div class="top-content">
+    <div class="top-content" [hidden]="!name">
         <div class="header-image" (click)="goProfile()">
             <img src="http://ionicframework.com/dist/preview-app/www/assets/img/card-amsterdam.png" />
         </div>
-        <h4 class="user-name">حسين محمود</h4>
-        <p class="user-mail">husseinmahmoud@gmail.com</p>
+        <h4 class="user-name">{{name || 'no set user'}}</h4>
+        <p class="user-mail">{{email || 'notsetemail@gmail.com'}}</p>
     </div>
 
 
     <div class="main-content">
 
         <div class="inner-content">
-            <ion-list>
-                <ion-list-header>
+            <ion-list [hidden]="name">
+              <ion-item (click)="toLogin()">
+                <ion-icon ios="ios-cog" md="md-cog" item-start></ion-icon>
+                <div class="inner-item">
+                  تسجيل الدخول
+                  <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                </div>
+
+              </ion-item>
+
+              <ion-item (click)="toSignup()">
+                <ion-icon ios="ios-cog" md="md-cog" item-start></ion-icon>
+                <div class="inner-item">
+                  تسجيل حساب جديد
+                  <ion-icon ios="ios-arrow-back" md="md-arrow-back" item-end></ion-icon>
+                </div>
+
+              </ion-item>
+            </ion-list>
+            <ion-list [hidden]="!name">
+                <ion-list-header color="light">
                     الاعدادات
                 </ion-list-header>
+
                 <ion-item (click)="goEditProfile()">
                     <ion-icon ios="ios-cog" md="md-cog" item-start></ion-icon>
                     <div class="inner-item">
@@ -41,8 +68,8 @@
                 </ion-item>
             </ion-list>
 
-            <ion-list>
-                <ion-list-header>
+            <ion-list [hidden]="!name">
+                <ion-list-header color="light">
                     التطبيق
                 </ion-list-header>
 
@@ -75,9 +102,9 @@
                                 </ion-item>-->
             </ion-list>
 
-            <ion-list>
+            <ion-list [hidden]="!name">
 
-                <ion-list-header>
+                <ion-list-header color="light">
                     تسجيل الخروج
                 </ion-list-header>
                 <ion-item (click)='Logout()'>

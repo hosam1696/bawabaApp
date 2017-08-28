@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, Events, Config} from 'ionic-angular';
 
 import { Users } from "../../providers/users";
 import { API } from "../../providers/api";
@@ -7,6 +7,8 @@ import { Components } from "../../providers/components";
 
 import { Signup } from '../signup/signup';
 import { ForgetPass } from '../forget-pass/forget-pass';
+import {TabsPage} from "../tabs/tabs";
+import {PassengerHome} from "../passenger-home/passenger-home";
 
 
 
@@ -26,15 +28,18 @@ export class Login {
   Token:any;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
     public users: Users,
     public com: Components,
     public alertCtrl: AlertController,
-    public events: Events
+    public events: Events,
+    private config: Config
   ) {
+    this.config.set('tabsHideOnSubPages', true);
 
+    console.log('prop config', this.config.get('tabsHideOnSubPages'));
   }
 
   ionViewDidEnter(){
@@ -46,14 +51,13 @@ export class Login {
     console.log('load');
     // Run After Page Already Loaded
 
-    
-    Promise.all([
+
+
       this.users.getToken().then((val) => {
         this.Token = val;
+        console.log('current token='+this.Token);
       })
-    ]).then(() => {
-      console.log('current token='+this.Token);
-    });
+
   }
 
   goSignup(){
@@ -62,7 +66,7 @@ export class Login {
 
   goForgetPass(){
     this.navCtrl.push(ForgetPass)
-    
+
   }
 
 
@@ -88,6 +92,7 @@ export class Login {
         let D = 2000;
         let P = 'top';
         this.com.Toast(M, D, P);
+
       }, ()=> {
         this.loginload = true;
       });
@@ -104,4 +109,8 @@ export class Login {
     this.events.publish('user:Connect',this.Token);
   }
 
+
+  skipLogging() {
+    this.navCtrl.setRoot(TabsPage)
+  }
 }

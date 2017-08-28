@@ -4,7 +4,7 @@
         <ion-title>إضافة مسار</ion-title>
         <ion-buttons start right>
             <button ion-button clear color="primary" (click)="dismiss()">
-                    <ion-icon color="primary" name="close"></ion-icon>
+                    <ion-icon  name="close"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -13,7 +13,7 @@
 <ion-content>
 
     <div class="main-content">
-     
+
 
               <div class="inner-content">
                 <div class="top-header">
@@ -28,13 +28,13 @@
                 </div>
                 <ion-list class="temp-data">
                     <ion-item>
-                     
+
                         <ion-label> عنوان المسار</ion-label>
                         <ion-input type="text" [(ngModel)]="temp.title" placeholder="يرجى إدخار عنوان المسار" ></ion-input>
                     </ion-item>
                     <ion-item class="city">
                         <ion-label>المدينة</ion-label>
-                        <ion-label [hidden]="districts" class="holder">
+                        <ion-label [hidden]="cities"  class="holder">
                             <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
@@ -46,9 +46,10 @@
                     </ion-item>
                     <ion-item class="city">
                         <ion-label>نقل من</ion-label>
-                        <ion-label [hidden]="districts"class="holder">
-                            <ion-icon name="md-arrow-dropdown"></ion-icon>    
-                        </ion-label>  
+                        <ion-label [hidden]="districts" class="holder">
+                          <ion-spinner name="crescent"></ion-spinner>
+                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                        </ion-label>
                         <ion-select [hidden]="!districts" (click)="checkDB('districts')" okText="تم" cancelText="إلغاء" [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد المدينة ">
                             <ion-option *ngFor="let district of districts " [value]="district.tid" > {{district.name}}</ion-option>
 
@@ -58,6 +59,7 @@
                     <ion-item class="districts">
                         <ion-label>نقل إلى</ion-label>
                         <ion-label [hidden]="universities" class="holder">
+                          <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
                         <ion-select [hidden]="!universities" (click)="checkDB('universities')" [(ngModel)]="temp.field_route_university_to.und[0]['tid']" placeholder="يرجى تحديد الجامعة">
@@ -68,6 +70,7 @@
                     <ion-item class="van">
                         <ion-label>نوع المركبة</ion-label>
                         <ion-label [hidden]="vehicles" class="holder">
+                          <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
                         <ion-select [hidden]="!vehicles" (click)="checkDB($event,'vehicles')" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']" placeholder="يرجى تحديد نوع المركبة">
@@ -79,6 +82,7 @@
                     <ion-item class="cont">
                         <ion-label>مدة العقد </ion-label>
                         <ion-label [hidden]="contracts" class="holder">
+                          <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
                         <ion-select [hidden]="!contracts" (click)="checkDB('contracts')" [(ngModel)]="temp.field_contract_period.und[0]['tid']" placeholder="يرجى تحديد مدة العقد">
@@ -90,6 +94,7 @@
                     <ion-item class="gocome">
                         <ion-label>نوع الطلب </ion-label>
                         <ion-label [hidden]="goAndComes" class="holder">
+                          <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
                         <ion-select [hidden]="!goAndComes" (click)="checkDB('goAndComes')" [(ngModel)]="temp.field_go_and_come.und[0]['tid']" placeholder="يرجى تحديد نوع الطلب ">
@@ -107,7 +112,7 @@
                 </ion-list>
 
             </div>
-  
+
     </div>
 
 </ion-content>
@@ -115,10 +120,10 @@
 <ion-footer>
     <ion-toolbar >
         <div class="footer-button" (click)="addPath()">
-                      <ion-spinner *ngIf="submitload" name="circles"></ion-spinner>
+                      <ion-spinner *ngIf="submitload" ></ion-spinner>
 
             حفظ المسار
-            
+
         </div>
     </ion-toolbar>
 </ion-footer>

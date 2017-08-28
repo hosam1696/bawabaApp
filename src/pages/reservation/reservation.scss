@@ -1,7 +1,13 @@
 page-reservation {
     ion-content{
         background:#f1f1f1!important;
-
+        ion-spinner {
+          width: 20px;
+          height: 20px;
+          & * {
+            stroke: #fff;
+          }
+        }
         ion-list{
 
             ion-item{

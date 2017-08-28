@@ -55,7 +55,7 @@ export class AddPath {
         public users: Users
     ) {
 
-        
+
 //         this.submitload = true;
         this.temp = {
             type: "routes",
@@ -153,7 +153,7 @@ export class AddPath {
             this.users.getTaxList('2'),
             this.users.getTaxList('4'),
             this.users.getTaxList('8'),
-            
+
         ]).then(data => {
             console.log(data);
             [this.cities,this.districts, this.universities, this.vehicles, this.contracts, this.goAndComes] = data;
@@ -229,6 +229,13 @@ export class AddPath {
                     console.log('data', data);
                     this.showToast('تم اضافة المسار بنجاح ');
                     this.viewCtrl.dismiss(data);
+
+                    this.storage.get('userInfo')
+                      .then(data=>{
+                        data.numberOfRoutes++;
+                        this.storage.set('userInfo',data);
+                      })
+
                 },err=>{
                     this.submitload = false;
                 });

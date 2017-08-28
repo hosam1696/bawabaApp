@@ -13,6 +13,8 @@ import {SendLocation} from "../sendlocation/sendlocation";
 import {EditProfile} from "../edit-profile/edit-profile";
 import {GetLocation} from "../get-location/get-location";
 import { CompanyPath } from "../company-path/company-path";
+import {Signup} from "../signup/signup";
+import {Login} from "../login/login";
 
 
 @IonicPage()
@@ -21,7 +23,7 @@ import { CompanyPath } from "../company-path/company-path";
     templateUrl: 'profile.html',
 })
 export class ProfilePage {
-
+    userLogged: boolean;
     section: string = 'two';
     somethings: any = new Array(20);
     user:  LocalUser;
@@ -36,19 +38,29 @@ export class ProfilePage {
     ) {
       console.log('ionViewDidLoad ProfilePage');
       // this.user={name:''};
-        
+
     }
     async ionViewWillEnter() {
+
+      try { // If user has been logged in
+
         this.user = await this.users.getUserInfo();
+
+        this.userLogged = true;
+
         console.info('UserInfo', this.user);
-        
+
         let userRole = this.user.roles[4];
-        
+
         if (this.user.roles[4] === 'transporter') {
-            this.userLabel = this.checkNull(this.user.companyFirstName) + ' ' + this.checkNull(this.user.cmpanyLastName);
+          this.userLabel = this.checkNull(this.user.companyFirstName) + ' ' + this.checkNull(this.user.cmpanyLastName);
         } else if (this.user.roles[5] === 'passenger') {
-            this.userLabel = this.checkNull(this.user.firstName) + ' ' + this.checkNull(this.user.familyName);
+          this.userLabel = this.checkNull(this.user.firstName) + ' ' + this.checkNull(this.user.familyName);
         }
+      } catch(noUserDataErr) {
+        this.userLogged = false;
+      }
+
     }
     async ionViewDidLoad() {
         //let userInfo = await this.users.getUserInfo();
@@ -56,17 +68,17 @@ export class ProfilePage {
 
             this.user = await this.users.getUserInfo();
         } else {
-            
+
             this.ionViewWillEnter();
         }
 
 
-            
+
     }
 
     checkNull(name: string): string {
         return name == null ? '' : name;
-    } 
+    }
 
     sendlocation() {
         let sendlocationModal = this.modalCtrl.create(SendLocation);
@@ -101,14 +113,17 @@ export class ProfilePage {
             // Saving this info to local storage after updating user profile info
         })
     }
-    
-      locationmodal() {
-          
+
+      openBrowserMao(maps='30.0371616,31.0033728') {
+        const url = 'https://www.google.com/maps?q=' + maps + '&z=17&hl=ar';
+        /*const tab = this.iab.create(url);
+
+        tab.show();
         let getlocationModal = this.modalCtrl.create(GetLocation);
         getlocationModal.present();
         getlocationModal.onDidDismiss(data => {
             // Saving this info to local storage after updating user profile info
-        })
+        })*/
     }
 
     imageActionSheet() {
@@ -140,6 +155,10 @@ export class ProfilePage {
     }
 
 
-
-
+  navigateToLogin() {
+      this.navCtrl.setRoot(Login)
+  }
+  navigateToSignup() {
+      this.navCtrl.push(Signup)
+  }
 }

@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateModule , TranslateStaticLoader, TranslateLoader} from 'ng2-translate/ng2-translate';
 import { IonicStorageModule } from '@ionic/storage';
-import { DragulaModule } from 'ng2-dragula';
+//import { DragulaModule } from 'ng2-dragula';
 
 import { MyApp } from './app.component';
 
@@ -17,7 +17,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 
 
-import { Tabs } from '../pages/tabs/tabs';
+import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Intro } from '../pages/intro/intro';
@@ -69,7 +69,7 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     MyApp,
-    Tabs,
+    TabsPage,
     HomePage,
     ListPage,
     Intro,
@@ -113,7 +113,7 @@ export function createTranslateLoader(http: Http) {
 
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
-    DragulaModule,
+    //DragulaModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -123,7 +123,7 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Tabs, 
+    TabsPage,
     HomePage,
     ListPage,
     Intro,

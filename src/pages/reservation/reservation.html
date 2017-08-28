@@ -21,10 +21,12 @@
             <ion-label>أتعهد بدفع عمولة موقع بوابة النقل (15 ريال) في مدة أقصاها  شهر من تاريخ الحجز ، ويبقى المبلغ في ذمتي </ion-label>
             <ion-checkbox color="dark" checked="false"></ion-checkbox>
         </ion-item>
-        
+
     </ion-list>
 
     <ion-row>
-        <button ion-button full (click)="Confirm()">تأكيد الحجز</button>
+        <button ion-button full (click)="ConfirmBooking()">تأكيد الحجز
+        <ion-spinner *ngIf="showLoader"></ion-spinner>
+        </button>
     </ion-row>
 </ion-content>

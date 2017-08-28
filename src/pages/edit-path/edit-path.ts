@@ -40,7 +40,7 @@ export class EditPath {
         public users: Users
     ) {
 
-        
+
 
         Promise.all([
             this.users.getToken().then((val) => {
@@ -169,7 +169,9 @@ export class EditPath {
                     this.submitload = false;
                     this.showToast('تم تعديل المسار بنجاح ');
                     this.viewCtrl.dismiss(data);
-                });
+                },err=>{
+              this.submitload = false;
+            });
         }
     }
     showToast(msg, dur = 2000) {

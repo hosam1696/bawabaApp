@@ -3,7 +3,15 @@ page-signup {
     ion-content{
         background-image: url(../assets/img/gmap.jpg);
         background-size:cover;
-
+      ion-spinner {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px;
+        * {
+          stroke: #fff !important;
+          fill: #fff !important;
+        }
+      }
         ion-img{
             background: transparent;
             width: 100%;
@@ -75,7 +83,7 @@ page-signup {
                         width:calc(100% - 70px)!important;
                         max-width:calc(100% - 70px)!important;
                         .select-icon{
-                            position:absolute!important;  
+                            position:absolute!important;
                             left:10px;
                             top:12px;
                             .select-icon-inner{
@@ -138,7 +146,7 @@ page-signup {
     ion-icon{
         font-size: 20px!important;
     }
-} 
+}
 ion-toast{
     .toast-top{
         background-color: rgba(246,188,68,0.6)!important;
@@ -173,7 +181,7 @@ ion-alert{
         .alert-radio-group{
             direction: rtl!important;
             padding-left: 15px;
-            button.alert-radio{ 
+            button.alert-radio{
                 min-height:36px!important;
 
                 .alert-radio-label{

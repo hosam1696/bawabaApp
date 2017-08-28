@@ -14,25 +14,48 @@
 
     <section class="inner-content">
       <div class="top-div" *ngIf="searchData">
+        <ion-grid>
         <ion-row>
           <ion-col col-6>
             <h4 class="from">من : &nbsp; {{searchData.cityName}}
-            </h4>
-            <h4 class="vaicle">
-              المركبة : &nbsp; {{searchData.vehicleName}}
             </h4>
           </ion-col>
           <ion-col col-6>
             <h4 class="to">الى : &nbsp; {{searchData.distName}}
             </h4>
-            <h4 class="contract">عقد لمدة&nbsp; {{searchData.contractName}} {{searchData.goAndComeName}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h4>الجامعة:
+              {{searchData.univName}}
             </h4>
           </ion-col>
         </ion-row>
+        <ion-row>
+          <ion-col>
+          <h4 class="vaicle">
+            المركبة : &nbsp; {{searchData.vehicleName}}
+          </h4>
+          </ion-col>
+          <ion-col>
+            <h4 class="contract">عقد لمدة&nbsp; {{searchData.contractName}}
+            </h4>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <h4>
+                النوع:
+                {{searchData.goAndComeName}}
+              </h4>
+          </ion-col>
+        </ion-row>
+        </ion-grid>
       </div>
 
       <ion-list *ngIf="AllSearchedData&&AllSearchedData.length>0;else noRoutes">
-        <ion-list-header>
+        <ion-list-header color="light">
           نتائج البحث
         </ion-list-header>
         <ion-item *ngFor="let searchData of AllSearchedData">
@@ -48,6 +71,9 @@
       </ion-list>
 
       <ng-template #noRoutes>
+        <p text-center [hidden]="AllSearchedData&&AllSearchedData.length<=0">
+          <ion-spinner  name="circles"></ion-spinner>
+        </p>
         <section id="no-data">
           <p text-center *ngIf="AllSearchedData&&AllSearchedData.length<=0">
             لا يوجد نتائج

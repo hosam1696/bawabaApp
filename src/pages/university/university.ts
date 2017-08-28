@@ -1,6 +1,6 @@
 // Main Components
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, ToastController,} from 'ionic-angular';
 
 // Providers
 import {Users} from "../../providers/users";
@@ -20,13 +20,14 @@ export class University {
 
     showLoader: boolean = true;
     university: any;
-
+  UnivId: number;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public api: API,
         public users: Users,
-        public toastCtrl: ToastController
+        public toastCtrl: ToastController,
+        public events: Events
     ) {
 
         //get Univirsities
@@ -50,14 +51,25 @@ export class University {
         this.navCtrl.push(Transportation,temp);
     }
 
-    ionViewDidEnter() {
+    ionViewWillEnter() {
         // Run After Page Already Entered
+
+
+
+      this.events.subscribe('TransportationunivId',(univId)=>{
+        this.UnivId = univId
+      })
     }
 
     ionViewDidLoad() {
 
 
     }
+
+  ionViewWillLeave() {
+    console.warn('you are about to leave this page [University Page]');
+    this.events.publish('UniversityDistId', this.navParams.get('distId')); // send Dist Id to Districts page
+  }
 
 
 

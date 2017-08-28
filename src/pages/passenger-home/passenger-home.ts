@@ -1,6 +1,6 @@
 // Main Components
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, ToastController,} from 'ionic-angular';
 
 // Providers
 import {Users} from "../../providers/users";
@@ -26,14 +26,15 @@ export class PassengerHome {
         public navParams: NavParams,
         public api: API,
         public users: Users,
-        public toastCtrl: ToastController
+        public toastCtrl: ToastController,
+        public events: Events
     ) {
-this.cityId=0;
-// get cities 
+        this.cityId=0;
+        // get cities
         this.users.getTaxList('7').then((data) => {
-            this.showLoader = false;
-            this.cities = data;
-            console.log('data', data);
+          this.showLoader = false;
+          this.cities = data;
+          console.log('data', data);
         });
     }
 
@@ -44,17 +45,30 @@ this.cityId=0;
         this.navCtrl.push(Districts, {cityId: id,cityName:name});
     }
 
-    ionViewDidEnter() {
-        // Run After Page Already Entered
-        console.log('this.cityId',this.cityId);
+    ionViewWillEnter() {
+
+      this.events.subscribe('passengerHomeCityId',(cityId)=>{
+        console.log('City Id data from Event (Districts page)', cityId);
+        this.cityId = cityId;
+      });
+
+
+
+
+
+
 
     }
 
     ionViewDidLoad() {
 
-        Promise.all([this.users.getUserInfo()]).then((data) => {
-            this.name = data[0].name;
-        });
+        this.users.getUserInfo().then((data) => {
+            if(data)
+              this.name = data.name;
+            console.log('user name', this.name);
+        }).catch(noData=>{
+          console.log('No User [visitor]', noData)
+        })
 
 
     }

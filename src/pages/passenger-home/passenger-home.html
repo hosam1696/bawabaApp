@@ -13,17 +13,25 @@
     <div *ngIf="!showLoader">
         <ion-card>
             <ion-card-content>
-                من فضلك قم بتحديد المدينة التى تبحث عن مواصلات بداخلها         
+                من فضلك قم بتحديد المدينة التى تبحث عن مواصلات بداخلها
             </ion-card-content>
         </ion-card>
 
         <ion-grid>
             <ion-row>
                 <ion-col *ngFor="let city of cities" col-6 class="city-btn">
-                    <button [ngClass]="{'activated':city.tid == cityId}" ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
-                        {{city.name}}-{{cityId}}
-                        <ion-icon name="arrow-back"></ion-icon>
+                  <!--[ngClass]="{'activated':city.tid == cityId}"-->
+                  <button *ngIf="city.tid == cityId;else btnNotActive" class="activated"  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+                    {{city.name}} <!---{{cityId}}-->
+                    <ion-icon name="arrow-back"></ion-icon>
+                  </button>
+                  <ng-template #btnNotActive>
+                    <button  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+                      {{city.name}} <!---{{cityId}}-->
+                      <ion-icon name="arrow-back"></ion-icon>
                     </button>
+                  </ng-template>
+
                 </ion-col>
 
 
@@ -31,13 +39,13 @@
         </ion-grid>
         <ion-card>
             <ion-card-content>
-                الخدمة تتوفر حاليا في المدن والمحافظات المذكورة فقط ، وسيتم اضافة المدن الأخرى تدريجيا            
+                الخدمة تتوفر حاليا في المدن والمحافظات المذكورة فقط ، وسيتم اضافة المدن الأخرى تدريجيا
             </ion-card-content>
         </ion-card>
 
     </div>
     <div text-center class="col-center"   *ngIf="showLoader" >
-        <ion-spinner name="circles"></ion-spinner>
+        <ion-spinner ></ion-spinner>
         <!--        <div>جارى جلب المحتوى  </div>-->
     </div>
 </ion-content>

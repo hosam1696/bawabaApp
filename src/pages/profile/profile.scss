@@ -1,9 +1,30 @@
 page-profile {
 
-    
+
 
     ion-content{
         background-color:#f1f1f1!important;
+
+        .no-user {
+          height: 100%;
+          /* background-color: red; */
+          display: flex;
+          align-items: center;
+          /* flex-direction: column; */
+          justify-content: center;
+          button {
+            margin: 0;
+            width: 40%;
+            color: #fff;
+
+            &:last-child {
+              border-radius: 5px 0 0 5px;
+            }
+            &:first-child {
+              border-radius: 0 5px 5px 0;
+            }
+          }
+        }
         .top-header{
             background-color: #f6bc44;
             text-align: center;
@@ -29,7 +50,7 @@ page-profile {
             }
             .change-img{
                 height: 30px;
-                width: 30px; 
+                width: 30px;
                 background-color: rgba(45,62,82,1);
                 border-radius: 50%;
                 text-align: center;
@@ -123,7 +144,7 @@ page-profile {
                         border-radius: 5px !important;
                         color: #2d3e52 !important;
                         margin: 0px!important;
-                        /*font-weight: bold;*/   
+                        /*font-weight: bold;*/
                         min-height: 36px;
                         height: 36px;
                         line-height: 36px;

@@ -1,11 +1,13 @@
-<!--<ion-header>
+<!--
+
+<ion-header>
 
   <ion-navbar>
-    <ion-title>{{'Login' | translate}}</ion-title>
+
   </ion-navbar>
 
-</ion-header>-->
-
+</ion-header>
+-->
 
 <ion-content padding>
 
@@ -30,7 +32,7 @@
 
     <ion-row>
         <button type="submit" ion-button full (click)="userLogin()">{{'Login' | translate}}
-                <ion-spinner *ngIf="loginload" name="crescent"></ion-spinner>
+                <ion-spinner *ngIf="loginload" ></ion-spinner>
         </button>
     </ion-row>
 
@@ -42,6 +44,10 @@
             <a (click)="goForgetPass()" class="forget-pass">{{'Forget Your Password!' | translate}}</a>
         </ion-col>
     </ion-row>
+
+    <p text-center>
+      <button class="skip-btn" (click)="skipLogging()">{{'تخطى التسجيل' | translate}}</button>
+    </p>
 
 </ion-content>
 

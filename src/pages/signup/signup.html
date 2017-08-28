@@ -33,7 +33,7 @@
 
         <ion-row>
             <button ion-button full (click)="Step2()">التالي
-                    <ion-spinner *ngIf="spinner == 1" name="circles" duration="3000"></ion-spinner>
+                    <ion-spinner *ngIf="spinner == 1"></ion-spinner>
             </button>
 
             <ion-col>
@@ -47,7 +47,7 @@
 
         <ion-card>
             <ion-card-content>
-                يرجى ادخال كود التفعيل المرسل اليك لاتمام عملية التفعيل            
+                يرجى ادخال كود التفعيل المرسل اليك لاتمام عملية التفعيل
             </ion-card-content>
         </ion-card>
         <ion-row>
@@ -79,7 +79,7 @@
 
         <ion-card>
             <ion-card-content>
-                يرجى تحديد نوع العضوية لاستكمال عملية التسجيل            
+                يرجى تحديد نوع العضوية لاستكمال عملية التسجيل
             </ion-card-content>
         </ion-card>
         <!--        <ion-row>
@@ -88,7 +88,7 @@
 
         <ion-row>
             <button ion-button full (click)="Step6('Passenger')" >باحث عن مواصلات
-                    <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+                    <ion-spinner *ngIf="signupload" ></ion-spinner>
             </button>
         </ion-row>
         <ion-row>
@@ -128,7 +128,7 @@
             <ion-row>
 
                 <button ion-button full (click)="Step4()">تسجيل
-                        <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+                        <ion-spinner *ngIf="signupload" ></ion-spinner>
                 </button>
 
 
@@ -165,11 +165,11 @@
             </ion-row>
 
             <ion-row>
-              
+
                     <button ion-button full (click)="Step4()">تسجيل
-                            <ion-spinner *ngIf="signupload" name="circles"></ion-spinner>
+                            <ion-spinner *ngIf="signupload"></ion-spinner>
                     </button>
-               
+
 <!--                <ion-col >
                     <button ion-button (click)="PrintCityID()">check city</button>
                 </ion-col>-->

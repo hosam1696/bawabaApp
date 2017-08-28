@@ -7,10 +7,10 @@
             <button color="Primary" ion-button icon-only>
                 <ion-icon color="Primary" name="search"></ion-icon>
             </button>
-        </ion-buttons> 
+        </ion-buttons>
     </ion-navbar>
 
- 
+
 
 </ion-header>
 
@@ -29,10 +29,10 @@
 
         <ion-row>
             <ion-col col-6 class="contact-us">
-                <ion-icon name="chatbubbles" (click)="contactus()"></ion-icon> 
+                <ion-icon name="chatbubbles" (click)="contactus()"></ion-icon>
             </ion-col>
             <ion-col col-6 class="edit-profile">
-                <ion-icon name="cog" (click)="goEditProfile()"></ion-icon> 
+                <ion-icon name="cog" (click)="goEditProfile()"></ion-icon>
             </ion-col>
         </ion-row>
     </div>
@@ -53,7 +53,7 @@
         </ion-row>
     </div>
   <div class="location-map">
-        <button ion-button full item-end icon-right (click)="locationmodal()">
+        <button ion-button full item-end icon-right (click)="openBrowserMao()">
             <ion-icon name="pin"></ion-icon>
             الموقع على الخريطة
         </button>
@@ -69,7 +69,7 @@ if(this.user) {
                     this.EditProfileForm.get(key).setValue(this.user[ITransporterFields[key]]);
                 } else {
                     this.EditProfileForm.get(key).setValue(this.user[IPassengerFields[key]]);
-                    
+
                 }
 
             }
@@ -102,7 +102,7 @@ if(this.user) {
 
 
     <!--    <div [ngSwitch]="section">
-    
+
             <ion-list *ngSwitchCase="'one'">
                 <ion-item *ngFor="let something of somethings">
                     <ion-thumbnail item-left>
@@ -111,7 +111,7 @@ if(this.user) {
                     <h2>Something</h2>
                 </ion-item>
             </ion-list>
-    
+
             <ion-list *ngSwitchCase="'two'">
                 <ion-item (click)="editaccount()">
                     Edit Account
@@ -123,13 +123,15 @@ if(this.user) {
                     Change Language
                 </ion-item>
             </ion-list>
-    
+
         </div>-->
     </div>
     <ng-template #noUser>
-        <p>
-            No user
-        </p>
+        <section class="no-user">
+          <button ion-button (click)="navigateToLogin()">تسجيل الدخول</button>
+          <button ion-button (click)="navigateToSignup()">تسجيل حساب جديد</button>
+
+        </section>
     </ng-template>
 </ion-content>
 

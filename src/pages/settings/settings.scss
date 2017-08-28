@@ -1,8 +1,28 @@
 page-settings {
+    ion-header {
+      ion-spinner {
+        width: 22px;
+        height: 22px;
+        margin: 0 8px;
+        * {
+          stroke: #fff !important;
+          fill: #fff !important;
+        }
+      }
+    }
+
     ion-content{
         background-color:#f1f1f1!important;
 
-
+      ion-spinner {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px;
+        * {
+          stroke: #fff !important;
+          fill: #fff !important;
+        }
+      }
         .top-content{
             background: #f6bc44;
             color: #2d3e52;
@@ -98,7 +118,7 @@ page-settings {
                     padding: 0px!important;
 
                     ion-label{
-                        margin: 0px !important; 
+                        margin: 0px !important;
                         height: 100%;
                         line-height: 40px;
                         ion-icon{

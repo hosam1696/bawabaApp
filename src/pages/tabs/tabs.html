@@ -6,7 +6,11 @@
     <ion-tab [root]="TransporterTab4" tabTitle="الاشعارات" tabIcon="notifications"></ion-tab>
     <ion-tab [root]="TransporterTab5" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
 </ion-tabs>
-
+<ion-tabs  *ngIf="isVistor" #tabs>
+  <ion-tab [root]="PassengerTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
+  <ion-tab [root]="PassengerTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>
+  <ion-tab [root]="PassengerTab3" tabTitle="الاعدادات" tabIcon="settings"></ion-tab>
+</ion-tabs>
 <ion-tabs  *ngIf="isPassenger">
     <ion-tab [root]="PassengerTab1" tabTitle="الرئيسية" tabIcon="home"></ion-tab>
     <ion-tab [root]="PassengerTab2" tabTitle="صفحتي" tabIcon="person"></ion-tab>

@@ -4,13 +4,14 @@
         <ion-title>التذاكر</ion-title>
     </ion-navbar>
     <ion-toolbar class="subheader" >
-        <ion-segment [(ngModel)]="mytickets">
-            <ion-segment-button value="booked">
+        <ion-segment (click)="getTickets()" [(ngModel)]="wantedTickets">
+          <ion-segment-button (click)="getCancelled()" value="Canceled">
+            التذاكر الملغاة
+          </ion-segment-button>
+            <ion-segment-button value="Booked">
                 التذاكر المحجوزة
             </ion-segment-button>
-            <ion-segment-button value="Canceled">
-                التذاكر الملغاة
-            </ion-segment-button>
+
         </ion-segment>
     </ion-toolbar>
 
@@ -18,19 +19,28 @@
 
 <ion-content>
     <div class="main-content">
+        <p text-center *ngIf="noTickets">
+          لا يوجد تذاكر
+        </p>
+      <p text-center *ngIf="noCancel">
+        لا يوجد تذاكر ملغاه
+      </p>
+        <p text-center *ngIf="loading">
+          <ion-spinner ></ion-spinner>
+        </p>
+        <div [ngSwitch]="wantedTickets">
 
-        <div [ngSwitch]="mytickets">
+            <ion-list *ngSwitchCase="'Booked'">
 
-            <ion-list *ngSwitchCase="'booked'">
+                <ion-item *ngFor="let ticket of mytickets">
 
-                <ion-item>
-                    <h2>رقم التذكرة : <span>012424</span></h2>
-                    <h2>تاريخ الحجز: <span>10/1/2017</span></h2>
-                    <p>شركة الصافنات للنقل</p>
-                    <h4 class="price">220 ريال</h4>
-                    <button ion-button outline>الغاء</button>
+                    <h2>رقم التذكرة : <span>{{ticket.nid}}</span></h2>
+                    <h2>تاريخ الحجز: <span style="direction: ltr">{{getDate(ticket) | date:'y/M/d' }}</span></h2>
+                    <p>اسم الراكب: {{ticket.name}}</p>
+                    <h4 class="price">{{ticket.price}} ريال</h4>
+                    <button ion-button outline (click)="cancelTicket(ticket)">الغاء</button>
                 </ion-item>
-                <ion-item>
+                <!--<ion-item>
                     <h2>رقم التذكرة : <span>745424</span></h2>
                     <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
                     <p>شركة السالم للنقل</p>
@@ -70,18 +80,18 @@
                     <button ion-button outline>الغاء</button>
 
                 </ion-item>
-
+-->
 
             </ion-list>
 
             <ion-list *ngSwitchCase="'Canceled'">
-                <ion-item>
-                    <h2>رقم التذكرة : <span>012424</span></h2>
+                <ion-item *ngFor="let ticket of CancelledTickets">
+                    <h2>رقم التذكرة : <span>{{ticket.nid}}</span></h2>
                     <h2>تاريخ الحجز: <span>10/1/2017</span></h2>
                     <p>شركة الصافنات للنقل</p>
-                    <h4 class="price">220 ريال</h4>
+                    <h4 class="price">{{ticket.price}} ريال</h4>
                 </ion-item>
-                <ion-item>
+                <!--<ion-item>
                     <h2>رقم التذكرة : <span>745424</span></h2>
                     <h2>تاريخ الحجز: <span>12/10/2017</span></h2>
                     <p>شركة السالم للنقل</p>
@@ -111,7 +121,7 @@
                     <p>شركة الصافنات للنقل</p>
                     <h4 class="price">230 ريال</h4>
                 </ion-item>
-
+-->
             </ion-list>
         </div>
 

@@ -66,6 +66,11 @@ export class Transportation {
 
     }
 
+
+  ionViewWillLeave() {
+    console.warn('you are about to leave this page [University Home]');
+    this.events.publish('TransportationunivId', this.navParams.get('univId'));
+  }
     setValue( value) {
         this.temp = {name: value};
         console.log('value',value);

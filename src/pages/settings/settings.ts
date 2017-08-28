@@ -11,6 +11,8 @@ import { Contactus } from "../contactus/contactus";
 import { ProfilePage } from "../profile/profile";
 import { Complaints } from "../complaints/complaints";
 import { EditProfile } from "../edit-profile/edit-profile";
+import {LocalUser} from "../../app/appconf/app.interfaces";
+import {Signup} from "../signup/signup";
 
 @IonicPage()
 @Component({
@@ -20,13 +22,13 @@ import { EditProfile } from "../edit-profile/edit-profile";
 export class Settings {
 
   name:any;
-  mail:any;
+  email:any;
   uid:any;
   role:any;
   Token:any;
-
+  logOutSpinner: boolean = false;
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public events: Events,
     public actionSheetCtrl: ActionSheetController,
@@ -38,18 +40,9 @@ export class Settings {
 
   ionViewDidEnter() {
     // Run After Page Already Entered
-    Promise.all([
-      this.users.getUserInfo(),
-      this.users.getToken()
-    ]).then((data) => {
-      console.log(data);
-      this.Token = data[0].token;
-      this.name = data[0].name;
-      this.uid = data[0].uid;
-      this.mail = data[0].mail
-      if (data[0].rid == 4) this.role = 'Transporter';
-      else if (data[0].rid == 5) this.role = 'Passenger';
-    })
+
+      this.FillUserInfo();
+
   }
 
   ionViewDidLoad() {
@@ -64,7 +57,11 @@ export class Settings {
   }
 
   Logout() {
+
+    this.logOutSpinner = true;
+
     this.events.publish('user:Logout',this.Token);
+
   }
 
   changeLang(){
@@ -96,11 +93,27 @@ export class Settings {
     actionSheet.present();
   }
 
+
+  FillUserInfo() {
+    this.users.getUserInfo()
+      .then((data:LocalUser)=>{
+        this.name = data.name;
+        this.email = data.email;
+        this.uid  = data.uid;
+        this.role = data.roles[4]?'transporter':'passenger';
+      })
+      .catch(err=>{
+        console.warn(err, '\n', 'No Local User in Storage');
+
+      })
+  }
   contactus(){
     let ContactusModal = this.modalCtrl.create(Contactus, { uid: this.uid });
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
-      console.log(data);
+      console.log('Data from Modal',data);
+      this.FillUserInfo();
+
     });
   }
 
@@ -117,5 +130,12 @@ export class Settings {
             // Saving this info to local storage after updating user profile info
         })
     }
-    
+
+
+    toSignup() {
+    this.navCtrl.push(Signup)
+    }
+  toLogin() {
+    this.navCtrl.setRoot(Signup)
+  }
 }

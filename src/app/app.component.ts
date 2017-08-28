@@ -7,7 +7,7 @@ import { TranslateService } from 'ng2-translate';
 
 import { Users } from "../providers/users";
 
-import { Tabs } from '../pages/tabs/tabs';
+import { TabsPage } from '../pages/tabs/tabs';
 // import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
 // import { Intro } from '../pages/intro/intro';
@@ -79,7 +79,7 @@ export class MyApp {
     this.events.subscribe('user:Login', (data) => {
       Promise.all([this.users.UserStorage(data)]).then(() => {
         this.checkSession();
-      })    
+      })
     });
 
     this.events.subscribe('user:Register', (data) => {
@@ -102,18 +102,14 @@ export class MyApp {
     this.events.subscribe('user:Connect', (data) => {
       this.userConnect(data);
     });
-    
+
   }
 
   checkSession() {
       console.log('check session');
     this.users.isUserLogin().then((val) => {
       console.log('val',val);
-      if (val == true) {
-        this.nav.setRoot(Tabs);
-      } else {
-        this.nav.setRoot(Login);
-      }
+      (val)?this.nav.setRoot(TabsPage):this.nav.setRoot(Login)
     });
   }
 
@@ -152,7 +148,7 @@ export class MyApp {
         if (user.uid === 0) { // no login user
           this.nav.setRoot(Login);
         } else {
-          this.nav.setRoot(Tabs);
+          this.nav.setRoot(TabsPage);
         }
       }, err => {
         console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());

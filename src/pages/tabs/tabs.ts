@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Tabs } from "ionic-angular/navigation/nav-interfaces";
 import { Login } from '../login/login';
 import { Signup } from '../signup/signup';
 import { TransporterHome } from '../transporter-home/transporter-home';
@@ -18,8 +18,8 @@ import { Users } from "../../providers/users";
   selector: 'page-tabs',
   templateUrl: 'tabs.html',
 })
-export class Tabs {
-
+export class TabsPage {
+  @ViewChild('tabs') MainTabs:Tabs;
   isTransporter: any = false;
   isPassenger: any = false;
   isAdmin: any = false;
@@ -35,7 +35,7 @@ export class Tabs {
   PassengerTab5:any;
   AdminTab1:any;
   Token: any;
-
+  isVistor:boolean;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,7 +53,7 @@ export class Tabs {
     ]).then(() => {
       console.log('current token='+this.Token);
     });
-    
+
     console.log('tabs viewdidload')
   }
 
@@ -62,8 +62,9 @@ export class Tabs {
   }
 
   getUserType() {
-    this.users.getUserInfo().then((data) => {
-      if (data.roles[4] == 'transporter') {
+    this.users.getUserInfo()
+      .then((data) => {
+      if (data&&data.roles[4] == 'transporter') {
         this.isTransporter = true ;
         // Transporter Tabs
         this.TransporterTab1 = TransporterHome; // Routes
@@ -72,7 +73,7 @@ export class Tabs {
         this.TransporterTab4 = Notifications;   // notification
         this.TransporterTab5 = Settings;   // Settings
 
-      } else if (data.roles[5] == 'passenger') {
+      } else if (data&&data.roles[5] == 'passenger') {
         this.isPassenger = true ;
         // Passenger Tabs
         this.PassengerTab1 = PassengerHome; // Home
@@ -80,10 +81,27 @@ export class Tabs {
         this.PassengerTab3 = Tickets; // Tickets
         this.PassengerTab4 = Notifications; // notification
         this.PassengerTab5 = Settings; // Settings
-      } else if (data.roles[3] == 'administrator') {
+      } else if (data&&data.roles[3] == 'administrator') {
         this.AdminTab1 = Settings;
+      } else {
+        this.isVistor = true ;
+        // Passenger Tabs
+        this.PassengerTab1 = PassengerHome; // Home
+        this.PassengerTab2 = ProfilePage; // ProfilePage
+        this.PassengerTab3 = Settings; // Tickets
       }
-    });
+    }).catch(noData=>{
+
+      console.log('Nodata', noData);
+      this.isVistor = true ;
+      this.MainTabs.select(0,{isNavRoot:true}, true);
+      console.log(this.isVistor);
+      // Passenger Tabs
+      this.PassengerTab1 = PassengerHome; // Home
+      this.PassengerTab2 = ProfilePage; // ProfilePage
+      this.PassengerTab3 = Settings; // Tickets
+
+    })
 
   }
 

@@ -4,10 +4,26 @@ page-add-path{
         border-width: 0 !important;
     }
     ion-content{
+      ion-spinner {
+        width: 22px;
+        height: 22px;
+        margin: 0 8px;
+        * {
+          stroke: #fff !important;
+          fill: #fff !important;
+        }
+      }
         background-color:#f1f1f1!important;
         #lbl-6 {
             min-width: 90px;
         }
+      ion-spinner {
+        width: 20px;
+        height: 20px;
+        * {
+          stroke: #ccc !important;
+        }
+      }
         .top-header{
             height: 100px;
             text-align: center;
@@ -66,7 +82,7 @@ page-add-path{
                 /*height: 40px;*/
                 min-height: 40px;
                 line-height: 40px;
-              
+
                 &:last-child {
                     ion-label {
                         min-width: 90px;
@@ -78,19 +94,20 @@ page-add-path{
 
                     ion-label{
                         display: flex;
-                        margin: 0px !important; 
+                        margin: 0px !important;
                         /*height: 100%;*/
                         font-size: 16px;
                         max-width: 90px !important;
 
                         line-height: 20px;
                         white-space: normal;
-                        
+
                         &.holder {
 
                         display: flex;
-                            justify-content: flex-end;
+
                             padding-left: 6px;
+                            justify-content: space-between;
                             height: 50px;
                             align-items: center;
                         flex: 1;
@@ -144,6 +161,6 @@ ion-navbar{
             ion-icon{
                 font-size: 30px;
             }
-        }  
+        }
     }
 }

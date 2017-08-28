@@ -6,7 +6,7 @@ import {IonicPage, NavController, Loading, LoadingController, NavParams, AlertOp
 import {Users} from "../../providers/users";
 import {API} from "../../providers/api";
 import {DragulaService} from 'ng2-dragula/ng2-dragula';
-
+import {Storage} from '@ionic/storage';
 
 // Req Pages
 import {SearchOption} from '../search-option/search-option';
@@ -37,7 +37,7 @@ export class TransporterHome {
         public alert: AlertController,
         public toastCtrl: ToastController,
         public alertCtrl: AlertController,
-
+        public storage: Storage,
         public loadingCtrl: LoadingController,
         public api: API,
         public users: Users,
@@ -152,9 +152,9 @@ export class TransporterHome {
                                 //                    this.submitload = false;
                                 console.log('data', data);
                                 this.routes.splice(routeIndex, 1);
-                                this.loading.dismissAll()
+                                this.loading.dismissAll();
                                 this.showToast('تم حذف المسار بنجاح ');
-
+                                this.decreaseRoutesNum();
                             }, (err) => {
                                 this.showToast('الرجاء المحاولة فى وقت لاحق')
                             });
@@ -166,6 +166,13 @@ export class TransporterHome {
       alert.present();
 
 
+    }
+    decreaseRoutesNum() {
+      this.storage.get('userInfo')
+        .then(data=>{
+          data.numberOfRoutes--;
+          this.storage.set('userInfo',data);
+        })
     }
     showToast(msg, dur = 2000) {
         let toast = this.toastCtrl.create({
