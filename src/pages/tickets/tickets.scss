@@ -27,6 +27,14 @@ page-tickets{
     }
     ion-content{
         background-color:#f1f1f1!important;
+
+      .status-msg {
+        position: absolute;
+        font-size: 1.7rem;
+        top: 40%;
+        width: 100%;
+        color: #666;
+      }
         .main-content{
             .subheader{
                 background-color: #fff;

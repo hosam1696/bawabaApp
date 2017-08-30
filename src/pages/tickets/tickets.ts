@@ -74,7 +74,7 @@ export class Tickets {
     }
 
     private async getCancelled() {
-      console.log('cancelled Tickets');
+      console.log('No API cancelled Tickets');
       [this.noCancel, this.noTickets] = Array(2).fill(false);
 
       this.noCancel = true;
@@ -82,7 +82,8 @@ export class Tickets {
     }
 
     private getTickets():void {
-      this.loading = true;
+
+      [this.noCancel, this.noTickets] = Array(2).fill(false);
       this.users
         .GetTickets(this.UserData.uid)
         .subscribe(data=>{

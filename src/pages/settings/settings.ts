@@ -13,6 +13,9 @@ import { Complaints } from "../complaints/complaints";
 import { EditProfile } from "../edit-profile/edit-profile";
 import {LocalUser} from "../../app/appconf/app.interfaces";
 import {Signup} from "../signup/signup";
+import {TermsPage} from "../terms/terms";
+
+import {SocialSharing} from '@ionic-native/social-sharing';
 
 @IonicPage()
 @Component({
@@ -34,7 +37,8 @@ export class Settings {
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
     public api: API,
-    public users: Users
+    public users: Users,
+    private social: SocialSharing
   ) {
   }
 
@@ -131,11 +135,52 @@ export class Settings {
         })
     }
 
+  shareApp() {
+    let actions = this.actionSheetCtrl.create({
+      title: 'مشاركة عبر',
+      buttons: [
+        {
+          icon: 'facebook',
+          text: 'Facebook',
+          handler: () => {
+            console.log('share with facebook');
+
+            //TODO: Detect user platform type
+            this.social.shareViaFacebook('حمل تطبيق بوابة النقل من خلال هذه الروابط', 'http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU').then(data => {
+              console.log(data);
+            })
+              .catch(err => {
+                console.warn(err);
+              })
+          }
+        }, {
+          icon: 'twitter',
+          text: 'Twitter',
+          handler: () => {
+
+            console.log('share with twitter');
+            this.social.shareViaTwitter('حمل تطبيق بوابة النقل من خلال هذه الروابط', 'http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU').then(data => {
+              console.log(data);
+            })
+              .catch(err => {
+                console.warn(err);
+              })
+          }
+        }
+      ]
+    });
+
+    actions.present();
+  }
 
     toSignup() {
     this.navCtrl.push(Signup)
     }
   toLogin() {
     this.navCtrl.setRoot(Signup)
+  }
+
+  toTerms() {
+    this.navCtrl.push(TermsPage)
   }
 }

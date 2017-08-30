@@ -8,9 +8,9 @@ page-add-path{
         width: 22px;
         height: 22px;
         margin: 0 8px;
-        * {
+        & * {
           stroke: #fff !important;
-          fill: #fff !important;
+          //fill: #fff !important;
         }
       }
         background-color:#f1f1f1!important;

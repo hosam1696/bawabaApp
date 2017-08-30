@@ -18,8 +18,9 @@ export class Districts {
 
 
     showLoader: boolean = true;
-    districts: any;
+  districts: any[];
     DistId: number;
+  cityId: number;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -29,12 +30,30 @@ export class Districts {
         public events: Events
     ) {
 
+      this.cityId = this.navParams.get('cityId');
+
+      this.users.getDistrictsByCity(this.cityId)
+        .subscribe(
+          districts => {
+
+            console.log('Districts in city', districts);
+
+            this.districts = districts;
+
+
+          }, err => {
+            console.warn(err.json());
+            this.showLoader = false
+          }, () => {
+            this.showLoader = false
+          });
+
         // get Districts
-        this.users.getTaxList('5').then((data) => {
-            this.showLoader = false;
-            this.districts = data;
-            console.log('data', data);
-        });
+      /*this.users.getTaxList('5').then((data) => {
+          this.showLoader = false;
+          this.districts = data;
+          console.log('data', data);
+      });*/
     }
 
 

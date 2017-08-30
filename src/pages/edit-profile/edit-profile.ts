@@ -13,6 +13,7 @@ import {Users} from "../../providers/users";
 import {API} from "../../providers/api";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 import {getUpdatedAppNgModuleContentWithDeepLinkConfig} from "@ionic/app-scripts/dist/deep-linking/util";
+import {MapsModal} from "../mapsmodal";
 
 // Req Pages
 
@@ -58,6 +59,8 @@ export class EditProfile {
     userType: string;
     Token:string;
     showSpinner: boolean = false;
+  MapAddress: string;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -106,14 +109,16 @@ export class EditProfile {
     async ionViewWillEnter() {
 
         // Get user Data from Storage
+
         this.user = await this.users.getUserInfo();
         this.Token = await  this.users.getToken();
+      this.MapAddress = await  this.storage.get('userAddress');
         this.userType = this.user.roles[5]?'passenger':'transporter';
 
         console.info('UserInfo', this.user, this.userType, this.Token);
 
 
-        console.log('transporter first name value',this.EditProfileForm.get('transporter').get('transporter_first_name').value);
+//        console.log('transporter first name value',this.EditProfileForm.get('transporter').get('transporter_first_name').value);
 
         this.detectUserForm(this.userType);
 
@@ -159,7 +164,7 @@ export class EditProfile {
             this.user = await this.users.getUserInfo();
 
         console.log(this.EditProfileForm, 'form value', this.EditProfileForm.value, this.EditProfileForm.controls);
-        console.info(this.EditProfileForm.get('transporter').get('transporter_first_name'));
+      //console.info(this.EditProfileForm.get('transporter').get('transporter_first_name'));
         this.EditProfileForm.valueChanges
             .subscribe(data=>{
                 console.log(data);
@@ -212,7 +217,9 @@ export class EditProfile {
               console.log('response from Editing User',res);
               if(res.uid || res.name) {
                 this.storage.set('userInfo', res);
-                this.showToast('تم تعديل البيانات الشخصية بنجاح')
+                this.storage.set('userAddress', this.MapAddress);
+                this.showToast('تم تعديل البيانات الشخصية بنجاح');
+                this.EditProfileForm.get('current_pass').setValue('');
               }
 
 
@@ -292,11 +299,37 @@ export class EditProfile {
         return (Object.prototype.toString.call(val) == "[object Null]")?true:false;
     }
 
+  openMaps() {
+
+    let modal = this.modalCtrl.create(MapsModal, {
+      initData: {
+        lat: this.EditProfileForm.value.lat,
+        lng: this.EditProfileForm.value.lang
+      }
+    });
+
+    modal.onDidDismiss(data => {
+      console.log('Data from close', data);
+      if (data) {
+        this.EditProfileForm.get('lat').setValue(data.latitude);
+        this.EditProfileForm.get('lang').setValue(data.longitude);
+
+        if (data.address)
+          this.MapAddress = data.address
+      }
+
+    });
+
+    modal.present();
+
+
+  }
 
     showToast(msg) {
       let toast = this.toastCtrl.create({
         message: msg,
-        duration: 1500
+        duration: 2000,
+        position: 'top'
       });
       toast.present();
     }

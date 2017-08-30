@@ -4,11 +4,11 @@
         <ion-title>التذاكر</ion-title>
     </ion-navbar>
     <ion-toolbar class="subheader" >
-        <ion-segment (click)="getTickets()" [(ngModel)]="wantedTickets">
+      <ion-segment [(ngModel)]="wantedTickets">
           <ion-segment-button (click)="getCancelled()" value="Canceled">
             التذاكر الملغاة
           </ion-segment-button>
-            <ion-segment-button value="Booked">
+        <ion-segment-button (click)="getTickets()" value="Booked">
                 التذاكر المحجوزة
             </ion-segment-button>
 
@@ -19,13 +19,13 @@
 
 <ion-content>
     <div class="main-content">
-        <p text-center *ngIf="noTickets">
+      <p text-center *ngIf="noTickets" class="status-msg">
           لا يوجد تذاكر
         </p>
-      <p text-center *ngIf="noCancel">
+      <p text-center *ngIf="noCancel" class="status-msg">
         لا يوجد تذاكر ملغاه
       </p>
-        <p text-center *ngIf="loading">
+      <p text-center *ngIf="loading" class="status-msg">
           <ion-spinner ></ion-spinner>
         </p>
         <div [ngSwitch]="wantedTickets">

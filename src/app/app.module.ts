@@ -15,7 +15,7 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-
+import {Geolocation} from '@ionic-native/geolocation';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
@@ -61,6 +61,10 @@ import { Components } from '../providers/components';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ShrinkingSegmentHeaderComponent } from '../components/shrinking-segment-header/shrinking-segment-header';
+import {TermsPage} from "../pages/terms/terms";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {MapsModal} from "../pages/mapsmodal";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -92,6 +96,7 @@ export function createTranslateLoader(http: Http) {
     SearchResults,
     Reservation,
     Tickets,
+    TermsPage,
     SendLocation,
     Notifications,
     Complaints,
@@ -103,7 +108,7 @@ export function createTranslateLoader(http: Http) {
     AddPath,
     EditPath,
     NotificationsDetail,
-
+    MapsModal
   ],
   imports: [
     BrowserModule,
@@ -126,6 +131,7 @@ export function createTranslateLoader(http: Http) {
     TabsPage,
     HomePage,
     ListPage,
+    TermsPage,
     Intro,
     Login,
     ForgetPass,
@@ -155,7 +161,8 @@ export function createTranslateLoader(http: Http) {
     SearchOption,
     AddPath,
     EditPath,
-    NotificationsDetail
+    NotificationsDetail,
+    MapsModal
   ],
   providers: [
     StatusBar,
@@ -163,6 +170,9 @@ export function createTranslateLoader(http: Http) {
     File,
     Transfer,
     Camera,
+    InAppBrowser,
+    Geolocation,
+    SocialSharing,
     FilePath,
     RoutesProvider,
     API,SMS,Users,Components,

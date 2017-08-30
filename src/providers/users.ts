@@ -5,6 +5,7 @@ import { API } from "./api";
 import { Events } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class Users {
@@ -458,6 +459,18 @@ export class Users {
     });
   }
 
+  getDistrictsByCity(cityId: number): Observable<any> {
+
+    return this.http.get(this.api.SystemGateway + 'get-districts?city=' + cityId).map(res => res.json());
+
+  }
+
+  getUniversitiesByCity(cityId: number): Observable<any> {
+
+    return this.http.get(this.api.SystemGateway + 'get-universities?city=' + cityId).map(res => res.json());
+
+  }
+
   getUserRoutes(userId) {
 
       let Link = this.api.getRoutes;
@@ -556,10 +569,10 @@ export class Users {
   }
 
 
-  getSearchResults(cityId, universityId, vehicleId, routeFrom, contract, goAndCome) {
+  getSearchResults(cityId, universityId, routeFrom) {
 
 
-      return this.http.get('http://www.bawabt-alnagel.com/api/v1/routes?city='+cityId+'&university='+universityId+'&vehicle_type='+vehicleId+'&route_from='+routeFrom+'&contract_period='+contract+'&go_come='+goAndCome).map(serverRes=>serverRes.json());
+    return this.http.get('http://www.bawabt-alnagel.com/api/v1/routes?city=' + cityId + '&university=' + universityId + '&route_from=' + routeFrom).map(serverRes => serverRes.json());
   }
 
 
@@ -625,6 +638,18 @@ export class Users {
 
   }
 
+  getPageContent(pageId) {
+    return this.http.get(this.api.SystemGateway + 'load-page?nid=' + pageId).map(res => res.json());
+  }
+
+
+  getUserIP() {
+    return this.http.get('http://ipv4.myexternalip.com/json').map(res => res.json());
+  }
+
+  getUserLocationInfoByIp(ip) {
+    return (ip) ? this.http.get('http://ipinfo.io/' + ip).map(res => res.json()) : null;
+  }
 }
 
 

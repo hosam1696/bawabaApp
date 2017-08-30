@@ -32,7 +32,7 @@
             </h4>
           </ion-col>
         </ion-row>
-        <ion-row>
+          <ion-row hidden>
           <ion-col>
           <h4 class="vaicle">
             المركبة : &nbsp; {{searchData.vehicleName}}
@@ -43,7 +43,7 @@
             </h4>
           </ion-col>
         </ion-row>
-        <ion-row>
+          <ion-row hidden>
           <ion-col>
               <h4>
                 النوع:
@@ -72,7 +72,7 @@
 
       <ng-template #noRoutes>
         <p text-center [hidden]="AllSearchedData&&AllSearchedData.length<=0">
-          <ion-spinner  name="circles"></ion-spinner>
+          <ion-spinner></ion-spinner>
         </p>
         <section id="no-data">
           <p text-center *ngIf="AllSearchedData&&AllSearchedData.length<=0">

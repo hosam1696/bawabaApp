@@ -19,8 +19,9 @@
         <ion-grid>
             <ion-row>
                 <ion-col *ngFor="let dist of districts" col-12 class="city-btn">
-                    <button [ngClass]="{'activated':dist.tid == DistId}" ion-button outline icon-left (click)="gouniversity(dist.tid,dist.name)">
-                        {{dist.name}}
+                  <button [ngClass]="{'activated':dist.tid == DistId}" ion-button outline icon-left
+                          (click)="gouniversity(dist.tid,dist.title)">
+                    {{dist.title}}
                         <ion-icon name="arrow-back"></ion-icon>
                     </button>
                 </ion-col>
@@ -29,7 +30,7 @@
         </ion-grid>
     </div>
     <div text-center class="col-center"   *ngIf="showLoader" >
-        <ion-spinner name="circles"></ion-spinner>
+      <ion-spinner></ion-spinner>
         <!--        <div>جارى جلب المحتوى  </div>-->
     </div>
 

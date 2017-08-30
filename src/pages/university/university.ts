@@ -9,6 +9,7 @@ import {API} from "../../providers/api";
 
 // Req Pages
 import {Transportation} from "../transportation/transportation"
+import {SearchResults} from "../search-results/search-results";
 
 @IonicPage()
 @Component({
@@ -21,6 +22,7 @@ export class University {
     showLoader: boolean = true;
     university: any;
   UnivId: number;
+  cityId: number;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -29,13 +31,29 @@ export class University {
         public toastCtrl: ToastController,
         public events: Events
     ) {
+      this.cityId = this.navParams.get('cityId');
+
+      this.users.getUniversitiesByCity(this.cityId)
+        .subscribe(
+          uniData => {
+
+            console.log('Universityies in City ', uniData);
+
+            this.university = uniData;
+
+          }, err => {
+            this.showLoader = false;
+            console.warn(err.json())
+          }, () => {
+            this.showLoader = false;
+          });
 
         //get Univirsities
-        this.users.getTaxList('9').then((data) => {
-            this.showLoader = false;
-            this.university = data;
-            console.log('data', data);
-        });
+      /*this.users.getTaxList('9').then((data) => {
+          this.showLoader = false;
+          this.university = data;
+          console.log('data', data);
+      });*/
     }
 
     goTransportation(univId,univName) {
@@ -48,7 +66,7 @@ export class University {
             univName: univName
         };
              console.log('temp', temp);
-        this.navCtrl.push(Transportation,temp);
+      this.navCtrl.push(SearchResults, {searchData: temp});
     }
 
     ionViewWillEnter() {

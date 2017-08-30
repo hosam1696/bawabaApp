@@ -53,7 +53,7 @@
         </ion-row>
     </div>
   <div class="location-map">
-        <button ion-button full item-end icon-right (click)="openBrowserMao()">
+    <button ion-button full item-end icon-right (click)="openBrowserMao(user.lat+','+user.lang)">
             <ion-icon name="pin"></ion-icon>
             الموقع على الخريطة
         </button>

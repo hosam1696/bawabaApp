@@ -1,7 +1,10 @@
 import { LocalUser } from './../../app/appconf/app.interfaces';
 // Main Components
 import {Component} from '@angular/core';
-import {IonicPage, NavController, ModalController, ActionSheetController, Events, NavParams} from 'ionic-angular';
+import {
+  IonicPage, NavController, ModalController, ActionSheetController, Events, NavParams,
+  ToastController
+} from 'ionic-angular';
 
 // Providers
 import {Users} from "../../providers/users";
@@ -15,6 +18,7 @@ import {GetLocation} from "../get-location/get-location";
 import { CompanyPath } from "../company-path/company-path";
 import {Signup} from "../signup/signup";
 import {Login} from "../login/login";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 
 @IonicPage()
@@ -28,13 +32,15 @@ export class ProfilePage {
     somethings: any = new Array(20);
     user:  LocalUser;
     userLabel: string = '';
-    constructor(
-        public navCtrl: NavController,
-        public events: Events,
-        public navParams: NavParams,
-        public modalCtrl: ModalController,
-        public users: Users,
-        public actionSheetCtrl: ActionSheetController
+
+    constructor(public navCtrl: NavController,
+                public events: Events,
+                public navParams: NavParams,
+                public modalCtrl: ModalController,
+                public users: Users,
+                public actionSheetCtrl: ActionSheetController,
+                public toastCtrl: ToastController,
+                public iab: InAppBrowser
     ) {
       console.log('ionViewDidLoad ProfilePage');
       // this.user={name:''};
@@ -114,17 +120,29 @@ export class ProfilePage {
         })
     }
 
-      openBrowserMao(maps='30.0371616,31.0033728') {
-        const url = 'https://www.google.com/maps?q=' + maps + '&z=17&hl=ar';
-        /*const tab = this.iab.create(url);
+//='30.0371616,31.0033728'
+  openBrowserMao(maps) {
+    console.log(maps);
+    if (!maps || maps == 'null,null' || maps == 'undefined,undefined') {
+      this.showToast('لم يتم تحديد الموقع على الخريطة')
+    } else {
 
-        tab.show();
-        let getlocationModal = this.modalCtrl.create(GetLocation);
-        getlocationModal.present();
-        getlocationModal.onDidDismiss(data => {
-            // Saving this info to local storage after updating user profile info
-        })*/
+      const url = 'https://www.google.com/maps?q=' + maps + '&z=17&hl=ar';
+
+      const tab = this.iab.create(url);
+
+      tab.show();
+
+
+      /*let getlocationModal = this.modalCtrl.create(GetLocation);
+      getlocationModal.present();
+      getlocationModal.onDidDismiss(data => {
+          // Saving this info to local storage after updating user profile info
+      })*/
     }
+
+
+  }
 
     imageActionSheet() {
         let imageactionSheet = this.actionSheetCtrl.create({
@@ -160,5 +178,14 @@ export class ProfilePage {
   }
   navigateToSignup() {
       this.navCtrl.push(Signup)
+  }
+
+  showToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

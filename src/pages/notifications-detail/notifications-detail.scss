@@ -2,17 +2,17 @@ page-notifications-detail {
     ion-content{
         direction: rtl!important;
         background-color:#f1f1f1!important;
-        
+
 
         .inner-content{
             ion-item{
                 .item-inner{
                     border: 0px !important;
-                    ion-label{
-                        p{
-                            white-space: normal;
-                        }
+                  ion-label {
+                    p {
+                      white-space: normal;
                     }
+                  }
                 }
             }
 
@@ -32,7 +32,7 @@ page-notifications-detail {
                 ion-icon{
                     font-size: 30px;
                 }
-            }  
+            }
         }
     }
 }

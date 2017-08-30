@@ -113,14 +113,14 @@
       </ion-item>
     </ion-list>
 
-    <ion-list hidden class="location-data">
+    <ion-list class="location-data">
       <ion-list-header>
         بيانات الموقع
       </ion-list-header>
 
-      <ion-item class="location-map">
-        <ion-label>الموقع على الخريطة الموقع على الخريطة</ion-label>
-        <ion-input type="text"></ion-input>
+      <ion-item class="location-map" (click)="openMaps()">
+        <ion-label>الموقع على الخريطة</ion-label>
+        <ion-label style="white-space:normal">{{MapAddress||'Cairo Egypt'}}</ion-label>
         <ion-icon name="pin" item-right></ion-icon>
       </ion-item>
 

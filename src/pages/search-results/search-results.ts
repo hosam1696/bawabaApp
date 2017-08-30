@@ -62,28 +62,28 @@ export class SearchResults {
         this.users.getSearchResults(
             this.searchData.cityId,
             this.searchData.univId,
-            this.searchData.vehicleId,
-            this.searchData.distId,
-            this.searchData.contractId,
-            this.searchData.goAndComeId
+          this.searchData.distId
         ).subscribe(data=>{
             console.log(data);
 
             // map(x=> {return {Nid: x.Nid, title: x.title, Uid: x.Uid, city: x.city, mainImage: x.mainImage.price: x.price}})
-            
+
             this.AllSearchedData = data;
         }, err=> {
             console.warn(err);
+          this.searchData = null;
         })
     }
 
-
+  ionViewWillLeave() {
+    this.events.publish('TransportationunivId', this.searchData.univId)
+  }
   goReservation(searchData) {
         this.navCtrl.push(Reservation, {route:searchData} );
-    } 
-    
+  }
 
-    //     
+
+  //
     //  goProfile()    {
     //    this.navCtrl.push(ProfilePage)    ;
     //  }
