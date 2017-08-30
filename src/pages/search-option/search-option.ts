@@ -9,7 +9,7 @@ import {API} from "../../providers/api";
 // Req Pages
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-search-option',
     templateUrl: 'search-option.html',

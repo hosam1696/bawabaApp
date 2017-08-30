@@ -21,7 +21,7 @@ import {Login} from "../login/login";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-profile',
     templateUrl: 'profile.html',

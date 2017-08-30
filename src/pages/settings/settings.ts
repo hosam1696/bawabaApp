@@ -17,7 +17,7 @@ import {TermsPage} from "../terms/terms";
 
 import {SocialSharing} from '@ionic-native/social-sharing';
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html',

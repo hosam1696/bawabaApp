@@ -10,7 +10,7 @@ import {Components} from "../../providers/components";
 // Req Pages
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-sendlocation',
     templateUrl: 'sendlocation.html',

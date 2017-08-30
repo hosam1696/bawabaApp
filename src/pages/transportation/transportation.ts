@@ -9,7 +9,7 @@ import {API} from "../../providers/api";
 // Req Pages
 import {SearchResults} from "../search-results/search-results";
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-transportation',
     templateUrl: 'transportation.html',

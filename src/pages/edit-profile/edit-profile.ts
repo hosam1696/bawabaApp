@@ -48,7 +48,7 @@ let ITransporterFields;
 })(ITransporterFields || (ITransporterFields = {}));
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-edit-profile',
     templateUrl: 'edit-profile.html',

@@ -9,7 +9,7 @@ import { API } from "../../providers/api";
 // Req Pages
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-default-page',
   templateUrl: 'default-page.html',
@@ -17,7 +17,7 @@ import { API } from "../../providers/api";
 export class DefaultPage {
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
     public users: Users

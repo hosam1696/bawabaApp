@@ -13,7 +13,7 @@ import { Notifications } from '../notifications/notifications';
 
 import { Users } from "../../providers/users";
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',

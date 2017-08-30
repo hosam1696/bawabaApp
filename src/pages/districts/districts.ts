@@ -9,7 +9,7 @@ import {API} from "../../providers/api";
 import {University} from "../university/university";
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-districts',
     templateUrl: 'districts.html',

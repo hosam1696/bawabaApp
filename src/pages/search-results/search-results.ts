@@ -26,7 +26,7 @@ interface ISerachData {
     goAndComeName: string
 }
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-search-results',
     templateUrl: 'search-results.html',

@@ -6,7 +6,7 @@ import { Signup } from '../signup/signup';
 
 import { API } from '../../providers/api';
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-intro',
   templateUrl: 'intro.html',
@@ -14,11 +14,11 @@ import { API } from '../../providers/api';
 export class Intro {
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public api: API,
     public events: Events
-  ) {    
+  ) {
   }
 
   ionViewDidEnter(){

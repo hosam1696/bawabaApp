@@ -9,7 +9,7 @@ import { API } from "../../providers/api";
 // Req Pages
 import { RoutesNewPage } from "../routes-new/routes-new";
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-routes',
   templateUrl: 'routes.html',
@@ -34,11 +34,11 @@ export class Routes {
   }
 
   ionViewDidLoad() {
-    // Run After Page Already Loaded 
+    // Run After Page Already Loaded
     this.users.getUserRoutes(0).then((data) => {
       this.noData = false;
       this.userRoutes = data;
-    });   
+    });
   }
 
   openRoute(r_uuid){

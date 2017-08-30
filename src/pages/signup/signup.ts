@@ -8,7 +8,7 @@ import {Users} from "../../providers/users";
 import {API} from "../../providers/api";
 import {Login} from "../login/login";
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-signup',
     templateUrl: 'signup.html',

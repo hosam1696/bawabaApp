@@ -74,7 +74,11 @@
                         <!--<ion-spinner name="crescent"></ion-spinner>-->
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                      <ion-select [hidden]="!universities" [(ngModel)]="temp.field_route_university_to.und[0]['tid']"
+                      <ion-select
+                                  [hidden]="!universities"
+                                  okText="تم"
+                                  cancelText="إلغاء"
+                                  [(ngModel)]="temp.field_route_university_to.und[0]['tid']"
                                   placeholder="يرجى تحديد الجامعة">
                         <ion-option *ngFor="let university of universities" [value]="university.tid">
                           {{university.title}}

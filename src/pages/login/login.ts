@@ -12,7 +12,7 @@ import {PassengerHome} from "../passenger-home/passenger-home";
 
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

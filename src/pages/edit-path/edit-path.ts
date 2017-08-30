@@ -9,7 +9,7 @@ import {API} from "../../providers/api";
 // Req Pages
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-edit-path',
     templateUrl: 'edit-path.html',

@@ -10,7 +10,7 @@ import {API} from "../../providers/api";
 import {NotificationsDetail} from '../notifications-detail/notifications-detail';
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-notifications',
     templateUrl: 'notifications.html',

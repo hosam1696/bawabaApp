@@ -10,7 +10,7 @@ import {Districts} from "../districts/districts";
 
 // Req Pages
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-passenger-home',
     templateUrl: 'passenger-home.html',

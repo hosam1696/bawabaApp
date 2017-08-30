@@ -17,7 +17,7 @@ import {Camera} from '@ionic-native/camera';
 
 declare var cordova: any;
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-add-path',
     templateUrl: 'add-path.html',

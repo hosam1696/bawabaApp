@@ -9,7 +9,7 @@ import {Users} from "../../providers/users";
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-terms',
   templateUrl: 'terms.html',

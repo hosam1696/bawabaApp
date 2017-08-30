@@ -8,7 +8,7 @@ import { API } from "../../providers/api";
 
 // Req Pages
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-complaints-reply',
   templateUrl: 'complaints-reply.html',
@@ -17,7 +17,7 @@ export class ComplaintsReply {
 
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public api: API,
@@ -38,8 +38,8 @@ export class ComplaintsReply {
   }
 
   Send(){
- 
+
    }
-   
+
 
 }

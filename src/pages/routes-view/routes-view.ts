@@ -8,7 +8,7 @@ import { API } from "../../providers/api";
 
 // Req Pages
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-routes-view',
   templateUrl: 'routes-view.html',

@@ -10,7 +10,7 @@ import {API} from "../../providers/api";
 import {ComplaintsReply} from "../complaints-reply/complaints-reply";
 //import { ComplaintsReply } from '..complaints-reply/complaints-reply';
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-complaints',
     templateUrl: 'complaints.html',

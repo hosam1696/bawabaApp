@@ -13,7 +13,7 @@ import {Login} from "../login/login";
 // Req Pages
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-reservation',
   templateUrl: 'reservation.html',

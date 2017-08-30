@@ -9,7 +9,7 @@ import { Components } from "../../providers/components";
 
 // Req Pages
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-contactus',
   templateUrl: 'contactus.html',
@@ -21,7 +21,7 @@ export class Contactus {
   mesbody:any;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public api: API,

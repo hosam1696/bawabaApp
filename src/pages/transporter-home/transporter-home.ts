@@ -15,7 +15,7 @@ import {EditPath} from '../edit-path/edit-path';
 
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-transporter-home',
     templateUrl: 'transporter-home.html',

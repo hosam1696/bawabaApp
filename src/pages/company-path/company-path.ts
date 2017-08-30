@@ -14,7 +14,7 @@ import {SearchOption} from '../search-option/search-option';
 //import { Reservation } from '../reservation/reservation';
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-company-path',
     templateUrl: 'company-path.html',

@@ -11,7 +11,7 @@ import {API} from "../../providers/api";
 import {Transportation} from "../transportation/transportation"
 import {SearchResults} from "../search-results/search-results";
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-university',
     templateUrl: 'university.html',

@@ -18,7 +18,7 @@ enum EWanted {
   Canceled
 }
 
-@IonicPage()
+//@IonicPage()
 @Component({
     selector: 'page-tickets',
     templateUrl: 'tickets.html',

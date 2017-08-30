@@ -9,7 +9,7 @@ import { Signup } from '../signup/signup';
 import { Login } from '../login/login';
 
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-forget-pass',
   templateUrl: 'forget-pass.html',

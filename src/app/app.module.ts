@@ -18,7 +18,6 @@ import { Camera } from '@ionic-native/camera';
 import {Geolocation} from '@ionic-native/geolocation';
 
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { Intro } from '../pages/intro/intro';
 import { Login } from '../pages/login/login';
@@ -60,11 +59,12 @@ import { Components } from '../providers/components';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ShrinkingSegmentHeaderComponent } from '../components/shrinking-segment-header/shrinking-segment-header';
+//import { ShrinkingSegmentHeaderComponent } from '../components/shrinking-segment-header/shrinking-segment-header';
 import {TermsPage} from "../pages/terms/terms";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {MapsModal} from "../pages/mapsmodal";
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {DefaultPage} from "../pages/default-page/default-page";
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -74,7 +74,6 @@ export function createTranslateLoader(http: Http) {
   declarations: [
     MyApp,
     TabsPage,
-    HomePage,
     ListPage,
     Intro,
     Login,
@@ -89,7 +88,7 @@ export function createTranslateLoader(http: Http) {
     Settings,
     Districts,
     Contactus,
-    ShrinkingSegmentHeaderComponent,
+    //ShrinkingSegmentHeaderComponent,
     ProfilePage,
     University,
     Transportation,
@@ -108,7 +107,8 @@ export function createTranslateLoader(http: Http) {
     AddPath,
     EditPath,
     NotificationsDetail,
-    MapsModal
+    MapsModal,
+    DefaultPage
   ],
   imports: [
     BrowserModule,
@@ -117,7 +117,9 @@ export function createTranslateLoader(http: Http) {
     ReactiveFormsModule,
 
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages: false
+    }),
     //DragulaModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
@@ -129,7 +131,6 @@ export function createTranslateLoader(http: Http) {
   entryComponents: [
     MyApp,
     TabsPage,
-    HomePage,
     ListPage,
     TermsPage,
     Intro,
@@ -162,7 +163,8 @@ export function createTranslateLoader(http: Http) {
     AddPath,
     EditPath,
     NotificationsDetail,
-    MapsModal
+    MapsModal,
+    DefaultPage
   ],
   providers: [
     StatusBar,
