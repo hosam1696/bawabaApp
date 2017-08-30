@@ -35,35 +35,50 @@
                     <ion-item class="city">
                         <ion-label>المدينة</ion-label>
                         <ion-label [hidden]="cities"  class="holder">
-                            <ion-spinner name="crescent"></ion-spinner>
-                            <ion-icon name="md-arrow-dropdown"></ion-icon>
+                          <ion-spinner name="crescent"></ion-spinner>
+                          <ion-icon name="md-arrow-dropdown"></ion-icon>
+
+
                         </ion-label>
-                        <ion-select [hidden]="!cities" (click)="checkDB('districts')" okText="تم" cancelText="إلغاء" [(ngModel)]="temp.field_city.und[0]['tid']"
-                            placeholder="يرجى تحديد المدينة ">
+                      <ion-select [hidden]="!cities"
+                                  (change)="changedValue($event)"
+                                  okText="تم"
+                                  cancelText="إلغاء"
+                                  [ngModel]="temp.field_city.und[0]['tid']"
+                                  (ngModelChange)="changedValue($event)"
+                                  placeholder="يرجى تحديد المدينة ">
                             <ion-option *ngFor="let district of cities " [value]="district.tid"> {{district.name}}</ion-option>
 
                         </ion-select>
                     </ion-item>
                     <ion-item class="city">
                         <ion-label>نقل من</ion-label>
-                        <ion-label [hidden]="districts" class="holder">
-                          <ion-spinner name="crescent"></ion-spinner>
+                      <ion-label [hidden]="districts" class="holder">
+                        <span>يرجى تحديد المدينة اولا</span>
+                        <!--<ion-spinner name="crescent"></ion-spinner>-->
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                        <ion-select [hidden]="!districts" (click)="checkDB('districts')" okText="تم" cancelText="إلغاء" [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد المدينة ">
-                            <ion-option *ngFor="let district of districts " [value]="district.tid" > {{district.name}}</ion-option>
+                      <ion-select [hidden]="!districts" okText="تم" cancelText="إلغاء"
+                                  [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد الحى ">
+                        <ion-option *ngFor="let district of districts " [value]="district.tid"> {{district.title}}
+                        </ion-option>
 
                         </ion-select>
                     </ion-item>
 
                     <ion-item class="districts">
                         <ion-label>نقل إلى</ion-label>
-                        <ion-label [hidden]="universities" class="holder">
-                          <ion-spinner name="crescent"></ion-spinner>
+                      <ion-label [hidden]="universities" class="holder">
+                        <span>يرجى تحديد المدينة اولا</span>
+
+                        <!--<ion-spinner name="crescent"></ion-spinner>-->
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                        <ion-select [hidden]="!universities" (click)="checkDB('universities')" [(ngModel)]="temp.field_route_university_to.und[0]['tid']" placeholder="يرجى تحديد الجامعة">
-                            <ion-option *ngFor="let university of universities" [value]="university.tid" >{{university.name}}</ion-option>
+                      <ion-select [hidden]="!universities" [(ngModel)]="temp.field_route_university_to.und[0]['tid']"
+                                  placeholder="يرجى تحديد الجامعة">
+                        <ion-option *ngFor="let university of universities" [value]="university.tid">
+                          {{university.title}}
+                        </ion-option>
 
                         </ion-select>
                     </ion-item>
@@ -73,7 +88,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                        <ion-select [hidden]="!vehicles" (click)="checkDB($event,'vehicles')" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']" placeholder="يرجى تحديد نوع المركبة">
+                      <ion-select [hidden]="!vehicles" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']"
+                                  placeholder="يرجى تحديد نوع المركبة">
                             <ion-option *ngFor="let vehicles of vehicles" [value]="vehicles.tid" >{{vehicles.name}} </ion-option>
 
                         </ion-select>
@@ -85,7 +101,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                        <ion-select [hidden]="!contracts" (click)="checkDB('contracts')" [(ngModel)]="temp.field_contract_period.und[0]['tid']" placeholder="يرجى تحديد مدة العقد">
+                      <ion-select [hidden]="!contracts" [(ngModel)]="temp.field_contract_period.und[0]['tid']"
+                                  placeholder="يرجى تحديد مدة العقد">
                             <ion-option *ngFor="let contract of contracts" [value]="contract.tid" >{{contract.name}} </ion-option>
 
                         </ion-select>
@@ -97,7 +114,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                        <ion-select [hidden]="!goAndComes" (click)="checkDB('goAndComes')" [(ngModel)]="temp.field_go_and_come.und[0]['tid']" placeholder="يرجى تحديد نوع الطلب ">
+                      <ion-select [hidden]="!goAndComes" [(ngModel)]="temp.field_go_and_come.und[0]['tid']"
+                                  placeholder="يرجى تحديد نوع الطلب ">
                             <ion-option *ngFor="let goAndCome of goAndComes" [value]="goAndCome.tid" >{{goAndCome.name}} </ion-option>
 
                         </ion-select>

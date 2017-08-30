@@ -141,7 +141,7 @@ export class Settings {
       buttons: [
         {
           icon: 'facebook',
-          text: 'Facebook',
+          text: 'فيسبوك',
           handler: () => {
             console.log('share with facebook');
 
@@ -155,7 +155,7 @@ export class Settings {
           }
         }, {
           icon: 'twitter',
-          text: 'Twitter',
+          text: 'تويتر',
           handler: () => {
 
             console.log('share with twitter');

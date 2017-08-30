@@ -1,4 +1,13 @@
 page-add-path{
+  ion-spinner {
+    width: 22px;
+    height: 22px;
+    margin: 0 8px;
+    & * {
+      stroke: #fff !important;
+      //fill: #fff !important;
+    }
+  }
     direction: rtl!important;
     .header-ios .toolbar-ios:last-child .toolbar-background-ios {
         border-width: 0 !important;
@@ -104,14 +113,19 @@ page-add-path{
 
                         &.holder {
 
-                        display: flex;
+                          display: flex;
 
                             padding-left: 6px;
                             justify-content: space-between;
                             height: 50px;
                             align-items: center;
-                        flex: 1;
+                          flex: 1;
                             min-width: calc(100% - 90px);
+                          span {
+                            padding: 0 7px;
+                            font-size: 13px;
+                            color: #999;
+                          }
                         }
 
 

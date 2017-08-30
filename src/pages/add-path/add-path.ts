@@ -1,5 +1,5 @@
 // Main Components
-import {Component} from '@angular/core';
+import {Component, DoCheck} from '@angular/core';
 import {IonicPage, NavController, ModalController, LoadingController, Loading, Platform, ViewController, NavParams, Events, ToastController, ActionSheetController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 
@@ -35,6 +35,7 @@ export class AddPath {
     error: any;
     Token: any;
     myInfo: any;
+  cityModel: any;
     submitload: any;
     constructor(
         public navCtrl: NavController,
@@ -148,15 +149,15 @@ export class AddPath {
 
         Promise.all([
             this.users.getTaxList('7'),
-            this.users.getTaxList('5'),
-            this.users.getTaxList('9'),
+          //this.users.getTaxList('5'),
+          //this.users.getTaxList('9'),
             this.users.getTaxList('2'),
             this.users.getTaxList('4'),
             this.users.getTaxList('8'),
 
         ]).then(data => {
             console.log(data);
-            [this.cities,this.districts, this.universities, this.vehicles, this.contracts, this.goAndComes] = data;
+          [this.cities, this.vehicles, this.contracts, this.goAndComes] = data;
         })
 
     }
@@ -166,6 +167,13 @@ export class AddPath {
 
     }
 
+
+  /*ngDoCheck() {
+      console.log('changes', this.temp);
+
+      if(this.temp.field_city.und[0]['tid'])
+        this.fillFields(this.temp.field_city.und[0]['tid'])
+  }*/
     ionViewDidLoad() {
         // Run After Page Already Loaded
 
@@ -184,13 +192,61 @@ export class AddPath {
 
         });
 
+
     }
 
-    private checkDB(event,value) {
-        /*if (this[value].length <= 0) {
-            event.preventDefault();
-        }*/
+  changeCity(event) {
+    console.log('event', event)
+  }
+
+  private fillFields(cityId) {
+
+
+    this.users.getDistrictsByCity(cityId)
+
+      .subscribe(data => {
+        console.log(data);
+        this.districts = data;
+      });
+
+    this.users.getUniversitiesByCity(cityId)
+
+      .subscribe(data => {
+        console.log(data);
+        this.universities = data;
+      })
+
+    /*if (this[value].length <= 0) {
+        event.preventDefault();
+    }*/
+  }
+
+
+  changedValue(cityId) {
+    console.log('change value', cityId);
+
+    if (this.temp.field_city.und[0].tid == cityId) {
+      console.log('you have not changed the city value');
+    } else {
+      this.temp.field_city.und[0]['tid'] = cityId;
+      this.districts = null;
+      this.universities = null;
+      this.users.getDistrictsByCity(cityId)
+
+        .subscribe(data => {
+          console.log(data);
+          this.districts = data;
+        });
+
+      this.users.getUniversitiesByCity(cityId)
+
+        .subscribe(data => {
+          console.log(data);
+          this.universities = data;
+        })
     }
+
+  }
     addPath() {
         console.log('title', this.temp);
         this.storage.get('userInfo').then((data) => {});

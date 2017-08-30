@@ -30,7 +30,12 @@
 
                     <ion-item class="city">
                         <ion-label>المدينة</ion-label>
-                        <ion-select [(ngModel)]="temp.field_city" placeholder="يرجى تحديد المدينة ">
+                      <ion-select
+                        okText="تم"
+                        cancelText="الغاء"
+                        [ngModel]="temp.field_city"
+                        (ngModelChange)="changedCityValue($event)"
+                        placeholder="يرجى تحديد المدينة ">
                             <ion-option *ngFor="let city of cities "   [value]="city.tid" > {{city.name}}</ion-option>
 
                         </ion-select>
@@ -39,22 +44,34 @@
 
                    <ion-item class="city">
                         <ion-label>نقل من</ion-label>
-                        <ion-select [(ngModel)]="temp.field_route_from" placeholder="يرجى تحديد المدينة ">
-                            <ion-option *ngFor="let district of districts "   [value]="district.tid" > {{district.name}}</ion-option>
+                     <ion-select
+                       okText="تم"
+                       cancelText="الغاء"
+                       [(ngModel)]="temp.field_route_from" placeholder="يرجى تحديد الحى ">
+                       <ion-option *ngFor="let district of districts " [value]="district.tid"> {{district.title}}
+                       </ion-option>
 
                         </ion-select>
                     </ion-item>
 
                   <ion-item class="districts">
                         <ion-label>نقل إلى</ion-label>
-                        <ion-select [(ngModel)]="temp.field_route_university_to" placeholder="يرجى تحديد الجامعة">
-                            <ion-option *ngFor="let university of universities" [value]="university.tid" >{{university.name}}</ion-option>
+                    <ion-select
+                      okText="تم"
+                      cancelText="الغاء"
+                      [(ngModel)]="temp.field_route_university_to" placeholder="يرجى تحديد الجامعة">
+                      <ion-option *ngFor="let university of universities" [value]="university.tid">
+                        {{university.title}}
+                      </ion-option>
 
                         </ion-select>
                     </ion-item>
                     <ion-item class="van">
                         <ion-label>نوع المركبة</ion-label>
-                        <ion-select [(ngModel)]="temp.field_vehicle_type" placeholder="يرجى تحديد نوع المركبة">
+                      <ion-select
+                        okText="تم"
+                        cancelText="الغاء"
+                        [(ngModel)]="temp.field_vehicle_type" placeholder="يرجى تحديد نوع المركبة">
                             <ion-option *ngFor="let vehicles of vehicles" [value]="vehicles.tid" >{{vehicles.name}} </ion-option>
 
                         </ion-select>
@@ -62,7 +79,10 @@
 
                     <ion-item class="cont">
                         <ion-label>مدة العقد </ion-label>
-                        <ion-select [(ngModel)]="temp.field_contract_period" placeholder="يرجى تحديد مدة العقد">
+                      <ion-select
+                        okText="تم"
+                        cancelText="الغاء"
+                        [(ngModel)]="temp.field_contract_period" placeholder="يرجى تحديد مدة العقد">
                             <ion-option *ngFor="let contract of contracts" [value]="contract.tid" >{{contract.name}} </ion-option>
 
                         </ion-select>
@@ -70,7 +90,10 @@
 
                     <ion-item class="gocome">
                         <ion-label>نوع الطلب </ion-label>
-                        <ion-select [(ngModel)]="temp.field_go_and_come" placeholder="يرجى تحديد نوع الطلب ">
+                      <ion-select
+                        okText="تم"
+                        cancelText="الغاء"
+                        [(ngModel)]="temp.field_go_and_come" placeholder="يرجى تحديد نوع الطلب ">
                             <ion-option *ngFor="let goAndCome of goAndComes" [value]="goAndCome.tid" >{{goAndCome.name}} </ion-option>
 
                         </ion-select>

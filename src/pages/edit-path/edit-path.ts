@@ -18,7 +18,7 @@ export class EditPath {
     routeInfo: any;
     showLoader: boolean = true;
     districts: any;
-    universities: any;
+  universities: any;
     vehicles: any;
     contracts: any;
     goAndComes: any;
@@ -59,17 +59,17 @@ export class EditPath {
         });
 
         //get cities
-        this.users.getTaxList('5').then((data) => {
+      /*this.users.getTaxList('5').then((data) => {
 
-            this.districts = data;
-            console.log('data', data);
-        });
-        // get Univirsities
-        this.users.getTaxList('9').then((data) => {
+          this.districts = data;
+          console.log('data', data);
+      });
+      // get Univirsities
+      this.users.getTaxList('9').then((data) => {
 
-            this.universities = data;
-            console.log('data', data);
-        });
+          this.universities = data;
+          console.log('data', data);
+      });*/
         // get vehicles
         this.users.getTaxList('2').then((data) => {
 
@@ -101,9 +101,56 @@ export class EditPath {
 
 
     }
+
+  /*
+  ngDoCheck() {
+
+    console.log(this.temp);
+
+    if (this.temp&&this.temp.field_city === this.routeInfo.field_city.und.tid) {
+      console.log('you have not changed the city value');
+      this.temp.field_route_from = '';
+      this.temp.field_route_university_to = '';
+    } else if(this.temp&&this.temp.field_city != this.routeInfo.field_city.und.tid){
+      console.log('you have changed the city value');
+      this.getCityUnivs()
+    }
+  }
+
+  */
+
+  cityChange(event) {
+    console.log(event);
+  }
     dismiss() {
         this.viewCtrl.dismiss();
     }
+
+  changedCityValue(cityId) {
+    console.log('change value', cityId);
+    if (this.temp.field_city == cityId) {
+      console.log('you have not changed the city value');
+    } else {
+      this.temp.field_city = cityId;
+      this.districts = null;
+      this.universities = null;
+      this.users.getDistrictsByCity(cityId)
+
+        .subscribe(data => {
+          console.log(data);
+          this.districts = data;
+        });
+
+      this.users.getUniversitiesByCity(cityId)
+
+        .subscribe(data => {
+          console.log(data);
+          this.universities = data;
+        })
+    }
+
+  }
+
 
     getRouteInfoByUserId(nId) {
         console.log('nId', nId);
@@ -132,6 +179,11 @@ export class EditPath {
             };
             console.log('data', data);
             console.log('temp', this.temp);
+
+
+          this.getCityUnivs();
+
+
         });
     }
     updatePath() {
@@ -187,6 +239,22 @@ export class EditPath {
 
         toast.present();
     }
+
+
+  getCityUnivs() {
+    this.users.getDistrictsByCity(this.temp.field_city)
+      .subscribe(data => {
+        console.log('Districts', data);
+        this.districts = data;
+      });
+    this.users.getUniversitiesByCity(this.temp.field_city)
+
+      .subscribe(data => {
+        console.log('Universites', data);
+        this.universities = data;
+      })
+  }
+
 
     editimageActionSheet() {
         let imageactionSheet = this.actionSheetCtrl.create({

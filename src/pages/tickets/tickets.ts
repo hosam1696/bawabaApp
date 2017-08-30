@@ -9,6 +9,7 @@ import {
 import {Users} from "../../providers/users";
 import {API} from "../../providers/api";
 import {LocalUser} from "../../app/appconf/app.interfaces";
+import {tick} from "@angular/core/testing";
 
 // Req Pages
 
@@ -30,7 +31,7 @@ export class Tickets {
     UserData:LocalUser;
     loading:boolean = true;
     wantedTickets = 'Booked';
-    CancelledTickets: any[];
+  CancelledTickets: any[] = [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -92,7 +93,33 @@ export class Tickets {
             this.noTickets = true;
 
           } else {
-            this.mytickets = data;
+            this.mytickets = [];
+            this.CancelledTickets = [];
+            data.forEach(ticket => {
+
+              console.log(ticket);
+
+              if (ticket.status == 'pending' || ticket.status == 'Pending') {
+
+                console.log(this.mytickets.indexOf(ticket), ticket.status);
+
+                  this.mytickets.push(ticket);
+
+
+                console.log(this.mytickets);
+
+              } else if (ticket.status == 'cancelled' || ticket.status == 'Cancelled' || ticket.status == 'CancelledTicket' || ticket.status == 'cancelledTicket') {
+
+                console.log(this.CancelledTickets.indexOf(ticket));
+
+                if(this.CancelledTickets.indexOf(ticket) == -1)
+                  this.CancelledTickets.push(ticket);
+              } else {
+                /*if(this.mytickets.indexOf(ticket) == -1)
+                  this.mytickets.push(ticket);*/
+              }
+            });
+
           }
 
         }, err=>{
