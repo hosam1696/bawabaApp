@@ -121,6 +121,8 @@ export class MyApp {
     });
 
     this.loader.present();
+
+
   }
 
   userLogout(Token) {
@@ -129,6 +131,7 @@ export class MyApp {
         console.log('data');
         console.log(data);
         this.users.LogoutUser().then(() => {
+
           this.events.publish('user:getToken');
           this.events.publish('user:Session');
         });

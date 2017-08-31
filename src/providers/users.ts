@@ -153,6 +153,7 @@ export class Users {
     return new Promise((resolve, reject) => {
       this.storage.set('isLogin', false);
       this.storage.remove('userInfo');
+      this.storage.remove('userAddress');
       console.log('Storage updated');
       resolve(true);
     });
