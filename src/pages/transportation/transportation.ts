@@ -1,10 +1,10 @@
 // Main Components
+import {API} from "../../providers/api";
 import {Component} from '@angular/core';
 import {IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController} from 'ionic-angular';
 
 // Providers
 import {Users} from "../../providers/users";
-import {API} from "../../providers/api";
 
 // Req Pages
 import {SearchResults} from "../search-results/search-results";
@@ -25,7 +25,7 @@ export class Transportation {
     goAndCome: any;
     vehicle: any;
     contract: any;
-    temp: any
+  temp: any;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
