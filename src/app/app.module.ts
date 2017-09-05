@@ -1,3 +1,4 @@
+import { NotConnectedPage } from './../pages/not-connected/not-connected';
 import { RoutesProvider } from './../providers/routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -108,7 +109,8 @@ export function createTranslateLoader(http: Http) {
     EditPath,
     NotificationsDetail,
     MapsModal,
-    DefaultPage
+    DefaultPage,
+    NotConnectedPage
   ],
   imports: [
     BrowserModule,
@@ -164,7 +166,8 @@ export function createTranslateLoader(http: Http) {
     EditPath,
     NotificationsDetail,
     MapsModal,
-    DefaultPage
+    DefaultPage,
+    NotConnectedPage
   ],
   providers: [
     StatusBar,

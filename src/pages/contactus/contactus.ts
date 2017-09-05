@@ -22,7 +22,6 @@ export class Contactus {
   message:any;
   userContactData: any;
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public api: API,
@@ -67,6 +66,9 @@ export class Contactus {
         .subscribe(
           data=> {
             console.log(data);
+            this.showToast(data[0], () => {
+              this.viewCtrl.dismiss()
+            })
           },
           err => {
             console.warn(err.json());
@@ -118,12 +120,14 @@ export class Contactus {
 //    this.viewCtrl.dismiss(data);
 //  }
 
-  showToast(msg) {
+  showToast(msg, callback?: any) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
       position: 'top'
     });
+
+    toast.onDidDismiss(callback);
     toast.present();
   }
 

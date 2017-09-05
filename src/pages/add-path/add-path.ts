@@ -37,6 +37,8 @@ export class AddPath {
     myInfo: any;
   cityModel: any;
     submitload: any;
+  showDistrictsLoader: boolean = false;
+  showUniversityLoader: boolean = false;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -231,9 +233,13 @@ export class AddPath {
       this.temp.field_city.und[0]['tid'] = cityId;
       this.districts = null;
       this.universities = null;
+      this.showDistrictsLoader = true;
+      this.showUniversityLoader = true;
       this.users.getDistrictsByCity(cityId)
 
         .subscribe(data => {
+
+          this.showDistrictsLoader = false;
           console.log(data);
           this.districts = data;
         });
@@ -242,6 +248,8 @@ export class AddPath {
 
         .subscribe(data => {
           console.log(data);
+
+          this.showUniversityLoader = false;
           this.universities = data;
         })
     }
