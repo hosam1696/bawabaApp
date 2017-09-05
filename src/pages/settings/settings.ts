@@ -118,7 +118,7 @@ export class Settings {
       })
   }
   contactus(){
-    let ContactusModal = this.modalCtrl.create(Contactus, { uid: this.uid });
+    let ContactusModal = this.modalCtrl.create(Contactus, { constactData: {uid: this.uid, name: this.name, email: this.email }});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log('Data from Modal',data);
@@ -148,7 +148,7 @@ export class Settings {
       console.log(data);
     }
   )
-    
+
     /*
     let actions = this.actionSheetCtrl.create({
       title: 'مشاركة عبر',
