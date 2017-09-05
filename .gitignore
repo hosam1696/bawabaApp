@@ -6,6 +6,11 @@
 *.log
 *.tmp
 *.tmp.*
+
+.sourcemaps
+
+ nodemodules.rar
+
 log.txt
 testquokka.ts
 *.sublime-project

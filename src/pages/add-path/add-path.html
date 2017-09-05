@@ -53,13 +53,18 @@
                     </ion-item>
                     <ion-item class="city">
                         <ion-label>نقل من</ion-label>
-                      <ion-label [hidden]="districts" class="holder">
+                      <ion-label [hidden]="districts||!showDistrictsLoader" class="holder">
+
+                        <ion-spinner name="crescent"></ion-spinner>
+                        <ion-icon name="md-arrow-dropdown"></ion-icon>
+                      </ion-label>
+                      <ion-label [hidden]="districts||showDistrictsLoader" class="holder">
                         <span>يرجى تحديد المدينة اولا</span>
                         <!--<ion-spinner name="crescent"></ion-spinner>-->
-                            <ion-icon name="md-arrow-dropdown"></ion-icon>
-                        </ion-label>
-                      <ion-select [hidden]="!districts" 
-                                okText="تم" 
+                        <ion-icon name="md-arrow-dropdown"></ion-icon>
+                      </ion-label>
+                      <ion-select [hidden]="!districts"
+                                  okText="تم"
                                 cancelText="إلغاء"
                                   [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد الحى ">
                         <ion-option *ngFor="let district of districts " [value]="district.tid"> {{district.title}}
@@ -69,8 +74,14 @@
                     </ion-item>
 
                     <ion-item class="districts">
+
                         <ion-label>نقل إلى</ion-label>
-                      <ion-label [hidden]="universities" class="holder">
+                      <ion-label [hidden]="universities||!showUniversityLoader" class="holder">
+
+                        <ion-spinner name="crescent"></ion-spinner>
+                        <ion-icon name="md-arrow-dropdown"></ion-icon>
+                      </ion-label>
+                      <ion-label [hidden]="universities||showUniversityLoader" class="holder">
                         <span>يرجى تحديد المدينة اولا</span>
 
                         <!--<ion-spinner name="crescent"></ion-spinner>-->

@@ -58,19 +58,23 @@ export class ProfilePage {
 
       let userRole = this.user.roles[4];
 
-      if (this.user.roles[4] === 'transporter') {
-        this.userLabel = this.checkNull(this.user.companyFirstName) + ' ' + this.checkNull(this.user.cmpanyLastName);
-        if(this.userLabel.trim() == '')
-          this.userLabel = this.user.name;
-      } else if (this.user.roles[5] === 'passenger') {
-        this.userLabel = this.checkNull(this.user.firstName) + ' ' + this.checkNull(this.user.familyName);
-        if(this.userLabel.trim() == '')
-          this.userLabel = this.user.name;
-      }
+      this.detectUserLabel()
     } catch (noUserDataErr) {
       this.userLogged = false;
     }
 
+  }
+
+  private detectUserLabel(): void {
+    if (this.user.roles[4] === 'transporter') {
+      this.userLabel = this.checkNull(this.user.companyFirstName) + ' ' + this.checkNull(this.user.cmpanyLastName);
+      if (this.userLabel.trim() == '')
+        this.userLabel = this.user.name;
+    } else if (this.user.roles[5] === 'passenger') {
+      this.userLabel = this.checkNull(this.user.firstName) + ' ' + this.checkNull(this.user.familyName);
+      if (this.userLabel.trim() == '')
+        this.userLabel = this.user.name;
+    }
   }
 
   async ionViewDidLoad() {
@@ -130,10 +134,13 @@ export class ProfilePage {
       console.groupEnd();
 
 
+      if (updatedData.uid === this.user.uid && JSON.stringify(this.user) != JSON.stringify(updatedData)) {
 
-
-      if (updatedData.uid === this.user.uid && JSON.stringify(this.user) !== JSON.stringify(updatedData))
         this.user = updatedData;
+
+        this.detectUserLabel()
+      }
+      console.log('user data from modal', this.user);
     })
   }
 

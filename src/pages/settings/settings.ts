@@ -79,7 +79,7 @@ export class Settings {
       title: 'Choose Language',
       buttons: [
         {
-          text: 'Arabic',
+          text: 'العربية',
           handler: () => {
             this.events.publish('lang:Changed',('ar'));
           }
@@ -143,7 +143,7 @@ export class Settings {
 
   shareApp() {
 
-    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط','http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU')
+    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط : للايفون https://goo.gl/W1eeRU', 'http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU')
     .then((data)=> {
       console.log(data);
     }
