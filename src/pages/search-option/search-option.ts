@@ -15,7 +15,8 @@ import {API} from "../../providers/api";
     templateUrl: 'search-option.html',
 })
 export class SearchOption {
-
+    university: any;
+    districts: any;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -37,8 +38,19 @@ export class SearchOption {
         // Run After Page Already Loaded
 
     }
-    dismiss() {
-        this.viewCtrl.dismiss();
+    dismiss(university , district) {
+        
+        if (university || district) {
+            let data = {
+                university, 
+                district
+            };
+            
+            this.viewCtrl.dismiss(data);
+        } else {
+            this.viewCtrl.dismiss()
+        }
+        
     }
 
 

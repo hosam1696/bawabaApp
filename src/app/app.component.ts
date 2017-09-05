@@ -1,3 +1,7 @@
+import { Storage } from '@ionic/storage';
+
+import { PassengerHome } from './../pages/passenger-home/passenger-home';
+import { TransporterHome } from './../pages/transporter-home/transporter-home';
 import { Login } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, Events, LoadingController } from 'ionic-angular';
@@ -37,16 +41,43 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     public translate: TranslateService,
     public events: Events,
-    public users: Users
+    public users: Users,
+    public storage: Storage
   ) {
-    Promise.all([
-      this.initializeApp(),
-      this.users.getToken()
+
+
+    this.getToken();
+
+    /*Promise.all([
+      
+      //this.users.getUserInfo(),
+      this.getToken()
     ]).then((data) => {
-      this.events.publish('user:Connect',data[1]);
+
+     // let userinfo = data[1],
+
+      let userToken = data[1];
+      
+      console.info('user token in app component', userToken);
+
+      /*if (userinfo) { // if the user has logged in before
+
+
+       this.nav.setRoot(TabsPage);
+
+
+      } else {
+
+        
+
+        this.userConnect(data[0]);
+        this.initializeApp()
+     // }
+
+      
     },error => {
       console.log('error');
-    });
+    });*/
   }
 
   initializeApp() {
@@ -99,9 +130,9 @@ export class MyApp {
       });
     });
 
-    this.events.subscribe('user:Connect', (data) => {
+    /*this.events.subscribe('user:Connect', (data) => {
       this.userConnect(data);
-    });
+    });*/
 
   }
 
@@ -142,7 +173,7 @@ export class MyApp {
   }
 
   userConnect(Token){
-    console.log('Token:'+Token);
+    console.log('user Connect method > Token:'+Token);
 
     this.users
       .userConnect(Token)
@@ -151,7 +182,9 @@ export class MyApp {
         if (user.uid === 0) { // no login user
           this.nav.setRoot(Login);
         } else {
+          this.storage.set('userConnectInfo', user);
           this.nav.setRoot(TabsPage);
+          //this.nav.setRoot(Login);
         }
       }, err => {
         console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());
@@ -178,16 +211,20 @@ export class MyApp {
   }
 
   getToken() {
-    this.users.userToken()
-      .map(res => res.json()).subscribe(data => {
-        console.log('data');
-        console.log(data);
+    this.users
+      .userToken()
+      .map(res => res.json())
+      .subscribe(data => {
+        console.log('data from user Token provider \n',data);
+      
         this.Token = data.token;
-        Promise.all([
-          this.users.saveToken(this.Token)
-        ]).then(()=>{
-          console.log('Done');
-        });
+        
+        this.users.saveToken(this.Token);
+
+        this.userConnect(data.token);
+
+        this.initializeApp();
+        
       }, error => {
         console.log('error');
         console.log(error);

@@ -58,7 +58,9 @@
                         <!--<ion-spinner name="crescent"></ion-spinner>-->
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                      <ion-select [hidden]="!districts" okText="تم" cancelText="إلغاء"
+                      <ion-select [hidden]="!districts" 
+                                okText="تم" 
+                                cancelText="إلغاء"
                                   [(ngModel)]="temp.field_route_from.und[0]['tid']" placeholder="يرجى تحديد الحى ">
                         <ion-option *ngFor="let district of districts " [value]="district.tid"> {{district.title}}
                         </ion-option>
@@ -92,7 +94,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                      <ion-select [hidden]="!vehicles" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']"
+                      <ion-select [hidden]="!vehicles" okText="تم"
+                      cancelText="إلغاء" [(ngModel)]="temp.field_vehicle_type.und[0]['tid']"
                                   placeholder="يرجى تحديد نوع المركبة">
                             <ion-option *ngFor="let vehicles of vehicles" [value]="vehicles.tid" >{{vehicles.name}} </ion-option>
 
@@ -105,7 +108,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                      <ion-select [hidden]="!contracts" [(ngModel)]="temp.field_contract_period.und[0]['tid']"
+                      <ion-select [hidden]="!contracts" okText="تم"
+                      cancelText="إلغاء" [(ngModel)]="temp.field_contract_period.und[0]['tid']"
                                   placeholder="يرجى تحديد مدة العقد">
                             <ion-option *ngFor="let contract of contracts" [value]="contract.tid" >{{contract.name}} </ion-option>
 
@@ -118,7 +122,8 @@
                           <ion-spinner name="crescent"></ion-spinner>
                             <ion-icon name="md-arrow-dropdown"></ion-icon>
                         </ion-label>
-                      <ion-select [hidden]="!goAndComes" [(ngModel)]="temp.field_go_and_come.und[0]['tid']"
+                      <ion-select [hidden]="!goAndComes" okText="تم"
+                      cancelText="إلغاء" [(ngModel)]="temp.field_go_and_come.und[0]['tid']"
                                   placeholder="يرجى تحديد نوع الطلب ">
                             <ion-option *ngFor="let goAndCome of goAndComes" [value]="goAndCome.tid" >{{goAndCome.name}} </ion-option>
 

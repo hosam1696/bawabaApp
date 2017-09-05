@@ -29,6 +29,7 @@ export class Settings {
   uid:any;
   role:any;
   Token:any;
+  userInfo: any;
   logOutSpinner: boolean = false;
   constructor(
     public navCtrl: NavController,
@@ -52,11 +53,16 @@ export class Settings {
   ionViewDidLoad() {
     // Run After Page Already Loaded
     Promise.all([
-      this.users.getToken().then((val) => {
-        this.Token = val;
-      })
-    ]).then(() => {
-      console.log('current token='+this.Token);
+      this.users.getToken(),
+      this.users.getUserInfo()
+    ]).then((data) => {
+      this.Token = data[0];
+      let  userInfo = data[1];
+      this.userInfo = userInfo;
+      console.log('settings promise resolve');
+      console.group();
+
+      console.info(this.Token, userInfo)
     });
   }
 
@@ -136,6 +142,14 @@ export class Settings {
     }
 
   shareApp() {
+
+    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط','http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU')
+    .then((data)=> {
+      console.log(data);
+    }
+  )
+    
+    /*
     let actions = this.actionSheetCtrl.create({
       title: 'مشاركة عبر',
       buttons: [
@@ -171,6 +185,8 @@ export class Settings {
     });
 
     actions.present();
+
+    */
   }
 
     toSignup() {

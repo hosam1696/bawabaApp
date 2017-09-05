@@ -86,7 +86,7 @@ export class Tickets {
 
       [this.noCancel, this.noTickets] = Array(2).fill(false);
       this.users
-        .GetTickets(this.UserData.uid)
+        .GetTickets(this.UserData.uid, this.UserData.token)
         .subscribe(data=>{
           console.log(data);
           if(data.length<=0) {
@@ -123,7 +123,7 @@ export class Tickets {
           }
 
         }, err=>{
-          console.warn(err);
+          console.warn(err.json());
           this.loading = false
         }, ()=> {
           this.loading = false

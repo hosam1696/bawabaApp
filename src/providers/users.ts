@@ -598,11 +598,12 @@ export class Users {
     return this.http.post(this.api.SystemGateway+'ticket/add',body, options ).map(res=>res.json());
   }
 
-  GetTickets(user_id) {
+  GetTickets(user_id, Token) {
     // Building Headers
     let headers = new Headers({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'X-CSRF-Token': Token,
     });
 
     // Building Options

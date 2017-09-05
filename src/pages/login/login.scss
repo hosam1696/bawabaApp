@@ -7,6 +7,12 @@ page-login {
     ion-content{
         background-image: url(../assets/img/gmap.jpg);
         background-size:cover;
+
+        img {
+            display: block;
+            margin: 30px auto 10px;
+            text-align: center
+        }
       ion-spinner {
         width: 20px;
         height: 20px;
@@ -25,7 +31,6 @@ page-login {
             width: 100%;
             text-align: center;
             position:relative;
-            contain: none;
             margin:55px 0px;
             img{
                 width: 150px;

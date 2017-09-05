@@ -90,7 +90,9 @@ export class TransporterHome {
         let searchoptionModal = this.modalctrl.create(SearchOption);
         searchoptionModal.present();
         searchoptionModal.onDidDismiss(data => {
-            // Saving this info to local storage after updating user profile info
+            // filter and search paths based onn the search modal
+
+            console.log(data);
         })
     }
     addpathmodal() {
