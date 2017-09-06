@@ -45,7 +45,8 @@ export class MyApp {
     public storage: Storage
   ) {
 
-
+    
+    
     this.getToken();
 
     /*Promise.all([

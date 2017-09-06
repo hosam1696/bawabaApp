@@ -79,7 +79,7 @@ export class Settings {
       title: 'Choose Language',
       buttons: [
         {
-          text: 'Arabic',
+          text: 'العربية',
           handler: () => {
             this.events.publish('lang:Changed',('ar'));
           }
@@ -118,7 +118,7 @@ export class Settings {
       })
   }
   contactus(){
-    let ContactusModal = this.modalCtrl.create(Contactus, { uid: this.uid });
+    let ContactusModal = this.modalCtrl.create(Contactus, { constactData: {uid: this.uid, name: this.name, email: this.email }});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log('Data from Modal',data);
@@ -143,12 +143,15 @@ export class Settings {
 
   shareApp() {
 
+
     this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط /n للايفون https://goo.gl/W1eeRU')
+
+
     .then((data)=> {
       console.log(data);
     }
   )
-    
+
     /*
     let actions = this.actionSheetCtrl.create({
       title: 'مشاركة عبر',

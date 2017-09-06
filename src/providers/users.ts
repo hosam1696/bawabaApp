@@ -167,6 +167,9 @@ export class Users {
     return this.storage.get('userToken');
   }
 
+
+
+
   async test(msg) {
     this.storage.ready().then(() => {
       this.storage.set('TestingAsync', msg);
@@ -208,6 +211,28 @@ export class Users {
     });
 
     return this.http.post(this.api.userLogin, data, options);
+  }
+
+  contactUs(contactData, Token) {
+   // www.bawabt-alnagel.com/api/v1/contact-us/send
+
+    // Building Headers
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-Token': Token
+    });
+
+    // Building Options
+    let options = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
+
+    let body = JSON.stringify(contactData);
+
+    return this.http.post(this.api.SystemGateway+'contact-us/send', body, options).map(res=>res.json());
+
   }
 
   userToken() {

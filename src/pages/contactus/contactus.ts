@@ -1,11 +1,12 @@
 // Main Components
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, ViewController, NavParams, ToastController} from 'ionic-angular';
 
 // Providers
 import { Users } from "../../providers/users";
 import { API } from "../../providers/api";
 import { Components } from "../../providers/components";
+import {getUserConfigFile} from "@ionic/app-scripts";
 
 // Req Pages
 
@@ -17,18 +18,20 @@ import { Components } from "../../providers/components";
 export class Contactus {
 
   uid:any;
-  mestitle:any;
-  mesbody:any;
-
+  subject:any;
+  message:any;
+  userContactData: any;
   constructor(
-    public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
     public api: API,
     public users: Users,
-    public components: Components
+    public components: Components,
+    public toastCtrl: ToastController
   ) {
-    this.uid = navParams.get('userId');
+    this.userContactData = this.navParams.get('constactData');
+
+    console.log('user Contact data', this.userContactData);
   }
 
   ionViewDidEnter(){
@@ -43,11 +46,42 @@ export class Contactus {
     this.viewCtrl.dismiss();
   }
 
-  Send(){
+  async Send(){
     // console.log(this.api.UserGateway);
-    console.log(this.uid);
-    console.log(this.mestitle);
-    console.log(this.mesbody);
+    console.log(this.userContactData);
+    console.log(this.subject);
+    console.log(this.message);
+
+    if (this.subject && this.message && this.message.trim() != ''  && this.subject.trim() != '') {
+      console.log(' you have entered the followings', this.message, this.subject);
+
+      let contactData = {
+        ...this.userContactData,
+        subject: this.subject,
+        message: this.message
+      };
+
+      this.users
+        .contactUs(contactData, await this.users.getToken())
+        .subscribe(
+          data=> {
+            console.log(data);
+            this.showToast(data[0], () => {
+              this.viewCtrl.dismiss()
+            })
+          },
+          err => {
+            console.warn(err.json());
+          }
+        )
+
+    } else {
+      if(!this.subject || this.subject.trim() == '') {
+        this.showToast('يرجى ادخال موضوع للرسالة')
+      } else {
+        this.showToast('يرجى ادخال نص للرسالة')
+      }
+    }
     // this.users.sendMessage(this.api.UserGateway,this.uid,this.mestitle,this.mesbody)
     // .map(response => response.json()).subscribe(data => {
     //   if(data.status == 'success'){
@@ -85,5 +119,16 @@ export class Contactus {
 //   dismiss(data) {
 //    this.viewCtrl.dismiss(data);
 //  }
+
+  showToast(msg, callback?: any) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(callback);
+    toast.present();
+  }
 
 }

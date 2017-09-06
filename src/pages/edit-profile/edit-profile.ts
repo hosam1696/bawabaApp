@@ -2,8 +2,7 @@ import {LocalUser} from './../../app/appconf/app.interfaces';
 // Main Components
 import {Component} from '@angular/core';
 import {
-  IonicPage, NavController, ModalController, ViewController, NavParams, Events, ActionSheetController,
-  ToastController
+  IonicPage, NavController, ModalController, ViewController, NavParams, Events, ToastController, ActionSheetController
 } from 'ionic-angular';
 
 
@@ -12,7 +11,7 @@ import {Storage} from '@ionic/storage';
 import {Users} from "../../providers/users";
 import {API} from "../../providers/api";
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
-import {getUpdatedAppNgModuleContentWithDeepLinkConfig} from "@ionic/app-scripts/dist/deep-linking/util";
+
 import {MapsModal} from "../mapsmodal";
 
 // Req Pages
@@ -212,33 +211,8 @@ export class EditProfile {
 
       console.log('trimmed value', this.trimUnChangedValues(this.EditProfileForm.value[this.userType]));
 
+      this.editProfileProvider(profileData, token);
 
-      this.users
-        .editProfile(profileData, token)
-        .subscribe(res => {
-          console.log('response from Editing User', res);
-          if (res.uid || res.name) {
-            this.storage.set('userInfo', res);
-            this.storage.set('userAddress', this.MapAddress);
-            this.showToast('تم تعديل البيانات الشخصية بنجاح');
-            this.EditProfileForm.get('current_pass').setValue('');
-          }
-
-
-        }, err => {
-          console.warn(err);
-          this.showSpinner = false;
-          let error = err.json();
-          if (error[0] == 'you\'ve entered a Wrong Password') {
-            this.showToast('كلمة المرور الحالية غير صحيحة')
-          } else {
-            this.showToast('يرجى المحاولة مرة اخرى')
-          }
-
-
-        }, () => {
-          this.showSpinner = false;
-        })
     } else {
       this.showSpinner = false;
       console.warn('UnValid Form', this.EditProfileForm.errors, this.EditProfileForm);
@@ -259,6 +233,41 @@ export class EditProfile {
     }
 
 
+  }
+
+  private editProfileProvider(profileData, token) {
+    this.users
+      .editProfile(profileData, token)
+      .subscribe(res => {
+        console.log('response from Editing User', res);
+        if (res.uid || res.name) {
+          this.storage.set('userInfo', Object.assign({}, this.user, res));
+          this.storage.set('userAddress', this.MapAddress);
+          this.showToast('تم تعديل البيانات الشخصية بنجاح');
+          this.EditProfileForm.get('current_pass').setValue('');
+        }
+
+
+      }, err => {
+        console.warn(err);
+        let error = err.json();
+        if (error[0] == 'you\'ve entered a Wrong Password') {
+          this.showToast('كلمة المرور الحالية غير صحيحة')
+        } else if (error[0] == 'CSRF validation failed') {
+          this.users.userToken()
+            .map(res => res.json())
+            .subscribe(data => {
+              this.users.saveToken(data.Token);
+              this.editProfileProvider(profileData, data.token);
+            })
+        } else {
+          this.showToast('يرجى المحاولة مرة اخرى')
+        }
+
+
+      }, () => {
+        this.showSpinner = false;
+      })
   }
 
   private trimUnChangedValues(formValue): object {

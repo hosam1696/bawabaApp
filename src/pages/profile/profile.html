@@ -24,7 +24,7 @@
         <div class="change-img" (click)="imageActionSheet()">
             <ion-icon name="camera"></ion-icon>
         </div>
-        <h2 class="user-name" >{{userLabel}}</h2>
+        <h2 class="user-name" >{{userLabel||'     '}}</h2>
         <!--<h2 class="user-name" *ngIf="user.firstName" >{{user.firstName}} {{user.lastName}}</h2>-->
 
         <ion-row>

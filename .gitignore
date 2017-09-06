@@ -6,13 +6,18 @@
 *.log
 *.tmp
 *.tmp.*
+
+.sourcemaps
+
+nodemodules.rar
+
 log.txt
 testquokka.ts
 *.sublime-project
 *.sublime-workspace
 .vscode/
 npm-debug.log*
-
+bawabt alnagel.postman_collection.json
 .idea/
 .sass-cache/
 .tmp/
