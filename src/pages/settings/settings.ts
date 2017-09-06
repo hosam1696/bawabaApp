@@ -144,7 +144,7 @@ export class Settings {
   shareApp() {
 
 
-    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط /n للايفون https://goo.gl/W1eeRU')
+    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط /n للايفون https://goo.gl/W1eeRU ')
 
 
     .then((data)=> {
