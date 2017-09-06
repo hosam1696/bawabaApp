@@ -677,6 +677,28 @@ export class Users {
   getUserLocationInfoByIp(ip) {
     return (ip) ? this.http.get('http://ipinfo.io/' + ip).map(res => res.json()) : null;
   }
+
+registerDeviceToken(deviceData) {
+   // Building Headers
+   let headers = new Headers({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+
+
+  // Building Options
+  let options = new RequestOptions({
+    headers: headers,
+    withCredentials: true
+  });
+
+  let body = JSON.stringify(deviceData);
+
+  return this.http.post(this.api.SystemGateway+'push_notifications', body, options).map(res=>res.json());
+
+  
+}
+
 }
 
 

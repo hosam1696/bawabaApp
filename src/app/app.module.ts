@@ -17,6 +17,8 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import {Geolocation} from '@ionic-native/geolocation';
+import {Push} from '@ionic-native/push';
+import { Network } from '@ionic-native/network';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { ListPage } from '../pages/list/list';
@@ -177,6 +179,8 @@ export function createTranslateLoader(http: Http) {
     Camera,
     InAppBrowser,
     Geolocation,
+    Push,
+    Network,
     SocialSharing,
     FilePath,
     RoutesProvider,

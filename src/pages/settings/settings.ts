@@ -118,7 +118,7 @@ export class Settings {
       })
   }
   contactus(){
-    let ContactusModal = this.modalCtrl.create(Contactus, { constactData: {uid: this.uid, name: this.name, email: this.email }});
+    let ContactusModal = this.modalCtrl.create(Contactus, { contactData: {uid: this.uid, name: this.name, email: this.email }});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log('Data from Modal',data);

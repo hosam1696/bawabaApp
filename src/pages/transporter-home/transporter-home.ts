@@ -1,6 +1,7 @@
+import { PushObject,Push, PushOptions } from '@ionic-native/push';
 // Main Components
 import {Component} from '@angular/core';
-import {IonicPage, NavController, Loading, LoadingController, NavParams, AlertOptions, ToastController, ModalController, AlertController, Events} from 'ionic-angular';
+import { IonicPage, NavController, Loading, LoadingController, NavParams, AlertOptions, ToastController, ModalController, AlertController, Events, Platform } from 'ionic-angular';
 
 // Providers
 import {Users} from "../../providers/users";
@@ -29,6 +30,7 @@ export class TransporterHome {
     Token: any;
     alertOptions: AlertOptions;
     showLoader: boolean = true;
+    pushObject: PushObject
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -41,6 +43,8 @@ export class TransporterHome {
         public loadingCtrl: LoadingController,
         public api: API,
         public users: Users,
+        public push:Push,
+        public platform: Platform
 
     ) {
 
@@ -86,6 +90,34 @@ export class TransporterHome {
             console.log('data', data);
         });
     }
+
+
+    private registerUserDeviceToken():void {
+        
+                let platformType = this.platform.is('ios')?'ios':(this.platform.is('windows')?'windows':'android');
+                  
+                           
+                this.pushObject.on('registration').subscribe((registration: any) => {
+                    console.log('Device registered', registration);
+                    let deviceData = {
+                        token: registration.token,
+                        type: platformType
+                    };
+        
+                    this.users
+                        .registerDeviceToken(deviceData)
+                        .subscribe(res=>{
+                            console.log('device data has saved to db',res);
+                        } , err =>{
+                            console.warn(err.json());
+                        });
+                    
+                });
+                
+                this.pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+                          
+            }
+
     searchoption() {
         let searchoptionModal = this.modalctrl.create(SearchOption);
         searchoptionModal.present();

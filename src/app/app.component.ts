@@ -1,3 +1,4 @@
+
 import { Storage } from '@ionic/storage';
 
 import { PassengerHome } from './../pages/passenger-home/passenger-home';
@@ -10,7 +11,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate';
 
 import { Users } from "../providers/users";
-
 import { TabsPage } from '../pages/tabs/tabs';
 // import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
@@ -170,6 +170,7 @@ export class MyApp {
       }, error => {
         console.log('error');
         console.log(error);
+
       })
   }
 
@@ -211,6 +212,8 @@ export class MyApp {
     });*/
   }
 
+  
+
   getToken() {
     this.users
       .userToken()
@@ -229,6 +232,7 @@ export class MyApp {
       }, error => {
         console.log('error');
         console.log(error);
+        this.nav.setRoot(TabsPage)
       })
   }
 }
