@@ -72,7 +72,7 @@ export class PassengerHome {
 
       this.appUtils.watchOnConnect(()=>{ // watch when the user will be connected
         this.isOnline = true;
-        this.initPageOnConnection();
+        //this.initPageOnConnection();
       })
     }
 

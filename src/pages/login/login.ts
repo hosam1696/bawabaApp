@@ -92,11 +92,18 @@ export class Login {
             this.events.publish('user:getToken', this.Token)
           ]);
         }, error => {
+          console.log(error.json()[0]);
           this.loginload = false;
-          let M = error.statusText;
-          let D = 2000;
-          let P = 'top';
-          this.com.Toast(M, D, P);
+          if (error.json()[0].match('غير مفعل أو ممنوع.') ) {
+            this.showToast(error.json()[0].replace(/\<.*\>(.*)\<\/em\>/g, '$1'));
+          } else {
+
+            let M = error.statusText.toString('utf8');
+            let D = 2000;
+            let P = 'top';
+            this.com.Toast(M, D, P);
+          }
+
 
         }, ()=> {
           this.loginload = true;
