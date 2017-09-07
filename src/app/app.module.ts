@@ -68,6 +68,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {MapsModal} from "../pages/mapsmodal";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {DefaultPage} from "../pages/default-page/default-page";
+import {AppUtils} from "./appconf/app.utils";
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -172,6 +173,7 @@ export function createTranslateLoader(http: Http) {
     NotConnectedPage
   ],
   providers: [
+    AppUtils,
     StatusBar,
     SplashScreen,
     File,

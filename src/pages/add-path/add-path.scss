@@ -1,4 +1,9 @@
+
+
 page-add-path{
+  input.text-input.text-input-ios::placeholder {
+    font-size: 13px;
+  }
   ion-spinner {
     width: 22px;
     height: 22px;

@@ -5,6 +5,7 @@ import {API} from "../../providers/api";
 import {Districts} from "../districts/districts";
 import {Push, PushObject, PushOptions} from '@ionic-native/push';
 import {Network} from "@ionic-native/network";
+import {AppUtils} from "../../app/appconf/app.utils";
 
 
 //@IonicPage()
@@ -29,7 +30,9 @@ export class PassengerHome {
       public events: Events,
       public push: Push,
       public platform: Platform,
-      public network: Network) {
+      public network: Network,
+      public appUtils: AppUtils
+      ) {
 
   }
 
@@ -47,46 +50,30 @@ export class PassengerHome {
 
   ionViewDidLoad() {
 
-    if (this.network.type ) {
+    console.log('Are you connected or not',this.appUtils.IsConnected);
 
+    if (this.appUtils.IsConnected) {
 
-      this.getCities();  // Get Available Cities
-
-      this.getUserInfo(); // Get Stored User Info
-
-      this.network
-        .onDisconnect()
-        .subscribe(data=> {
+      this.appUtils.OnConnection(  // user is connected to the internet
+        ()=> {
+          this.initPageOnConnection()
+        },
+        ()=>{ // after a while he disconnected to the internet
           this.Online = false;
-          this.network
-            .onConnect()
-            .subscribe(
-              connection => {
-                console.info(connection);
-                this.Online = true;
-                this.getCities();
-                this.getUserInfo(); // check if there is a user data stored in Storage
-              },
-              err => {
-                console.warn(err.json());
-              })
-        })
+          this.appUtils.watchOnConnect(()=>{ // watch when the user will be connected
+            this.isOnline = true;
+            this.initPageOnConnection();
+          })
+        }
+      );
 
     } else { // detect if the user is not connected to WIFI
       this.Online = false;
 
-      this.network
-        .onConnect()
-        .subscribe(
-          connection => {
-            console.info(connection);
-            this.Online = true;
-            this.getCities();
-            this.getUserInfo(); // check if there is a user data stored in Storage
-            },
-            err => {
-              console.warn(err.json());
-          })
+      this.appUtils.watchOnConnect(()=>{ // watch when the user will be connected
+        this.isOnline = true;
+        this.initPageOnConnection();
+      })
     }
 
     /*
@@ -99,6 +86,13 @@ export class PassengerHome {
       })*/
 
   }
+
+  private initPageOnConnection() {
+    this.getCities();  // Get Available Cities
+
+    this.getUserInfo(); // Get Stored User Info
+  }
+
 
   private registerUserDeviceToken(): void {
     const options: PushOptions = {

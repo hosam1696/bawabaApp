@@ -12,6 +12,10 @@
 
 
   <section *ngIf="isOnline;else offline">
+    <div text-center class="col-center status-msg"   *ngIf="showLoader" >
+      <ion-spinner ></ion-spinner>
+      <!--        <div>جارى جلب المحتوى  </div>-->
+    </div>
     <div *ngIf="!showLoader">
       <ion-card>
         <ion-card-content>
@@ -46,10 +50,7 @@
       </ion-card>
 
     </div>
-    <div text-center class="col-center status-msg"   *ngIf="showLoader" >
-      <ion-spinner ></ion-spinner>
-      <!--        <div>جارى جلب المحتوى  </div>-->
-    </div>
+
   </section>
 
   <ng-template #offline>

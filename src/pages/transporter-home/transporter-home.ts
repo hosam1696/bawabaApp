@@ -14,6 +14,7 @@ import {SearchOption} from '../search-option/search-option';
 import {AddPath} from '../add-path/add-path';
 import {EditPath} from '../edit-path/edit-path';
 import {Network} from "@ionic-native/network";
+import {AppUtils} from "../../app/appconf/app.utils";
 
 
 
@@ -47,7 +48,8 @@ export class TransporterHome {
         public users: Users,
         public push:Push,
         public platform: Platform,
-        public network: Network
+        public network: Network,
+        public appUtils: AppUtils
 
     ) {
 
@@ -62,60 +64,54 @@ export class TransporterHome {
 
     }
 
-    ionViewDidLoad() {
-        // Run After Page Already Loaded
 
-        this.users.getToken().then((val) => {
-            this.Token = val;
-        });
+  ionViewDidLoad() {
 
-      this.network
-        .onConnect()
-        .subscribe(data=> {
-          this.users
-            .getUserInfo()
-            .then((data) => {
-              console.log('myInfo', data);
-              this.myInfo = data;
+    console.log('Are you connected or not',this.appUtils.IsConnected);
 
-              console.log('data.user.uid', data.uid);
-              //setTimeout(function(){
-              this.getRoutesByUserId(data.uid);
-              //  },2000);
+    if (this.appUtils.IsConnected) {
 
-            });
-        });
+      this.appUtils.OnConnection(  // user is connected to the internet
+        ()=> {
+          this.initPageOnConnection()
+        },
+        ()=>{ // after a while he disconnected to the internet
+          this.Online = false;
+          this.appUtils.watchOnConnect(()=>{ // watch when the user will be connected
+            this.isOnline = true;
+            this.initPageOnConnection();
+          })
+        }
+      );
 
-      this.network
-        .onDisconnect()
-        .subscribe(data=> {
-          this.users
-            .getUserInfo()
-            .then((data) => {
-              console.log('myInfo', data);
-              this.myInfo = data;
+    } else { // detect if the user is not connected to WIFI
+      this.Online = false;
 
-              console.log('data.user.uid', data.uid);
-              //setTimeout(function(){
-              this.getRoutesByUserId(data.uid);
-              //  },2000);
-
-            });
-        });
-        this.users
-          .getUserInfo()
-          .then((data) => {
-            console.log('myInfo', data);
-            this.myInfo = data;
-
-            console.log('data.user.uid', data.uid);
-            //setTimeout(function(){
-            this.getRoutesByUserId(data.uid);
-            //  },2000);
-
-        });
-
+      this.appUtils.watchOnConnect(()=>{ // watch when the user will be connected
+        this.isOnline = true;
+        this.initPageOnConnection();
+      })
     }
+
+  }
+
+  initPageOnConnection() {
+    this.users
+      .getUserInfo()
+      .then((data) => {
+        console.log('myInfo', data);
+        this.myInfo = data;
+
+        console.log('data.user.uid', data.uid);
+        //setTimeout(function(){
+        this.getRoutesByUserId(data.uid);
+        //  },2000);
+
+      });
+
+
+
+  }
 
     getRoutesByUserId(uId) {
         console.log('uId', uId);
@@ -134,7 +130,9 @@ export class TransporterHome {
 
     }
 
-
+  private set Online(isOnlineStatus: boolean) {
+    this.isOnline = isOnlineStatus
+  }
     private registerUserDeviceToken():void {
 
                 let platformType = this.platform.is('ios')?'ios':(this.platform.is('windows')?'windows':'android');
