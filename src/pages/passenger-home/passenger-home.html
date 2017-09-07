@@ -10,42 +10,57 @@
 
 <ion-content>
 
+
+  <section *ngIf="isOnline;else offline">
     <div *ngIf="!showLoader">
-        <ion-card>
-            <ion-card-content>
-                من فضلك قم بتحديد المدينة التى تبحث عن مواصلات بداخلها
-            </ion-card-content>
-        </ion-card>
+      <ion-card>
+        <ion-card-content>
+          من فضلك قم بتحديد المدينة التى تبحث عن مواصلات بداخلها
+        </ion-card-content>
+      </ion-card>
 
-        <ion-grid>
-            <ion-row>
-                <ion-col *ngFor="let city of cities" col-6 class="city-btn">
-                  <!--[ngClass]="{'activated':city.tid == cityId}"-->
-                  <button *ngIf="city.tid == cityId;else btnNotActive" class="activated"  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
-                    {{city.name}} <!---{{cityId}}-->
-                    <ion-icon name="arrow-back"></ion-icon>
-                  </button>
-                  <ng-template #btnNotActive>
-                    <button  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
-                      {{city.name}} <!---{{cityId}}-->
-                      <ion-icon name="arrow-back"></ion-icon>
-                    </button>
-                  </ng-template>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let city of cities" col-6 class="city-btn">
+            <!--[ngClass]="{'activated':city.tid == cityId}"-->
+            <button *ngIf="city.tid == cityId;else btnNotActive" class="activated"  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+              {{city.name}} <!---{{cityId}}-->
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+            <ng-template #btnNotActive>
+              <button  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+                {{city.name}} <!---{{cityId}}-->
+                <ion-icon name="arrow-back"></ion-icon>
+              </button>
+            </ng-template>
 
-                </ion-col>
+          </ion-col>
 
 
-            </ion-row>
-        </ion-grid>
-        <ion-card>
-            <ion-card-content>
-                الخدمة تتوفر حاليا في المدن والمحافظات المذكورة فقط ، وسيتم اضافة المدن الأخرى تدريجيا
-            </ion-card-content>
-        </ion-card>
+        </ion-row>
+      </ion-grid>
+      <ion-card>
+        <ion-card-content>
+          الخدمة تتوفر حاليا في المدن والمحافظات المذكورة فقط ، وسيتم اضافة المدن الأخرى تدريجيا
+        </ion-card-content>
+      </ion-card>
 
     </div>
-    <div text-center class="col-center"   *ngIf="showLoader" >
-        <ion-spinner ></ion-spinner>
-        <!--        <div>جارى جلب المحتوى  </div>-->
+    <div text-center class="col-center status-msg"   *ngIf="showLoader" >
+      <ion-spinner ></ion-spinner>
+      <!--        <div>جارى جلب المحتوى  </div>-->
     </div>
+  </section>
+
+  <ng-template #offline>
+    <p text-center class="col-center is-offline" *ngIf="!isOnline">
+
+      <ion-icon large name="ios-wifi"></ion-icon>
+      <span>
+      التطبيق يتطلب اتصال بالانترنت
+    </span>
+    </p>
+  </ng-template>
+
+
 </ion-content>

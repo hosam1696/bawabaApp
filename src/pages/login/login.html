@@ -31,17 +31,17 @@
     </ion-row>
 
     <ion-row>
-        <button type="submit" ion-button full (click)="userLogin()">{{'Login' | translate}}
+        <button type="submit" ion-button full (click)="userLogin()">{{'تسجيل الدخول' | translate}}
                 <ion-spinner *ngIf="loginload" ></ion-spinner>
         </button>
     </ion-row>
 
     <ion-row>
         <ion-col width-50>
-            <a (click)="goSignup()" class="new-account" >{{'New Account?' | translate}}</a>
+            <a (click)="goSignup()" class="new-account" >{{'تسجيل حساب جديد' | translate}}</a>
         </ion-col>
         <ion-col width-50>
-            <a (click)="goForgetPass()" class="forget-pass">{{'Forget Your Password!' | translate}}</a>
+            <a (click)="goForgetPass()" class="forget-pass">{{'نسيت كلمة المرور!' | translate}}</a>
         </ion-col>
     </ion-row>
 

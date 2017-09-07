@@ -57,7 +57,7 @@ export class Signup {
         this.error = false;
         this.step = 1;
         this.randcode = '8816';
-        this.CountryCode = '2';
+        this.CountryCode = '966';
         this.city = 'Riyadh';
         this.mobile = '';
         this.vercode = '';

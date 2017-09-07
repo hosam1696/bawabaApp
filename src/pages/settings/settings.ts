@@ -16,6 +16,8 @@ import {Signup} from "../signup/signup";
 import {TermsPage} from "../terms/terms";
 
 import {SocialSharing} from '@ionic-native/social-sharing';
+import {Login} from "../login/login";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 //@IonicPage()
 @Component({
@@ -39,7 +41,8 @@ export class Settings {
     public modalCtrl: ModalController,
     public api: API,
     public users: Users,
-    private social: SocialSharing
+    private social: SocialSharing,
+    private inAppBroswer: InAppBrowser
   ) {
   }
 
@@ -196,10 +199,15 @@ export class Settings {
     this.navCtrl.push(Signup)
     }
   toLogin() {
-    this.navCtrl.setRoot(Signup)
+    this.navCtrl.setRoot(Login)
   }
 
   toTerms() {
     this.navCtrl.push(TermsPage)
+  }
+
+  openInBrowser() {
+    this.inAppBroswer.create('http://it-plus.co').show();
+
   }
 }

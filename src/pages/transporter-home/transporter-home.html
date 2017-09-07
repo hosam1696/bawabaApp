@@ -14,7 +14,15 @@
 </ion-header>
 
 <ion-content class="home" parallax-header>
-    <div *ngIf="!showLoader" class="full-height">
+  <p text-center class="col-center is-offline" *ngIf="!isOnline">
+
+    <ion-icon large name="ios-wifi"></ion-icon>
+    <span>
+      التطبيق يتطلب اتصال بالانترنت
+    </span>
+  </p>
+
+  <div *ngIf="!showLoader" class="full-height">
         <div class="main-content">
 
             <div class="inner-content">
@@ -57,7 +65,8 @@
         </div>
     </div>
 
-    <div text-center class="col-center"   *ngIf="showLoader" >
+
+  <div text-center class="col-center"   *ngIf="showLoader" >
         <ion-spinner ></ion-spinner>
         <!--        <div>جارى جلب المحتوى  </div>-->
     </div>

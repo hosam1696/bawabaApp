@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController, Events, Config} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, Events, Config, ToastController} from 'ionic-angular';
 
 import { Users } from "../../providers/users";
 import { API } from "../../providers/api";
@@ -9,6 +9,7 @@ import { Signup } from '../signup/signup';
 import { ForgetPass } from '../forget-pass/forget-pass';
 import {TabsPage} from "../tabs/tabs";
 import {PassengerHome} from "../passenger-home/passenger-home";
+import {Network} from "@ionic-native/network";
 
 
 
@@ -35,7 +36,9 @@ export class Login {
     public com: Components,
     public alertCtrl: AlertController,
     public events: Events,
-    private config: Config
+    private config: Config,
+    public network: Network,
+    private toastCtrl: ToastController
   ) {
     this.config.set('tabsHideOnSubPages', true);
 
@@ -75,29 +78,42 @@ export class Login {
   }
 
   userLogin() {
-    this.loginload = true;
-    this.users
-      .userLogin(this.username, this.password)
-      .map(res => res.json())
-      .subscribe(data => {
-        console.log(data);
-        this.Token = data.token;
-        Promise.all([
-          this.events.publish('user:Login', data),
-          this.events.publish('user:getToken', this.Token)
-        ]);
-      }, error => {
-        this.loginload = false;
-        let M = error.statusText;
-        let D = 2000;
-        let P = 'top';
-        this.com.Toast(M, D, P);
+    console.log('user network type', this.network.type);
+    if ( this.network.type != 'none') {
+      this.loginload = true;
+      this.users
+        .userLogin(this.username, this.password)
+        .map(res => res.json())
+        .subscribe(data => {
+          console.log(data);
+          this.Token = data.token;
+          Promise.all([
+            this.events.publish('user:Login', data),
+            this.events.publish('user:getToken', this.Token)
+          ]);
+        }, error => {
+          this.loginload = false;
+          let M = error.statusText;
+          let D = 2000;
+          let P = 'top';
+          this.com.Toast(M, D, P);
 
-      }, ()=> {
-        this.loginload = true;
-      });
+        }, ()=> {
+          this.loginload = true;
+        });
+    } else {
+      this.showToast('يرجى الاتصال بالانترنت')
+    }
+
   }
-
+  showToast(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+  }
   userLogout(){
     this.events.publish('user:Logout',this.Token);
     // this.users.testpromise().then((data) => {

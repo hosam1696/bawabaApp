@@ -13,6 +13,7 @@ import {Storage} from '@ionic/storage';
 import {SearchOption} from '../search-option/search-option';
 import {AddPath} from '../add-path/add-path';
 import {EditPath} from '../edit-path/edit-path';
+import {Network} from "@ionic-native/network";
 
 
 
@@ -30,7 +31,8 @@ export class TransporterHome {
     Token: any;
     alertOptions: AlertOptions;
     showLoader: boolean = true;
-    pushObject: PushObject
+    pushObject: PushObject;
+    isOnline: boolean = true;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -44,7 +46,8 @@ export class TransporterHome {
         public api: API,
         public users: Users,
         public push:Push,
-        public platform: Platform
+        public platform: Platform,
+        public network: Network
 
     ) {
 
@@ -61,14 +64,47 @@ export class TransporterHome {
 
     ionViewDidLoad() {
         // Run After Page Already Loaded
-        Promise.all([
-            this.users.getToken().then((val) => {
-                this.Token = val;
-            })
-        ]).then(() => {
-            console.log('current token=' + this.Token);
+
+        this.users.getToken().then((val) => {
+            this.Token = val;
         });
-        this.users.getUserInfo().then((data) => {
+
+      this.network
+        .onConnect()
+        .subscribe(data=> {
+          this.users
+            .getUserInfo()
+            .then((data) => {
+              console.log('myInfo', data);
+              this.myInfo = data;
+
+              console.log('data.user.uid', data.uid);
+              //setTimeout(function(){
+              this.getRoutesByUserId(data.uid);
+              //  },2000);
+
+            });
+        });
+
+      this.network
+        .onDisconnect()
+        .subscribe(data=> {
+          this.users
+            .getUserInfo()
+            .then((data) => {
+              console.log('myInfo', data);
+              this.myInfo = data;
+
+              console.log('data.user.uid', data.uid);
+              //setTimeout(function(){
+              this.getRoutesByUserId(data.uid);
+              //  },2000);
+
+            });
+        });
+        this.users
+          .getUserInfo()
+          .then((data) => {
             console.log('myInfo', data);
             this.myInfo = data;
 
@@ -83,27 +119,34 @@ export class TransporterHome {
 
     getRoutesByUserId(uId) {
         console.log('uId', uId);
+        if (this.network.type == 'none') {
+          this.showLoader =false;
+          this.isOnline = false;
+        } else {
+          this.users
+            .getUserRoutes(uId)
+            .then((data) => {
+              this.showLoader = false;
+              this.routes = data;
+              console.log('data', data);
+            });
+        }
 
-        this.users.getUserRoutes(uId).then((data) => {
-            this.showLoader = false;
-            this.routes = data;
-            console.log('data', data);
-        });
     }
 
 
     private registerUserDeviceToken():void {
-        
+
                 let platformType = this.platform.is('ios')?'ios':(this.platform.is('windows')?'windows':'android');
-                  
-                           
+
+
                 this.pushObject.on('registration').subscribe((registration: any) => {
                     console.log('Device registered', registration);
                     let deviceData = {
                         token: registration.token,
                         type: platformType
                     };
-        
+
                     this.users
                         .registerDeviceToken(deviceData)
                         .subscribe(res=>{
@@ -111,11 +154,11 @@ export class TransporterHome {
                         } , err =>{
                             console.warn(err.json());
                         });
-                    
+
                 });
-                
+
                 this.pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-                          
+
             }
 
     searchoption() {
