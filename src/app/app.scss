@@ -14,7 +14,20 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     border-top: 2px solid #33475e  !important;
 
 }*/
+.is-offline {
+  margin-top: -4%;
+  display: flex;
+  flex-direction: column;
+  ion-icon {
+    font-size: 60px;
+    display: block;
+  }
 
+}
+
+.full-height {
+  height: 100%
+}
 .toolbar-title-md{
     text-align: center!important;
 }
@@ -34,7 +47,7 @@ ion-navbar{
         z-index: 999999;
 
         ion-icon{
-            font-size:28px;  
+            font-size:28px;
         }
         .back-button-text{
             display: none;
@@ -136,8 +149,8 @@ ion-action-sheet{
     top:9px;
 }
 .item-md ion-thumbnail{
-    min-width: 60px !important; 
-    min-height: 60px !important; 
+    min-width: 60px !important;
+    min-height: 60px !important;
 }
 
 
@@ -227,7 +240,7 @@ ion-alert{
     direction: rtl;
 }
 ion-alert .alert-wrapper .alert-message {
-     display: block !important; 
+     display: block !important;
 }
 .activated {
     background-color: #f6bc44 !important;

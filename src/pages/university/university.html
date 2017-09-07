@@ -9,32 +9,45 @@
 
 
 <ion-content>
+
+  <section class="full-height" *ngIf="!isOnline;else OnlineUser">
+    <p text-center class="col-center is-offline" >
+
+      <ion-icon large name="ios-wifi"></ion-icon>
+      <span>
+      التطبيق يتطلب اتصال بالانترنت
+    </span>
+    </p>
+  </section>
+  <ng-template #OnlineUser>
     <div *ngIf="!showLoader">
-        <ion-card>
-            <ion-card-content>
-                من فضلك قم بتحديد الجامعة التي تريد الذهاب إليها
-            </ion-card-content>
-        </ion-card>
+      <ion-card>
+        <ion-card-content>
+          من فضلك قم بتحديد الجامعة التي تريد الذهاب إليها
+        </ion-card-content>
+      </ion-card>
 
-        <ion-grid>
-            <ion-row>
-                <ion-col *ngFor="let uni of university"  col-12 class="city-btn">
-                  <button [ngClass]="{'activated' : uni.tid == UnivId}" ion-button outline icon-left
-                          (click)="goTransportation(uni.tid,uni.title)">
-                    {{uni.title}}
-                        <ion-icon name="arrow-back"></ion-icon>
-                    </button>
-                </ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let uni of university"  col-12 class="city-btn">
+            <button [ngClass]="{'activated' : uni.tid == UnivId}" ion-button outline icon-left
+                    (click)="goTransportation(uni.tid,uni.title)">
+              {{uni.title}}
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          </ion-col>
 
 
 
-            </ion-row>
-        </ion-grid>
+        </ion-row>
+      </ion-grid>
 
     </div>
     <div text-center class="col-center"   *ngIf="showLoader" >
       <ion-spinner></ion-spinner>
-        <!--        <div>جارى جلب المحتوى  </div>-->
+      <!--        <div>جارى جلب المحتوى  </div>-->
     </div>
+  </ng-template>
+
 
 </ion-content>
