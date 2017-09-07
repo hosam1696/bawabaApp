@@ -76,15 +76,6 @@ export class PassengerHome {
       })
     }
 
-    /*
-    this.network
-
-      .onchange()
-      .subscribe(
-        dataForm=>{
-          console.log('network change value' ,dataForm);
-      })*/
-
   }
 
   private initPageOnConnection() {
@@ -156,11 +147,12 @@ export class PassengerHome {
       .getUserInfo() // Check if there is a logged in user
       .then((userData) => {
 
-        if (userData) this.name = userData.name;
+        if (userData.name) {
+          this.name = userData.name;
+          this.registerUserDeviceToken();
+        }
 
         console.log('user name', this.name);
-
-        this.registerUserDeviceToken();
 
       }).catch(noData => {
       console.log('No User [visitor]', noData)

@@ -1,21 +1,21 @@
 <ion-header>
-    <ion-navbar >
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>بحث عن مواصلات</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>بحث عن مواصلات</ion-title>
+  </ion-navbar>
 </ion-header>
 
 
 <ion-content>
 
-
+  <p text-center class="col-center" *ngIf="showLoader">
+    <ion-spinner></ion-spinner>
+    <!--        <div>جارى جلب المحتوى  </div>-->
+  </p>
   <section *ngIf="isOnline;else offline">
-    <div text-center class="col-center status-msg"   *ngIf="showLoader" >
-      <ion-spinner ></ion-spinner>
-      <!--        <div>جارى جلب المحتوى  </div>-->
-    </div>
+
     <div *ngIf="!showLoader">
       <ion-card>
         <ion-card-content>
@@ -27,12 +27,13 @@
         <ion-row>
           <ion-col *ngFor="let city of cities" col-6 class="city-btn">
             <!--[ngClass]="{'activated':city.tid == cityId}"-->
-            <button *ngIf="city.tid == cityId;else btnNotActive" class="activated"  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+            <button *ngIf="city.tid == cityId;else btnNotActive" class="activated" ion-button outline icon-left
+                    (click)="godistricts(city.tid,city.name)">
               {{city.name}} <!---{{cityId}}-->
               <ion-icon name="arrow-back"></ion-icon>
             </button>
             <ng-template #btnNotActive>
-              <button  ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
+              <button ion-button outline icon-left (click)="godistricts(city.tid,city.name)">
                 {{city.name}} <!---{{cityId}}-->
                 <ion-icon name="arrow-back"></ion-icon>
               </button>

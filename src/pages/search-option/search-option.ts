@@ -37,20 +37,30 @@ export class SearchOption {
     ionViewDidLoad() {
         // Run After Page Already Loaded
 
+      this.users.getTaxList(9) // university
+        .then(res=>{
+          console.log('Universities in Search',res);
+        });
+
+      this.users.getTaxList(5) //districts
+        .then(res=>{
+          console.log('Districts In search',res);
+        });
+
     }
     dismiss(university , district) {
-        
+
         if (university || district) {
             let data = {
-                university, 
+                university,
                 district
             };
-            
+
             this.viewCtrl.dismiss(data);
         } else {
             this.viewCtrl.dismiss()
         }
-        
+
     }
 
 
