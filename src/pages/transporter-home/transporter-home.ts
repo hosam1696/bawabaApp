@@ -165,7 +165,7 @@ export class TransporterHome {
         searchoptionModal.onDidDismiss(data => {
             // filter and search paths based onn the search modal
 
-            console.log(data);
+            console.log('What i will filter with', data);
         })
     }
     addpathmodal() {
