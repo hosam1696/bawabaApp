@@ -40,16 +40,19 @@ export class Login {
     public network: Network,
     private toastCtrl: ToastController
   ) {
-    this.config.set('tabsHideOnSubPages', true);
+    /*this.config.set('tabsHideOnSubPages', true);
 
-    console.log('prop config', this.config.get('tabsHideOnSubPages'));
+    console.log('tabs hide on subpages prop config', this.config.get('tabsHideOnSubPages')); */
   }
 
   ionViewDidEnter(){
     console.log('enter');
     // Run After Page Already Entered
   }
-
+  /*ionViewWillLeave() {
+    this.config.set('tabsHideOnSubPages', false);
+    console.log('tabs hide on subpages prop config', this.config.get('tabsHideOnSubPages'));
+  }*/
   ionViewDidLoad() {
     console.log('load');
     // Run After Page Already Loaded
@@ -94,7 +97,7 @@ export class Login {
         }, error => {
           console.log(error.json()[0]);
           this.loginload = false;
-          if (error.json()[0].match('غير مفعل أو ممنوع.') ) {
+          if (error.json()[0]&&error.json()[0].match('غير مفعل أو ممنوع.') ) {
             this.showToast(error.json()[0].replace(/\<.*\>(.*)\<\/em\>/g, '$1'));
           } else {
 

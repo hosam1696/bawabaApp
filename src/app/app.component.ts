@@ -158,8 +158,10 @@ export class MyApp {
   }
 
   userLogout(Token) {
-    this.users.userLogout(Token)
-      .map(res => res.json()).subscribe(data => {
+    this.users
+      .userLogout(Token)
+      .map(res => res.json())
+      .subscribe(data => {
         console.log('data');
         console.log(data);
         this.users.LogoutUser().then(() => {

@@ -95,7 +95,7 @@ export class SearchResults {
   goReservation(searchData) {
 
 
-      if (this.localUser.name) {
+      if (this.localUser&&this.localUser.name) {
         this.navCtrl.push(Reservation, {route:searchData} );
       } else {
         let alert = this.alertCtrl.create({

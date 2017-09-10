@@ -166,6 +166,13 @@ export class TransporterHome {
             // filter and search paths based onn the search modal
 
             console.log('What i will filter with', data);
+
+            if (data.city) {
+                
+                this.routes = this.routes.filter(route => route.city == data.city);
+
+                console.log('filtered by city', this.routes);
+            }
         })
     }
     addpathmodal() {

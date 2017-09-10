@@ -21,7 +21,8 @@ export class SearchOption {
     CityModel:any;
     DistrictModel:any;
     UniversityModel:any;
-  showDistrictsLoader:boolean =false;
+    showDistrictsLoader: boolean = false;
+    showCityLoader: boolean = true;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -43,7 +44,8 @@ export class SearchOption {
         // Run After Page Already Loaded
       this.users.getTaxList('7')
         .then(cities=> {
-          this.AllCities = cities
+          this.AllCities = cities;
+          this.showCityLoader = false;
         })
       /*this.users.getTaxList(9) // university
         .then(res=>{
