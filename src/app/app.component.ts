@@ -45,12 +45,12 @@ export class MyApp {
     public storage: Storage
   ) {
 
-    
-    
+
+
     this.getToken();
 
     /*Promise.all([
-      
+
       //this.users.getUserInfo(),
       this.getToken()
     ]).then((data) => {
@@ -58,7 +58,7 @@ export class MyApp {
      // let userinfo = data[1],
 
       let userToken = data[1];
-      
+
       console.info('user token in app component', userToken);
 
       /*if (userinfo) { // if the user has logged in before
@@ -69,13 +69,13 @@ export class MyApp {
 
       } else {
 
-        
+
 
         this.userConnect(data[0]);
         this.initializeApp()
      // }
 
-      
+
     },error => {
       console.log('error');
     });*/
@@ -109,6 +109,7 @@ export class MyApp {
 
     // This Event Listen for User Login-Logout
     this.events.subscribe('user:Login', (data) => {
+
       Promise.all([this.users.UserStorage(data)]).then(() => {
         this.checkSession();
       })
@@ -214,7 +215,7 @@ export class MyApp {
     });*/
   }
 
-  
+
 
   getToken() {
     this.users
@@ -222,15 +223,15 @@ export class MyApp {
       .map(res => res.json())
       .subscribe(data => {
         console.log('data from user Token provider \n',data);
-      
+
         this.Token = data.token;
-        
+
         this.users.saveToken(this.Token);
 
         this.userConnect(data.token);
 
         this.initializeApp();
-        
+
       }, error => {
         console.log('error');
         console.log(error);
