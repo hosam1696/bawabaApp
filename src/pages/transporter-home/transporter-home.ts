@@ -34,6 +34,9 @@ export class TransporterHome {
     showLoader: boolean = true;
     pushObject: PushObject;
     isOnline: boolean = true;
+    noPaths: boolean = false;
+    noMatchedPaths: boolean = false;
+    routesAlt: any[];
     constructor(
       public navCtrl: NavController,
       public navParams: NavParams,
@@ -120,15 +123,22 @@ export class TransporterHome {
         } else {
           this.users
             .getUserRoutes(uId)
-            .then((data) => {
+            .then((data:any[]) => {
               this.showLoader = false;
               this.routes = data;
-              console.log('data', data);
+              if (data.length <= 0)
+                this.noPaths = true;
+              console.log('All Paths data', data);
             });
         }
 
     }
 
+    ionViewWillLeave() {
+    
+      if (this.routesAlt)
+        this.routes = this.routesAlt && (this.noMatchedPaths = false); 
+  }
   private set Online(isOnlineStatus: boolean) {
     this.isOnline = isOnlineStatus
   }
@@ -159,23 +169,51 @@ export class TransporterHome {
 
   }
 
-    searchoption() {
+  searchoption() {
+      
+    if (this.routesAlt) {
+
+      this.routes = this.routesAlt ;
+      this.noMatchedPaths = false;  
+      this.routesAlt = null
+    }
         let searchoptionModal = this.modalctrl.create(SearchOption);
         searchoptionModal.present();
         searchoptionModal.onDidDismiss(data => {
             // filter and search paths based onn the search modal
-
+          this.routesAlt = this.routes;
             console.log('What i will filter with', data);
 
-            if (data.city) {
+            if (data) {
 
-                this.routes = this.routes.filter(route => route.city == data.city);
+              this.routes = this.routes.filter(route => {
+                
+                if (data.city && data.university) {
+                  return route.city == data.city && route.university == data.university
+                } else if (data.city  && data.district) {
+                  return route.city == data.city && route.routeFrom == data.district
+                }else if (data.city && data.university && data.district){ 
+                  return route.city == data.city && route.university == data.university && route.routeFrom == data.district
+                } else if (data.city)
+                  return route.city == data.city
+                }
+              );
 
-                console.log('filtered by city', this.routes);
+              if (this.routes.length <= 0)
+                this.noMatchedPaths = true;
+
+                console.log('filtered by city', this.routes, '\n founded matched paths or not', !!this.routes);
             }
         })
-    }
+  }
+  
     addpathmodal() {
+      if (this.routesAlt) {
+
+        this.routes = this.routesAlt;
+        this.noMatchedPaths = false;
+        this.routesAlt = null
+      }
         let addpathModal = this.modalctrl.create(AddPath);
         addpathModal.present();
         addpathModal.onDidDismiss(data => {
@@ -190,6 +228,12 @@ export class TransporterHome {
 
     }
     editpathmodal(nId) {
+      if (this.routesAlt) {
+
+        this.routes = this.routesAlt;
+        this.noMatchedPaths = false;
+        this.routesAlt =null
+      }
         console.log('nId', nId);
       let editpathModal = this.modalctrl.create(EditPath, {nId: nId});
         editpathModal.present();
@@ -209,7 +253,12 @@ export class TransporterHome {
 
     }
     deletepathmodal(route) {
+      if (this.routesAlt) {
 
+        this.routes = this.routesAlt;
+        this.noMatchedPaths = false;
+        this.routesAlt = null
+      }
         console.log('route', route);
         let routeIndex = this.routes.indexOf(route);
         console.log('routeIndex', routeIndex);

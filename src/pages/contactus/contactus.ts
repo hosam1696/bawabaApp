@@ -76,6 +76,14 @@ export class Contactus {
           },
           err => {
             console.warn(err.json());
+            if (err.json()[0] == "CSRF validation failed") {
+              this.users.userToken()
+                .map(res => res.json())
+                .subscribe(data => {
+                  this.users.saveToken(data.Token);
+                  this.Send();
+                })
+            }
           }
         )
 

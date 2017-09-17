@@ -60,7 +60,12 @@
 
                 </div>-->
       </div>
-      <div text-center class="hint col-center"  *ngIf="(routes).length <1 ">
+
+      <div text-center *ngIf="noMatchedPaths">
+        لا يوجد مسارات تطابق البحث
+      </div>
+
+      <div text-center class="hint col-center"  *ngIf="noPaths ">
         <div  class="no-data-msg">
           لم يتم إضافة مسارات الى الان , يمكنك إضافة مسار من خلال الضغط على زر أضف مسار</div>
 

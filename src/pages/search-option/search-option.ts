@@ -92,10 +92,10 @@ export class SearchOption {
         let data:any = {};
         if(city)data['city']=city.split(',')[1];
         if(university)data['university']=university;
-
         if(district)data['district']=district;
 
-            this.viewCtrl.dismiss(data);
+          this.viewCtrl.dismiss(data);
+        
         } else {
             this.viewCtrl.dismiss()
         }

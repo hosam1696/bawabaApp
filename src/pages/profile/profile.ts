@@ -103,7 +103,7 @@ export class ProfilePage {
   }
 
   contactus() {
-    let ContactusModal = this.modalCtrl.create(Contactus, {contactData: {userLabel: this.userLabel}});
+    let ContactusModal = this.modalCtrl.create(Contactus, {contactData: {name: this.userLabel, uid: this.user.uid, email: this.user.email}});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log(data);

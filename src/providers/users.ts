@@ -660,7 +660,7 @@ export class Users {
       withCredentials: true
     });
 
-    return this.http.post(this.api.SystemGateway+'ticket/delete',JSON.stringify({nid:ticketId}), options).map(response=>response.json());
+    return this.http.post(this.api.SystemGateway+'ticket/cancel',JSON.stringify({nid:ticketId}), options).map(response=>response.json());
 
 
   }

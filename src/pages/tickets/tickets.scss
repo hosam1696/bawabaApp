@@ -28,6 +28,12 @@ page-tickets{
     ion-content{
         background-color:#f1f1f1!important;
 
+        ion-refresher {
+            margin-top: 15px;
+             * {
+                 font-size: 14px;
+             }
+        }
       .status-msg {
         position: absolute;
         font-size: 1.7rem;

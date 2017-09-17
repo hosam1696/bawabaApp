@@ -5,10 +5,10 @@
     </ion-navbar>
     <ion-toolbar class="subheader" >
       <ion-segment [(ngModel)]="wantedTickets">
-        <ion-segment-button (click)="getTickets()" value="Canceled">
+        <ion-segment-button  value="Canceled">
             التذاكر الملغاة
           </ion-segment-button>
-        <ion-segment-button (click)="getTickets()" value="Booked">
+        <ion-segment-button  value="Booked">
                 التذاكر المحجوزة
             </ion-segment-button>
 
@@ -18,16 +18,26 @@
 </ion-header>
 
 <ion-content>
+
+    <ion-refresher (ionRefresh)="getTickets($event)">
+        <ion-refresher-content pullingText='تحديث' refreshingText='تحديث'></ion-refresher-content>
+    </ion-refresher>
     <div class="main-content">
-      <p text-center *ngIf="noTickets" class="status-msg ">
-          لا يوجد تذاكر
+        <p text-center *ngIf="noTickets" class="status-msg ">
+            لا يوجد تذاكر 
         </p>
-      <p text-center *ngIf="noCancel" class="status-msg">
+      <p text-center *ngIf="mytickets.length<=0 && !loading && wantedTickets =='Booked'&&!noTickets" class="status-msg ">
+            لا يوجد تذاكر محجوزة
+        </p>
+      <p text-center *ngIf="CancelledTickets.length<=0&& !loading &&wantedTickets =='Canceled'&&!noTickets" class="status-msg">
         لا يوجد تذاكر ملغاه
       </p>
       <p text-center *ngIf="loading" class="status-msg">
           <ion-spinner ></ion-spinner>
         </p>
+
+        
+
         <div [ngSwitch]="wantedTickets">
 
             <ion-list *ngSwitchCase="'Booked'">
