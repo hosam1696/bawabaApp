@@ -85,8 +85,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      //this.statusBar.styleDefault();
-      //this.splashScreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
 
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -128,8 +128,8 @@ export class MyApp {
     });
 
     this.events.subscribe('user:Logout', (data) => {
-      Promise.all([this.userLogout(data)]).then(() => {
-      });
+      this.userLogout(data)
+      
     });
 
     /*this.events.subscribe('user:Connect', (data) => {
@@ -162,14 +162,13 @@ export class MyApp {
     this.users
       .userLogout(Token)
       .map(res => res.json())
-      .subscribe(data => {
-        console.log('data');
-        console.log(data);
-        this.users.LogoutUser().then(() => {
-
-          this.events.publish('user:getToken');
-          this.events.publish('user:Session');
-        });
+      .subscribe(logoutdata => {
+        console.log('logout data', logoutdata); 
+        this.storage.remove('userInfo')
+          .then(removeres => { console.log('userInfo has been removed from storgae' , removeres) });
+        this.events.publish('user:getToken');
+        //this.events.publish('user:Session');
+       
       }, error => {
         console.log('error');
         console.log(error);
@@ -184,6 +183,10 @@ export class MyApp {
       .userConnect(Token)
       .subscribe(({user})=>{
         console.log('%c%s','font-size: 20px;color:green;','User connect Data [app component file line 151]', user);
+        
+
+        this.initializeApp();
+
         if (user.uid === 0) { // no login user
           this.nav.setRoot(Login);
         } else {
@@ -195,24 +198,7 @@ export class MyApp {
         console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());
         this.nav.setRoot(Login);
       });
-/*
 
-    Promise.all([
-      this.users.userConnect(Token)
-    ]).then((data) => {
-      data[0].map(res => res.json()).subscribe(data => {
-
-        console.log('user id', data, data.user.uid);
-        if(data.user.uid == 0) {
-          this.nav.setRoot(Login);
-        } else {
-          this.events.publish('user:Session');
-        }
-      }, error => {
-        console.log('Stablishing connection failed');
-        this.nav.setRoot(Login);
-      })
-    });*/
   }
 
 
@@ -230,7 +216,6 @@ export class MyApp {
 
         this.userConnect(data.token);
 
-        this.initializeApp();
 
       }, error => {
         console.log('error');
@@ -238,4 +223,6 @@ export class MyApp {
         this.nav.setRoot(TabsPage)
       })
   }
+
+
 }

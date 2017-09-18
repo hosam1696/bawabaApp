@@ -48,6 +48,8 @@ export class Login {
   ionViewDidEnter(){
     console.log('enter');
     // Run After Page Already Entered
+
+    
   }
   /*ionViewWillLeave() {
     this.config.set('tabsHideOnSubPages', false);
@@ -57,6 +59,7 @@ export class Login {
     console.log('load');
     // Run After Page Already Loaded
 
+      
 
 
       this.users.getToken().then((val) => {
