@@ -102,13 +102,10 @@ export class TransporterHome {
     this.users
       .getUserInfo()
       .then((data) => {
-        console.log('myInfo', data);
+
         this.myInfo = data;
 
-        console.log('data.user.uid', data.uid);
-        //setTimeout(function(){
         this.getRoutesByUserId(data.uid);
-        //  },2000);
 
       });
 
@@ -116,7 +113,7 @@ export class TransporterHome {
   }
 
     getRoutesByUserId(uId) {
-        console.log('uId', uId);
+
         if (this.network.type == 'none') {
           this.showLoader = false;
           this.isOnline = false;
@@ -237,7 +234,7 @@ export class TransporterHome {
         this.noMatchedPaths = false;
         this.routesAlt =null
       }
-        console.log('nId', nId);
+  
       let editpathModal = this.modalctrl.create(EditPath, {nId: nId});
         editpathModal.present();
         editpathModal.onDidDismiss(data => {
@@ -262,9 +259,10 @@ export class TransporterHome {
         this.noMatchedPaths = false;
         this.routesAlt = null
       }
-        console.log('route', route);
-        let routeIndex = this.routes.indexOf(route);
-        console.log('routeIndex', routeIndex);
+
+      let routeIndex = this.routes.indexOf(route);
+      console.log('route', route,'routeIndex', routeIndex);
+       
       let alert = this.alertCtrl.create({
             title: 'حذف مسار ',
             message: 'هل انت متأكد من رغبتك فى حذف المسار ؟',
@@ -286,11 +284,21 @@ export class TransporterHome {
                         this.users.deletePath(route.Nid, this.Token)
                             .map(res => res.json()).subscribe(data => {
                                 //                    this.submitload = false;
-                                console.log('data', data);
+                                console.log('delete path response', data);
                                 this.routes.splice(routeIndex, 1);
                                 this.loading.dismissAll();
                                 this.showToast('تم حذف المسار بنجاح ');
+                                
                                 this.decreaseRoutesNum();
+                                
+                                this.users
+                                  .userToken()
+                                  .map(res => res.json())
+                                  .subscribe(TokenData => {
+                                    this.users.saveToken(TokenData.token);
+                                    this.Token = TokenData.token
+                                  });
+                                
                             }, (err) => {
                           let error = err.json();
 
@@ -298,7 +306,7 @@ export class TransporterHome {
                             this.users.userToken()
                               .map(res => res.json())
                               .subscribe(data => {
-                                this.users.saveToken(data.Token);
+                                this.users.saveToken(data.token);
                                 this.users.deletePath(route.Nid, data.token)
                                   .map(res => res.json()).subscribe(data => {
                                   //                    this.submitload = false;

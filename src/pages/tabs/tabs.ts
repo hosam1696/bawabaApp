@@ -44,7 +44,7 @@ export class TabsPage {
   }
 
   ionViewDidLoad() {
-    console.log('Tabs Loaded');
+
     Promise.all([
       this.users.getToken().then((val) => {
         this.Token = val;
@@ -54,12 +54,9 @@ export class TabsPage {
       console.log('current token='+this.Token);
     });
 
-    console.log('tabs viewdidload')
   }
 
-  ionViewDidEnter(){
-    console.log('tabs viewdidenter')
-  }
+  
 
   getUserType() {
     this.users.getUserInfo()

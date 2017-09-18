@@ -128,42 +128,10 @@ export class AddPath {
 
 
     };
-    /*
-    //get cities
-    this.users.getTaxList('5').then((data) => {
-
-        this.districts = data;
-        console.log('data', data);
-    });
-    // get Univirsities
-    this.users.getTaxList('9').then((data) => {
-
-        this.universities = data;
-        console.log('data', data);
-    });
-    // get vehicles
-    this.users.getTaxList('2').then((data) => {
-
-        this.vehicles = data;
-        console.log('data', data);
-    });
-    // get contracts
-    this.users.getTaxList('4').then((data) => {
-
-        this.contracts = data;
-        console.log('data', data);
-    });
-    // get go_and_come
-    this.users.getTaxList('8').then((data) => {
-
-        this.goAndComes = data;
-        console.log('data', data);
-    });*/
 
     Promise.all([
       this.users.getTaxList('7'),
-      //this.users.getTaxList('5'),
-      //this.users.getTaxList('9'),
+
       this.users.getTaxList('2'),
       this.users.getTaxList('4'),
       this.users.getTaxList('8'),
@@ -175,22 +143,8 @@ export class AddPath {
 
   }
 
-  ionViewDidEnter() {
-    // Run After Page Already Entered
-
-  }
-
-
-  /*ngDoCheck() {
-      console.log('changes', this.temp);
-
-      if(this.temp.field_city.und[0]['tid'])
-        this.fillFields(this.temp.field_city.und[0]['tid'])
-  }*/
   ionViewDidLoad() {
-    // Run After Page Already Loaded
-
-
+ 
     this.users.getToken().then((val) => {
       this.Token = val;
       console.log('Current User Token', this.Token)
@@ -228,9 +182,6 @@ export class AddPath {
         this.universities = data;
       })
 
-    /*if (this[value].length <= 0) {
-        event.preventDefault();
-    }*/
   }
 
 
@@ -298,26 +249,40 @@ export class AddPath {
       this.submitload = true;
       this.temp.uid = this.myInfo.uid;
       console.log('this.temp.uid', this.temp.uid);
-      this.users.addPath(this.temp, this.Token)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.submitload = false;
-          console.log('data', data);
-          this.showToast('تم اضافة المسار بنجاح ');
-          this.viewCtrl.dismiss(data);
-
-          this.storage.get('userInfo')
-            .then(data => {
-              data.numberOfRoutes++;
-              this.storage.set('userInfo', data);
-            })
-
-        }, err => {
-          this.submitload = false;
-        });
+      this.AddPathService(this.temp, this.Token);
     }
 
 
+  }
+
+  AddPathService(temp, token) {
+    this.users.addPath(temp, token)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.submitload = false;
+        console.log('data', data);
+        this.showToast('تم اضافة المسار بنجاح ');
+        this.viewCtrl.dismiss(data);
+
+
+        this.storage.get('userInfo')
+          .then(data => {
+            data.numberOfRoutes++;
+            this.storage.set('userInfo', data);
+          })
+
+      }, err => {
+        this.submitload = false;
+        this.users
+          .userToken()
+          .map(res => res.json())
+          .subscribe(TokenData => {
+            this.users.saveToken(TokenData.token);
+            this.Token = TokenData.token;
+            this.AddPathService(this.temp, this.Token);
+          });
+
+      });
   }
 
   dismiss() {

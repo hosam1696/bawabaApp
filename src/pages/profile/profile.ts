@@ -93,14 +93,12 @@ export class ProfilePage {
     console.log('Your Languages', this.translate.getLangs(), this.translate.getBrowserLang());
 
     setTimeout(() => {
-      this.translate.use('ar')
-        .subscribe(res => {
-          console.log(res);
-          console.log('Your Lang is ',this.translate.getLangs())
-        })
-    }, 2000)
+      this.translate.use('ar');
 
-  }
+      console.log(this.translate.currentLang);
+
+    }, 1000);
+  }  
 
   checkNull(name: string): string {
     return name == null ? '' : name;

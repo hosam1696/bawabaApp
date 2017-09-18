@@ -12,7 +12,6 @@ export class Components {
     public http: Http,
     public toastCtrl: ToastController
     ) {
-    console.log('Hello Components Provider');
   }
 
   Toast(M,D,P) {

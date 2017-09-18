@@ -46,8 +46,29 @@ export class MyApp {
   ) {
 
 
+    this.initializeApp();
+    
+    
 
-    this.getToken();
+  }
+
+  ionViewDidLoad() {
+    
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+
+      this.statusBar.styleDefault();
+
+      // this language will be used as a fallback when a translation isn't found in the current language
+      this.translate.setDefaultLang('ar');
+      this.textDir = 'rtl';
+
+      this.getToken();
+      
+    });
+
 
     //this is to determine the text direction depending on the selected language
     this.events.subscribe('lang:Changed', (lang) => {
@@ -58,9 +79,6 @@ export class MyApp {
       }
       // Change Global Lang to Selected one
       this.translate.use(lang);
-
-      
-      
 
     });
 
@@ -94,28 +112,6 @@ export class MyApp {
 
     });
 
-    /*this.events.subscribe('user:Connect', (data) => {
-      this.userConnect(data);
-    });*/
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-
-    // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('ar');
-    this.textDir = 'rtl';
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    //this.translate.use('ar');
-
-    
-
   }
 
   checkSession() {
@@ -148,7 +144,10 @@ export class MyApp {
           .then(removeres => {
             console.log('userInfo has been removed from storgae', removeres);
             this.getTokenAndSave()
-          });
+          })
+          .then(d => {
+            this.nav.setRoot(Login);
+        })
         
         //this.events.publish('user:getToken');
         //this.events.publish('user:Session');
@@ -160,7 +159,8 @@ export class MyApp {
       })
   }
 
-  userConnect(Token){
+  userConnect(Token) {
+    
     console.log('user Connect method > Token:'+Token);
 
     this.users
@@ -169,7 +169,7 @@ export class MyApp {
         console.log('%c%s','font-size: 20px;color:green;','User connect Data [app component file line 151]', user);
         
 
-        this.initializeApp();
+        this.splashScreen.hide();
 
         if (user.uid === 0) { // no login user
           this.nav.setRoot(Login);
@@ -191,7 +191,7 @@ export class MyApp {
       .userToken()
       .map(res => res.json())
       .subscribe(TokenData => {
-        this.users.saveToken(TokenData.Token);
+        this.users.saveToken(TokenData.token);
       })
   }
 

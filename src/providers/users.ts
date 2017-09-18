@@ -30,7 +30,7 @@ export class Users {
     this.storage
       .set('userToken', data)
       .then(() => {
-        console.log('userToken Updated:' + data);
+        console.log('userToken Updated|updated:' + data);
       })
 
   }
