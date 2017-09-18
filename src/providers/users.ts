@@ -20,18 +20,19 @@ export class Users {
     public storage: Storage,
     public api: API
   ) {
-    console.log('Hello Users Provider');
-    console.log(this.api.userToken);
+
 
 
   }
 
   saveToken(data) {
-    this.storage.ready().then(() => {
-      //this.storage.set('isLogin',true);
-      this.storage.set('userToken', data);
-      console.log('userToken Updated:' + data);
-    });
+
+    this.storage
+      .set('userToken', data)
+      .then(() => {
+        console.log('userToken Updated:' + data);
+      })
+
   }
 
   // Creating User Proccess -> Sending main info then
@@ -140,12 +141,16 @@ export class Users {
     return this.http.get(Link);
   }
 
-  UserStorage(data) {
-    this.storage.ready().then(() => {
-      this.storage.set('isLogin', true);
-      this.storage.set('userInfo', data);
-      console.log('Storage updated')
-    });
+  UserStorage(userDataInfo):Promise<boolean> {
+    return Promise.all([
+      this.storage.set('isLogin', true),
+      this.storage.set('userInfo', userDataInfo),
+    ]).then(confirmSaving => {
+      console.info('[isLogin, userInfo] are stored in storage successfully after login');   
+      return true;
+      }).catch(storingErr => {
+      return false
+    })
   }
 
   LogoutUser() {

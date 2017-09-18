@@ -49,35 +49,53 @@ export class MyApp {
 
     this.getToken();
 
-    /*Promise.all([
-
-      //this.users.getUserInfo(),
-      this.getToken()
-    ]).then((data) => {
-
-     // let userinfo = data[1],
-
-      let userToken = data[1];
-
-      console.info('user token in app component', userToken);
-
-      /*if (userinfo) { // if the user has logged in before
-
-
-       this.nav.setRoot(TabsPage);
-
-
+    //this is to determine the text direction depending on the selected language
+    this.events.subscribe('lang:Changed', (lang) => {
+      if (lang == 'ar') {
+        this.textDir = 'rtl';
       } else {
+        this.textDir = 'ltr';
+      }
+      // Change Global Lang to Selected one
+      this.translate.use(lang);
 
+      
+      
 
+    });
 
-        this.userConnect(data[0]);
-        this.initializeApp()
-     // }
+    // This Event Listen for User Login-Logout
+    this.events.subscribe('user:Login', (data) => {
 
+      this.users.UserStorage(data)
+        .then(saveStatus => {
+          console.log('Dev Test Only User Info Data are Saved Or Not', saveStatus);
+        }).catch(errSvaing => {
 
-    },error => {
-      console.log('error');
+          console.log('Dev Test Only User Info Data are Saved Or Not', errSvaing);
+        })
+
+    });
+
+    this.events.subscribe('user:Register', (data) => {
+      this.getToken();
+    });
+
+    this.events.subscribe('user:Session', (data) => {
+      this.checkSession();
+    });
+
+    this.events.subscribe('user:getToken', () => {
+      this.getToken();
+    });
+
+    this.events.subscribe('user:Logout', (data) => {
+      this.userLogout(data)
+
+    });
+
+    /*this.events.subscribe('user:Connect', (data) => {
+      this.userConnect(data);
     });*/
   }
 
@@ -96,45 +114,7 @@ export class MyApp {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     //this.translate.use('ar');
 
-    //this is to determine the text direction depending on the selected language
-    this.events.subscribe('lang:Changed', (lang) => {
-      if (lang == 'ar') {
-        this.textDir = 'rtl';
-      } else {
-        this.textDir = 'ltr';
-      }
-      // Change Global Lang to Selected one
-      this.translate.use(lang);
-    });
-
-    // This Event Listen for User Login-Logout
-    this.events.subscribe('user:Login', (data) => {
-
-      Promise.all([this.users.UserStorage(data)]).then(() => {
-        this.checkSession();
-      })
-    });
-
-    this.events.subscribe('user:Register', (data) => {
-      this.getToken();
-    });
-
-    this.events.subscribe('user:Session', (data) => {
-      this.checkSession();
-    });
-
-    this.events.subscribe('user:getToken', () => {
-      this.getToken();
-    });
-
-    this.events.subscribe('user:Logout', (data) => {
-      this.userLogout(data)
-      
-    });
-
-    /*this.events.subscribe('user:Connect', (data) => {
-      this.userConnect(data);
-    });*/
+    
 
   }
 
@@ -165,8 +145,12 @@ export class MyApp {
       .subscribe(logoutdata => {
         console.log('logout data', logoutdata); 
         this.storage.remove('userInfo')
-          .then(removeres => { console.log('userInfo has been removed from storgae' , removeres) });
-        this.events.publish('user:getToken');
+          .then(removeres => {
+            console.log('userInfo has been removed from storgae', removeres);
+            this.getTokenAndSave()
+          });
+        
+        //this.events.publish('user:getToken');
         //this.events.publish('user:Session');
        
       }, error => {
@@ -202,6 +186,14 @@ export class MyApp {
   }
 
 
+  getTokenAndSave() {
+    this.users
+      .userToken()
+      .map(res => res.json())
+      .subscribe(TokenData => {
+        this.users.saveToken(TokenData.Token);
+      })
+  }
 
   getToken() {
     this.users
@@ -218,8 +210,8 @@ export class MyApp {
 
 
       }, error => {
-        console.log('error');
-        console.log(error);
+        console.warn('error While Getting Token', error);
+        
         this.nav.setRoot(TabsPage)
       })
   }

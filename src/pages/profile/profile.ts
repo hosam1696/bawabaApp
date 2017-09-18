@@ -1,3 +1,4 @@
+import { TranslateService } from 'ng2-translate';
 import {LocalUser} from './../../app/appconf/app.interfaces';
 // Main Components
 import {Component} from '@angular/core';
@@ -40,7 +41,9 @@ export class ProfilePage {
               public users: Users,
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController,
-              public iab: InAppBrowser) {
+              public iab: InAppBrowser,
+              public translate: TranslateService
+  ) {
     console.log('ionViewDidLoad ProfilePage');
     // this.user={name:''};
 
@@ -87,6 +90,15 @@ export class ProfilePage {
       this.ionViewWillEnter();
     }
 
+    console.log('Your Languages', this.translate.getLangs(), this.translate.getBrowserLang());
+
+    setTimeout(() => {
+      this.translate.use('ar')
+        .subscribe(res => {
+          console.log(res);
+          console.log('Your Lang is ',this.translate.getLangs())
+        })
+    }, 2000)
 
   }
 

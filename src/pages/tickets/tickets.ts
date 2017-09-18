@@ -95,18 +95,17 @@ export class Tickets {
           } else {
             this.mytickets = [];
             this.CancelledTickets = [];
-            data.forEach(ticket => {
+            data.forEach(ticket => { // seperate cancelled tickets from reserved tickets
 
-              console.log(ticket);
+              //console.log(ticket);
 
               if (ticket.status == 'pending' || ticket.status == 'Pending'||ticket.status == 'Paid') {
 
                 console.log(this.mytickets.indexOf(ticket), ticket.status);
 
-                  this.mytickets.push(ticket);
+                this.mytickets.push(ticket);
 
-
-                console.log(this.mytickets);
+                console.log('Not Cancelled Tickets ',this.mytickets);
 
               } else if (ticket.status == 'cancelled' || ticket.status == 'Cancelled' || ticket.status == 'CancelledTicket' || ticket.status == 'cancelledTicket') {
 

@@ -1,10 +1,10 @@
+import { AppUtils } from './../../app/appconf/app.utils';
 // Main Components
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController, ToastController } from 'ionic-angular';
 
 // Providers
 import { Users } from "../../providers/users";
-import { API } from "../../providers/api";
 
 // Req Pages
 import { Contactus } from "../contactus/contactus";
@@ -39,10 +39,11 @@ export class Settings {
     public events: Events,
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
-    public api: API,
+    public toastCtrl: ToastController,
     public users: Users,
     private social: SocialSharing,
-    private inAppBroswer: InAppBrowser
+    private inAppBroswer: InAppBrowser,
+    private appUtils:AppUtils
   ) {
   }
 
@@ -71,9 +72,14 @@ export class Settings {
 
   Logout() {
 
-    this.logOutSpinner = true;
+    if (this.appUtils.IsConnected) {
+      this.logOutSpinner = true;
 
-    this.events.publish('user:Logout',this.Token);
+      this.events.publish('user:Logout', this.Token);
+    } else {
+      this.showToast('يرجى التحقق من الاتصال بالانترنت')
+    }
+
 
   }
 
@@ -209,5 +215,14 @@ export class Settings {
   openInBrowser() {
     this.inAppBroswer.create('http://it-plus.co').show();
 
+  }
+
+  showToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 }

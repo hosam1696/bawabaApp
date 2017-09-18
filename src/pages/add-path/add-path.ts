@@ -190,13 +190,12 @@ export class AddPath {
   ionViewDidLoad() {
     // Run After Page Already Loaded
 
-    Promise.all([
-      this.users.getToken().then((val) => {
-        this.Token = val;
-      })
-    ]).then(() => {
-      console.log('current token=' + this.Token);
+
+    this.users.getToken().then((val) => {
+      this.Token = val;
+      console.log('Current User Token', this.Token)
     });
+    
     this.users.getUserInfo().then((data) => {
       console.log('myInfo', data);
       this.myInfo = data;
