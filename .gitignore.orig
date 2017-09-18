@@ -9,9 +9,13 @@
 
 .sourcemaps
 
+<<<<<<< HEAD
+ nodemodules.rar
 
+=======
 nodemodules.rar
 nbproject
+>>>>>>> 945e76b3e9a4d7d1bcf75c4cabbe6d8dbddc19a8
 log.txt
 testquokka.ts
 *.sublime-project

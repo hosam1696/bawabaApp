@@ -1,6 +1,14 @@
 page-search-option {
     direction: rtl!important;
-
+  ion-spinner {
+    width: 22px;
+    height: 22px;
+    margin: 0 8px;
+    & * {
+      stroke: #f6bc44 !important;
+      //fill: #fff !important;
+    }
+  }
     ion-content{
         background-color:#f1f1f1!important;
 
@@ -20,18 +28,35 @@ page-search-option {
                     border-bottom:0px solid #ddd!important;
                     padding: 0px!important;
 
-                    ion-label{
-                        margin: 0px !important; 
-                        /*height: 100%;*/
-                        font-size: 16px;
-                        width: 80px!important;
-                        max-width: 80px!important;
-                        line-height: 20px;
-                        white-space: normal;
+                  ion-label{
+                    display: flex;
+                    margin: 0px !important;
+                    /*height: 100%;*/
+                    font-size: 16px;
+                    max-width: 90px !important;
 
+                    line-height: 20px;
+                    white-space: normal;
 
+                    &.holder {
 
+                      display: flex;
+
+                      padding-left: 6px;
+                      justify-content: space-between;
+                      height: 50px;
+                      align-items: center;
+                      flex: 1;
+                      min-width: calc(100% - 90px);
+                      span {
+                        padding: 0 7px;
+                        font-size: 13px;
+                        color: #999;
+                      }
                     }
+
+
+                  }
 
                     ion-icon{
                         /*margin-top: 13px;*/
@@ -39,16 +64,19 @@ page-search-option {
                         color: #f6bc44;
                     }
 
-                    ion-select{
-                        max-width: calc(100% - 80px)!important;
-                        width: calc(100% - 80px)!important;
-                        .select-icon{
-                            margin-top: 5px;
-                            .select-icon-inner{
-                                color: #f6bc44!important;
-                            }
-                        }
+                  ion-select{
+                    position: relative;
+                    font-size: 13px;
+                    height: 50px;
+                    max-width: calc(100% - 90px)!important;
+                    width: calc(100% - 90px)!important;
+                    .select-icon{
+                      margin-top: 5px;
+                      .select-icon-inner{
+                        color: #f6bc44!important;
+                      }
                     }
+                  }
                 }
 
             }
@@ -79,6 +107,6 @@ ion-navbar{
             ion-icon{
                 font-size: 30px;
             }
-        }  
+        }
     }
 }

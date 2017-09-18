@@ -33,7 +33,7 @@ export class API {
   getTaxonomy: any;
 
   constructor(public http: Http) {
-    console.log('Hello Api Provider');
+
 
     this.url = 'http://www.bawabt-alnagel.com/'; // 
     this.SystemGateway = 'http://www.bawabt-alnagel.com/api/v1/'; // System API Link

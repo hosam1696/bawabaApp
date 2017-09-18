@@ -25,7 +25,10 @@
                             <ion-input [(ngModel)]="CountryCode" [value]="CountryCode" type="number" placeholder="" disabled='true'></ion-input>
                         </ion-col>-->
             <ion-col >
-                <ion-item>
+                <ion-item class="phone-num">
+                    <ion-label fixed>
+                        +966
+                    </ion-label>
                     <ion-input [(ngModel)]="mobile" [value]="mobile" type="tel" placeholder="رقم الهاتف" ></ion-input>
                 </ion-item>
             </ion-col>
@@ -52,7 +55,8 @@
         </ion-card>
         <ion-row>
             <ion-col>
-                <ion-item>
+                <ion-item >
+                    
                     <ion-input [(ngModel)]="vercode" [value]="vercode" type="number" placeholder="كود التفعيل" ></ion-input>
                 </ion-item>
             </ion-col>

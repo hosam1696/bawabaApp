@@ -1,3 +1,4 @@
+import { TranslateService } from 'ng2-translate';
 import {LocalUser} from './../../app/appconf/app.interfaces';
 // Main Components
 import {Component} from '@angular/core';
@@ -40,7 +41,9 @@ export class ProfilePage {
               public users: Users,
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController,
-              public iab: InAppBrowser) {
+              public iab: InAppBrowser,
+              public translate: TranslateService
+  ) {
     console.log('ionViewDidLoad ProfilePage');
     // this.user={name:''};
 
@@ -87,8 +90,15 @@ export class ProfilePage {
       this.ionViewWillEnter();
     }
 
+    console.log('Your Languages', this.translate.getLangs(), this.translate.getBrowserLang());
 
-  }
+    setTimeout(() => {
+      this.translate.use('ar');
+
+      console.log(this.translate.currentLang);
+
+    }, 1000);
+  }  
 
   checkNull(name: string): string {
     return name == null ? '' : name;
@@ -103,7 +113,7 @@ export class ProfilePage {
   }
 
   contactus() {
-    let ContactusModal = this.modalCtrl.create(Contactus);
+    let ContactusModal = this.modalCtrl.create(Contactus, {contactData: {name: this.userLabel, uid: this.user.uid, email: this.user.email}});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log(data);

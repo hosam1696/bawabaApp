@@ -66,7 +66,7 @@ export class Reservation {
       let userToken = await this.users.getToken();
 
       let ticketData = {
-        uid: this.transporterRoute.Uid,
+        uid: this.loggedUserData.uid,
         name: this.username,
         mobile: this.phone,
         route_id: this.transporterRoute.Nid

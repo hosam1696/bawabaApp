@@ -42,13 +42,12 @@ export class EditPath {
 
 
 
-        Promise.all([
-            this.users.getToken().then((val) => {
-                this.Token = val;
-            })
-        ]).then(() => {
+ 
+        this.users.getToken().then((val) => {
+            this.Token = val;
             console.log('current token=' + this.Token);
         });
+       
 
         console.log(navParams.get('nId'));
         this.getRouteInfoByUserId(navParams.get('nId'));

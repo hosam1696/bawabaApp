@@ -20,18 +20,19 @@ export class Users {
     public storage: Storage,
     public api: API
   ) {
-    console.log('Hello Users Provider');
-    console.log(this.api.userToken);
+
 
 
   }
 
   saveToken(data) {
-    this.storage.ready().then(() => {
-      //this.storage.set('isLogin',true);
-      this.storage.set('userToken', data);
-      console.log('userToken Updated:' + data);
-    });
+
+    this.storage
+      .set('userToken', data)
+      .then(() => {
+        console.log('userToken Updated|updated:' + data);
+      })
+
   }
 
   // Creating User Proccess -> Sending main info then
@@ -140,12 +141,16 @@ export class Users {
     return this.http.get(Link);
   }
 
-  UserStorage(data) {
-    this.storage.ready().then(() => {
-      this.storage.set('isLogin', true);
-      this.storage.set('userInfo', data);
-      console.log('Storage updated')
-    });
+  UserStorage(userDataInfo):Promise<boolean> {
+    return Promise.all([
+      this.storage.set('isLogin', true),
+      this.storage.set('userInfo', userDataInfo),
+    ]).then(confirmSaving => {
+      console.info('[isLogin, userInfo] are stored in storage successfully after login');   
+      return true;
+      }).catch(storingErr => {
+      return false
+    })
   }
 
   LogoutUser() {
@@ -660,7 +665,7 @@ export class Users {
       withCredentials: true
     });
 
-    return this.http.post(this.api.SystemGateway+'ticket/delete',JSON.stringify({nid:ticketId}), options).map(response=>response.json());
+    return this.http.post(this.api.SystemGateway+'ticket/cancel',JSON.stringify({nid:ticketId}), options).map(response=>response.json());
 
 
   }
@@ -677,6 +682,28 @@ export class Users {
   getUserLocationInfoByIp(ip) {
     return (ip) ? this.http.get('http://ipinfo.io/' + ip).map(res => res.json()) : null;
   }
+
+registerDeviceToken(deviceData) {
+   // Building Headers
+   let headers = new Headers({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+
+
+  // Building Options
+  let options = new RequestOptions({
+    headers: headers,
+    withCredentials: true
+  });
+
+  let body = JSON.stringify(deviceData);
+
+  return this.http.post(this.api.SystemGateway+'push_notifications', body, options).map(res=>res.json());
+
+  
+}
+
 }
 
 

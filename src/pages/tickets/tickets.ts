@@ -82,7 +82,7 @@ export class Tickets {
 
     }
 
-    private getTickets():void {
+    private getTickets(event?:any):void {
 
       [this.noCancel, this.noTickets] = Array(2).fill(false);
       this.users
@@ -95,18 +95,17 @@ export class Tickets {
           } else {
             this.mytickets = [];
             this.CancelledTickets = [];
-            data.forEach(ticket => {
+            data.forEach(ticket => { // seperate cancelled tickets from reserved tickets
 
-              console.log(ticket);
+              //console.log(ticket);
 
-              if (ticket.status == 'pending' || ticket.status == 'Pending') {
+              if (ticket.status == 'pending' || ticket.status == 'Pending'||ticket.status == 'Paid') {
 
                 console.log(this.mytickets.indexOf(ticket), ticket.status);
 
-                  this.mytickets.push(ticket);
+                this.mytickets.push(ticket);
 
-
-                console.log(this.mytickets);
+                console.log('Not Cancelled Tickets ',this.mytickets);
 
               } else if (ticket.status == 'cancelled' || ticket.status == 'Cancelled' || ticket.status == 'CancelledTicket' || ticket.status == 'cancelledTicket') {
 
@@ -124,9 +123,11 @@ export class Tickets {
 
         }, err=>{
           console.warn(err.json());
+          event && event.complete();
           this.loading = false
         }, ()=> {
-          this.loading = false
+          this.loading = false;
+          event && event.complete();
         })
     }
 
@@ -139,14 +140,14 @@ export class Tickets {
         .subscribe(
           data=>{
           console.log(data);
-          if(data[0] == 'Ticket has been deleted succssfully') {
+          if (data[0] == "Ticket has been canceled succssfully") {
             let index  = this.mytickets.indexOf(ticket);
 
             this.mytickets.splice(index, 1);
 
             this.showToast('تم الغاء حجزك بنجاح');
           } else {
-
+            console.log(data);
             this.showToast('يرجى المحاولة مرة اخرى')
 
           }

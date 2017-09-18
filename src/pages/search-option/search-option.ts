@@ -15,8 +15,14 @@ import {API} from "../../providers/api";
     templateUrl: 'search-option.html',
 })
 export class SearchOption {
-    university: any;
-    districts: any;
+    AllUniversity: any;
+    AllDistricts: any;
+    AllCities: any;
+    CityModel:any;
+    DistrictModel:any;
+    UniversityModel:any;
+    showDistrictsLoader: boolean = false;
+    showCityLoader: boolean = true;
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -36,21 +42,64 @@ export class SearchOption {
 
     ionViewDidLoad() {
         // Run After Page Already Loaded
+      this.users.getTaxList('7')
+        .then(cities=> {
+          this.AllCities = cities;
+          this.showCityLoader = false;
+        })
+      /*this.users.getTaxList(9) // university
+        .then(res=>{
+          console.log('Universities in Search',res);
+        });
+
+      this.users.getTaxList(5) //districts
+        .then(res=>{
+          console.log('Districts In search',res);
+        });*/
 
     }
-    dismiss(university , district) {
+
+  cityChange(val) {
+
+      if (val != this.CityModel) {
+        console.log('Value changed',val);
+        this.CityModel = val;
+        this.showDistrictsLoader = true;
+        this.users.getDistrictsByCity(val.split(',')[0])
+
+          .subscribe(data => {
+            console.log(data);
+            this.AllDistricts = data;
+            this.showDistrictsLoader = false
+          });
+
+        this.users.getUniversitiesByCity(val.split(',')[0])
+
+          .subscribe(data => {
+            console.log(data);
+            this.AllUniversity = data;
+
+          })
+
+      }
+
+  }
+
+    dismiss(city, university , district) {
+
+      console.log(this.CityModel, this.UniversityModel, this.DistrictModel);
+      if (city||university || district) {
+        let data:any = {};
+        if(city)data['city']=city.split(',')[1];
+        if(university)data['university']=university;
+        if(district)data['district']=district;
+
+          this.viewCtrl.dismiss(data);
         
-        if (university || district) {
-            let data = {
-                university, 
-                district
-            };
-            
-            this.viewCtrl.dismiss(data);
         } else {
             this.viewCtrl.dismiss()
         }
-        
+
     }
 
 

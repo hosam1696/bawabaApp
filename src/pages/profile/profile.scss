@@ -26,7 +26,8 @@ page-profile {
           }
         }
         .top-header{
-            background-color: #f6bc44;
+            background:linear-gradient(to top, #ffa705, #f6bc44);
+
             text-align: center;
             /*height: 160px;*/
             .user-img{
@@ -74,6 +75,7 @@ page-profile {
                 white-space: nowrap;
                 font-size: 16px;
                 padding: 0px 15px;
+                min-height: 19px;
             }
             ion-row{
                 ion-col{
@@ -117,7 +119,7 @@ page-profile {
 
         .location-map{
             padding: 8px 15px;
-            background-image: url('./assets/img/map.png');
+            background-image: url('../assets/img/map.png');
             background-size: cover;
             button{
                 background-color: rgba(246,188,68,0.7) !important;

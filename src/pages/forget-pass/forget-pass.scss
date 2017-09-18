@@ -35,12 +35,29 @@ page-forget-pass {
             ion-col{
                 padding:0px!important;
 
+
                 ion-item{
                     background-color: rgba(246,188,68,0.10)!important;
                     border: 1px solid #f6bc44!important;
                     border-radius: 5px!important;
                     color: #fff!important;
                     margin-bottom:10px!important;
+                    &.phone-num {
+                      direction: ltr !important;
+                      ion-label {
+                        flex: initial;
+                        width: 15% !important;
+                        min-width: 15% !important;
+                        color: #ccc !important;
+                        text-align: left;
+                        border-right: 1px solid #727070
+                      }
+                      ion-input {
+                        flex: 1;
+                        padding: 0 7px;
+                      }
+                    }
+
                     .item-inner{
                         border: none;
                         border-bottom: 0px!important;

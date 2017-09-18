@@ -1,3 +1,4 @@
+import { NotConnectedPage } from './../pages/not-connected/not-connected';
 import { RoutesProvider } from './../providers/routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -16,6 +17,8 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import {Geolocation} from '@ionic-native/geolocation';
+import {Push} from '@ionic-native/push';
+import { Network } from '@ionic-native/network';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { ListPage } from '../pages/list/list';
@@ -65,6 +68,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {MapsModal} from "../pages/mapsmodal";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {DefaultPage} from "../pages/default-page/default-page";
+import {AppUtils} from "./appconf/app.utils";
 
 export function createTranslateLoader(http: Http) {
 	return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -108,7 +112,8 @@ export function createTranslateLoader(http: Http) {
     EditPath,
     NotificationsDetail,
     MapsModal,
-    DefaultPage
+    DefaultPage,
+    NotConnectedPage
   ],
   imports: [
     BrowserModule,
@@ -164,9 +169,11 @@ export function createTranslateLoader(http: Http) {
     EditPath,
     NotificationsDetail,
     MapsModal,
-    DefaultPage
+    DefaultPage,
+    NotConnectedPage
   ],
   providers: [
+    AppUtils,
     StatusBar,
     SplashScreen,
     File,
@@ -174,6 +181,8 @@ export function createTranslateLoader(http: Http) {
     Camera,
     InAppBrowser,
     Geolocation,
+    Push,
+    Network,
     SocialSharing,
     FilePath,
     RoutesProvider,

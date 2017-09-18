@@ -1,3 +1,4 @@
+
 import { Storage } from '@ionic/storage';
 
 import { PassengerHome } from './../pages/passenger-home/passenger-home';
@@ -10,7 +11,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from 'ng2-translate';
 
 import { Users } from "../providers/users";
-
 import { TabsPage } from '../pages/tabs/tabs';
 // import { HomePage } from '../pages/home/home';
 // import { ListPage } from '../pages/list/list';
@@ -46,54 +46,29 @@ export class MyApp {
   ) {
 
 
-    this.getToken();
+    this.initializeApp();
+    
+    
 
-    /*Promise.all([
-      
-      //this.users.getUserInfo(),
-      this.getToken()
-    ]).then((data) => {
+  }
 
-     // let userinfo = data[1],
-
-      let userToken = data[1];
-      
-      console.info('user token in app component', userToken);
-
-      /*if (userinfo) { // if the user has logged in before
-
-
-       this.nav.setRoot(TabsPage);
-
-
-      } else {
-
-        
-
-        this.userConnect(data[0]);
-        this.initializeApp()
-     // }
-
-      
-    },error => {
-      console.log('error');
-    });*/
+  ionViewDidLoad() {
+    
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      //this.statusBar.styleDefault();
-      //this.splashScreen.hide();
+
+      this.statusBar.styleDefault();
+
+      // this language will be used as a fallback when a translation isn't found in the current language
+      this.translate.setDefaultLang('ar');
+      this.textDir = 'rtl';
+
+      this.getToken();
+      
     });
 
-    // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('ar');
-    this.textDir = 'rtl';
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    //this.translate.use('ar');
 
     //this is to determine the text direction depending on the selected language
     this.events.subscribe('lang:Changed', (lang) => {
@@ -104,13 +79,20 @@ export class MyApp {
       }
       // Change Global Lang to Selected one
       this.translate.use(lang);
+
     });
 
     // This Event Listen for User Login-Logout
     this.events.subscribe('user:Login', (data) => {
-      Promise.all([this.users.UserStorage(data)]).then(() => {
-        this.checkSession();
-      })
+
+      this.users.UserStorage(data)
+        .then(saveStatus => {
+          console.log('Dev Test Only User Info Data are Saved Or Not', saveStatus);
+        }).catch(errSvaing => {
+
+          console.log('Dev Test Only User Info Data are Saved Or Not', errSvaing);
+        })
+
     });
 
     this.events.subscribe('user:Register', (data) => {
@@ -126,13 +108,9 @@ export class MyApp {
     });
 
     this.events.subscribe('user:Logout', (data) => {
-      Promise.all([this.userLogout(data)]).then(() => {
-      });
-    });
+      this.userLogout(data)
 
-    /*this.events.subscribe('user:Connect', (data) => {
-      this.userConnect(data);
-    });*/
+    });
 
   }
 
@@ -157,28 +135,42 @@ export class MyApp {
   }
 
   userLogout(Token) {
-    this.users.userLogout(Token)
-      .map(res => res.json()).subscribe(data => {
-        console.log('data');
-        console.log(data);
-        this.users.LogoutUser().then(() => {
-
-          this.events.publish('user:getToken');
-          this.events.publish('user:Session');
-        });
+    this.users
+      .userLogout(Token)
+      .map(res => res.json())
+      .subscribe(logoutdata => {
+        console.log('logout data', logoutdata); 
+        this.storage.remove('userInfo')
+          .then(removeres => {
+            console.log('userInfo has been removed from storgae', removeres);
+            this.getTokenAndSave()
+          })
+          .then(d => {
+            this.nav.setRoot(Login);
+        })
+        
+        //this.events.publish('user:getToken');
+        //this.events.publish('user:Session');
+       
       }, error => {
         console.log('error');
         console.log(error);
+
       })
   }
 
-  userConnect(Token){
+  userConnect(Token) {
+    
     console.log('user Connect method > Token:'+Token);
 
     this.users
       .userConnect(Token)
       .subscribe(({user})=>{
         console.log('%c%s','font-size: 20px;color:green;','User connect Data [app component file line 151]', user);
+        
+
+        this.splashScreen.hide();
+
         if (user.uid === 0) { // no login user
           this.nav.setRoot(Login);
         } else {
@@ -190,24 +182,17 @@ export class MyApp {
         console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());
         this.nav.setRoot(Login);
       });
-/*
 
-    Promise.all([
-      this.users.userConnect(Token)
-    ]).then((data) => {
-      data[0].map(res => res.json()).subscribe(data => {
+  }
 
-        console.log('user id', data, data.user.uid);
-        if(data.user.uid == 0) {
-          this.nav.setRoot(Login);
-        } else {
-          this.events.publish('user:Session');
-        }
-      }, error => {
-        console.log('Stablishing connection failed');
-        this.nav.setRoot(Login);
+
+  getTokenAndSave() {
+    this.users
+      .userToken()
+      .map(res => res.json())
+      .subscribe(TokenData => {
+        this.users.saveToken(TokenData.token);
       })
-    });*/
   }
 
   getToken() {
@@ -216,18 +201,20 @@ export class MyApp {
       .map(res => res.json())
       .subscribe(data => {
         console.log('data from user Token provider \n',data);
-      
+
         this.Token = data.token;
-        
+
         this.users.saveToken(this.Token);
 
         this.userConnect(data.token);
 
-        this.initializeApp();
-        
+
       }, error => {
-        console.log('error');
-        console.log(error);
+        console.warn('error While Getting Token', error);
+        
+        this.nav.setRoot(TabsPage)
       })
   }
+
+
 }

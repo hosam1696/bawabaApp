@@ -244,6 +244,8 @@ export class EditProfile {
           this.storage.set('userInfo', Object.assign({}, this.user, res));
           this.storage.set('userAddress', this.MapAddress);
           this.showToast('تم تعديل البيانات الشخصية بنجاح');
+          this.users.userToken().map(res => res.json())
+            .subscribe(data => {this.users.saveToken(data.Token);})
           this.EditProfileForm.get('current_pass').setValue('');
         }
 

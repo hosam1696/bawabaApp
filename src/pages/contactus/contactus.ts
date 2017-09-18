@@ -21,6 +21,7 @@ export class Contactus {
   subject:any;
   message:any;
   userContactData: any;
+  userLabel: string;
   constructor(
     public navParams: NavParams,
     public viewCtrl: ViewController,
@@ -29,9 +30,12 @@ export class Contactus {
     public components: Components,
     public toastCtrl: ToastController
   ) {
-    this.userContactData = this.navParams.get('constactData');
+    this.userContactData = this.navParams.get('contactData');
 
     console.log('user Contact data', this.userContactData);
+
+    if(this.userContactData.userLabel)
+      this.userLabel = this.userContactData.userLabel;
   }
 
   ionViewDidEnter(){
@@ -72,6 +76,14 @@ export class Contactus {
           },
           err => {
             console.warn(err.json());
+            if (err.json()[0] == "CSRF validation failed") {
+              this.users.userToken()
+                .map(res => res.json())
+                .subscribe(data => {
+                  this.users.saveToken(data.Token);
+                  this.Send();
+                })
+            }
           }
         )
 

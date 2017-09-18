@@ -1,10 +1,10 @@
+import { AppUtils } from './../../app/appconf/app.utils';
 // Main Components
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, NavParams, Events, ActionSheetController, ToastController } from 'ionic-angular';
 
 // Providers
 import { Users } from "../../providers/users";
-import { API } from "../../providers/api";
 
 // Req Pages
 import { Contactus } from "../contactus/contactus";
@@ -16,6 +16,8 @@ import {Signup} from "../signup/signup";
 import {TermsPage} from "../terms/terms";
 
 import {SocialSharing} from '@ionic-native/social-sharing';
+import {Login} from "../login/login";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 //@IonicPage()
 @Component({
@@ -37,9 +39,11 @@ export class Settings {
     public events: Events,
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
-    public api: API,
+    public toastCtrl: ToastController,
     public users: Users,
-    private social: SocialSharing
+    private social: SocialSharing,
+    private inAppBroswer: InAppBrowser,
+    private appUtils:AppUtils
   ) {
   }
 
@@ -68,9 +72,14 @@ export class Settings {
 
   Logout() {
 
-    this.logOutSpinner = true;
+    if (this.appUtils.IsConnected) {
+      this.logOutSpinner = true;
 
-    this.events.publish('user:Logout',this.Token);
+      this.events.publish('user:Logout', this.Token);
+    } else {
+      this.showToast('يرجى التحقق من الاتصال بالانترنت')
+    }
+
 
   }
 
@@ -118,7 +127,7 @@ export class Settings {
       })
   }
   contactus(){
-    let ContactusModal = this.modalCtrl.create(Contactus, { constactData: {uid: this.uid, name: this.name, email: this.email }});
+    let ContactusModal = this.modalCtrl.create(Contactus, { contactData: {uid: this.uid, name: this.name, email: this.email }});
     ContactusModal.present();
     ContactusModal.onDidDismiss(data => {
       console.log('Data from Modal',data);
@@ -143,7 +152,10 @@ export class Settings {
 
   shareApp() {
 
-    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط : للايفون https://goo.gl/W1eeRU', 'http://is4.mzstatic.com/image/thumb/Purple18/v4/14/7c/cc/147ccc54-5384-f17e-85ab-152e5420b59f/source/175x175bb.jpg', 'https://goo.gl/W1eeRU')
+
+    this.social.share('حمل تطبيق بوابة النقل من خلال هذه الروابط /n للايفون https://goo.gl/W1eeRU')
+
+
     .then((data)=> {
       console.log(data);
     }
@@ -193,10 +205,24 @@ export class Settings {
     this.navCtrl.push(Signup)
     }
   toLogin() {
-    this.navCtrl.setRoot(Signup)
+    this.navCtrl.setRoot(Login)
   }
 
   toTerms() {
     this.navCtrl.push(TermsPage)
+  }
+
+  openInBrowser() {
+    this.inAppBroswer.create('http://it-plus.co').show();
+
+  }
+
+  showToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
   }
 }
