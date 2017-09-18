@@ -135,9 +135,12 @@ export class TransporterHome {
     }
 
     ionViewWillLeave() {
-    
-      if (this.routesAlt)
-        this.routes = this.routesAlt && (this.noMatchedPaths = false); 
+      if (this.routesAlt) {
+
+        this.routes = this.routesAlt;
+        this.noMatchedPaths = false;
+        this.routesAlt = null
+      }
   }
   private set Online(isOnlineStatus: boolean) {
     this.isOnline = isOnlineStatus
