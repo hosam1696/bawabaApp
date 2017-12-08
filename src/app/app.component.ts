@@ -180,6 +180,8 @@ export class MyApp {
         }
       }, err => {
         console.log('%c%s','font-size: 20px;color:red;','User connect Data [app component file line 153]', err.json());
+        this.splashScreen.hide();
+        
         this.nav.setRoot(Login);
       });
 

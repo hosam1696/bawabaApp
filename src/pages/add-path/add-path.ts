@@ -144,12 +144,12 @@ export class AddPath {
   }
 
   ionViewDidLoad() {
- 
+
     this.users.getToken().then((val) => {
       this.Token = val;
       console.log('Current User Token', this.Token)
     });
-    
+
     this.users.getUserInfo().then((data) => {
       console.log('myInfo', data);
       this.myInfo = data;
@@ -221,7 +221,7 @@ export class AddPath {
     console.log('title', this.temp);
     this.storage.get('userInfo').then((data) => {
     });
-
+      //data.map((response: Response) => response.json());
     if (!this.temp.title) {
 
       this.showToast('يرجى ادخال عنوان المسار ');
@@ -251,6 +251,7 @@ export class AddPath {
       console.log('this.temp.uid', this.temp.uid);
       this.AddPathService(this.temp, this.Token);
     }
+
 
 
   }

@@ -44,8 +44,16 @@ export class SearchOption {
         // Run After Page Already Loaded
       this.users.getTaxList('7')
         .then(cities=> {
+
+
+
           this.AllCities = cities;
+
+
+
+
           this.showCityLoader = false;
+
         })
       /*this.users.getTaxList(9) // university
         .then(res=>{
@@ -76,8 +84,8 @@ export class SearchOption {
         this.users.getUniversitiesByCity(val.split(',')[0])
 
           .subscribe(data => {
-            console.log(data);
             this.AllUniversity = data;
+            console.log(data);
 
           })
 
@@ -88,19 +96,18 @@ export class SearchOption {
     dismiss(city, university , district) {
 
       console.log(this.CityModel, this.UniversityModel, this.DistrictModel);
-      if (city||university || district) {
+        if (city||university || district) {
         let data:any = {};
         if(city)data['city']=city.split(',')[1];
         if(university)data['university']=university;
         if(district)data['district']=district;
 
           this.viewCtrl.dismiss(data);
-        
+
         } else {
             this.viewCtrl.dismiss()
         }
 
     }
-
 
 }
